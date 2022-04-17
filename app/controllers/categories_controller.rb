@@ -57,9 +57,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def home
-    render 'home'
-  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
