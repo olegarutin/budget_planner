@@ -5,8 +5,6 @@ class CreateWallets < ActiveRecord::Migration[7.0]
       t.text :currency
       t.integer :quantity
 
-      t.references :user, null: false, foreign_key: true
-
       t.timestamps
     end
   end
