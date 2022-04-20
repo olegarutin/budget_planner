@@ -3,7 +3,7 @@ class CreateWallets < ActiveRecord::Migration[7.0]
     create_table :wallets do |t|
       t.text :name
       t.text :currency
-      t.integer :quantity
+      t.integer :quantity, default: 0
 
       t.timestamps
     end
