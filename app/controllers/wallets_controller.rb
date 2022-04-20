@@ -3,7 +3,11 @@ class WalletsController < ApplicationController
 
   def create
     @wallet = Wallet.create(wallet_params)
-    redirect_to root_path
+    if @wallet.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def update
