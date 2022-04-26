@@ -1,0 +1,10 @@
+<h2>Dashboard</h2>
+<h4>Hi there, <%= current_user.email %></h4>
+
+<%= link_to 'Back', home_path, class: 'btn btn-dark ml-3' %>
+
+<h3>Profile</h3>
+<h3>Reports</h3>
+<h3>
+<%= link_to 'Create transaction', new_transaction_path %>
+</h3>

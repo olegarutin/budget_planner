@@ -1,5 +1,6 @@
 <h1>HOME</h1>
 <% if current_user %>
+  <%= link_to 'Dashboard', page_path('dashboard') %>
   <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-dark', data: { turbo: false } %>
 <% end %>
 <%= link_to 'Create wallet', new_wallet_path %>

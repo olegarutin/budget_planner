@@ -1,0 +1,32 @@
+<div class='container text-center mt-5'>
+  <h3>New transaction</h3>
+
+  <%= form_with url: transactions_path, method: :post, class: 'w-50 m-auto p-4 border border-dark', data: { turbo:false } do |f| %>
+    <% if @transaction %>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <div class='alert alert-dark mx-auto mb-4 mt-3'>
+          <%= msg %>
+        </div>
+      <% end %>
+    <% end %>
+
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <%= f.label :wallet %>
+    <%= f.select(:wallet_id, options_for_select(current_user.wallets), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+
+    <%= f.label :transaction_type %>
+    <%= f.select(:transaction_type, options_for_select(Transaction.transaction_types), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+  
+    <%= f.label :category %>
+    <%= f.select(:category_id, options_for_select(Category.all.pluck(:title)), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+
+    <%= f.label :amount %>
+    <%= f.text_field :amount, class: 'form-control mb-4 border-dark text-center' %>
+
+    <%= f.label :note %>
+    <%= f.text_field :note, class: 'form-control mb-4 border-dark text-center' %>
+
+    <%= f.submit 'Create', class: 'btn btn-dark w-50' %>
+  <% end %>
+</div>

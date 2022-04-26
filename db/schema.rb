@@ -17,7 +17,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_180531) do
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.string "image"
-    t.integer "transaction_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -51,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_180531) do
   create_table "wallets", force: :cascade do |t|
     t.text "name"
     t.text "currency"
-    t.integer "quantity", default: 0
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
