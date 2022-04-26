@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  before_action :authenticate_user!
+
 	def index
 		@transactions = Transaction.all
 	end
@@ -19,6 +21,6 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-  	params.require(:transaction).permit(:amount, :note, :transaction_type, :wallet_id, :category_id)
+  	params.permit(:amount, :note, :transaction_type, :wallet_id, :category_id)
   end
 end

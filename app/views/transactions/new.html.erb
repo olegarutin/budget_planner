@@ -10,16 +10,14 @@
       <% end %>
     <% end %>
 
-    <%= f.hidden_field :user_id, value: current_user.id %>
-
     <%= f.label :wallet %>
-    <%= f.select(:wallet_id, options_for_select(current_user.wallets), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+    <%= f.select(:wallet_id, options_for_select(current_user.wallet_ids), {}, { class: 'form-control text-center border-dark mb-4' }) %>
 
     <%= f.label :transaction_type %>
-    <%= f.select(:transaction_type, options_for_select(Transaction.transaction_types), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+    <%= f.select(:transaction_type, Transaction.transaction_types.keys.to_a, {}, { class: 'form-control text-center border-dark mb-4' }) %>
   
     <%= f.label :category %>
-    <%= f.select(:category_id, options_for_select(Category.all.pluck(:title)), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+    <%= f.select(:category_id, options_for_select(Category.all.ids), {}, { class: 'form-control text-center border-dark mb-4' }) %>
 
     <%= f.label :amount %>
     <%= f.text_field :amount, class: 'form-control mb-4 border-dark text-center' %>
