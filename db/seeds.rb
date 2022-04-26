@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+config = YAML.load_file('spec/support/seed.yml').freeze
+
+config.each do |key, _value|
+  Category.create(title: key, image: config[key]['image'], transaction_type: config[key]['transaction_type'])
+end
