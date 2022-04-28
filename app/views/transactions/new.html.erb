@@ -31,7 +31,7 @@
     <%= f.select(:transaction_type, Transaction.transaction_types.keys, {}, { class: 'form-control text-center border-dark mb-4' }) %>
 
     <%= f.label :category %>
-    <%= f.select(:category_id, options_for_select(Category.all.map { |category| [category.title.capitalize, category.id] }), {}, { class: 'form-control text-center border-dark mb-4' }) %>
+    <%= f.select(:category_id, options_for_select(Category.all.map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center border-dark mb-4' }) %>
 
     <%= f.label :note %>
     <%= f.text_area :note, class: 'form-control mb-4 border-dark text-center' %>
