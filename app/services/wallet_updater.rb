@@ -1,4 +1,4 @@
-class WalletUpdater < BaseServise
+class WalletUpdater < BaseService
   attr_accessor :amount, :transaction, :transaction_type
 
   def initialize(amount:, transaction:, transaction_type:)
