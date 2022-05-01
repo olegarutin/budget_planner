@@ -5,6 +5,10 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
+  def new
+    redirect_to new_wallet_path if current_user.wallets.empty?
+  end
+
   def create
     @transaction = Transaction.create(transaction_params)
 
