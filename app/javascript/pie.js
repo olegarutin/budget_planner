@@ -1,6 +1,6 @@
 const Chart2 = require('chart.js')
 
-const ctx = document.getElementById('chartPie');
+const ctx = document.getElementById('chart-pie');
 const chartPie = new Chart2(ctx, {
     type: 'pie',
     data: {
