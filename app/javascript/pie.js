@@ -1,7 +1,7 @@
-const Chart2 = require('chart.js')
+Chart2 = require('chart.js')
 
-const ctx = document.getElementById('chart-pie');
-const chartPie = new Chart2(ctx, {
+ctx2 = document.getElementById('chart-pie');
+chartPie = new Chart2(ctx2, {
     type: 'pie',
     data: {
       labels: [

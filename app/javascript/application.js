@@ -4,6 +4,7 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 import "./charts.js"
 import "./pie.js"
+import "./jquery.js"
 
 
 document.addEventListener("turbo:load", () => {

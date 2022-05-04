@@ -1,13 +1,15 @@
-const Chart = require('chart.js')
+Chart1 = require('chart.js')
 
-const ctx = document.getElementById('chart-bar');
-const chart_bar = new Chart(ctx, {
+ctx1 = document.getElementById('chart-bar');
+var chartBar = new Chart1(ctx1, {
     type: 'bar',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: 'Levels your money run low',
             // data: JSON.parse(ctx.data.data),
+            // data: $('#chart-bar').data('data'),
+            // data: [(#{Transaction.all.income.map{ |x| x.amount }.sum.to_json}), ({Transaction.all.expense.map{ |x| x.amount }.sum.to_json})]
             data: [10, 25, 35, 6, 85, 45],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',

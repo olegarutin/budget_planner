@@ -6,7 +6,7 @@
         Bar Chart for Salary/Expense
       </div>
         <div class="card-body">
-          <canvas id="chart-bar" width="400" height="400" data-data="<%#= @expense_by_days %>"></canvas>
+          <canvas id="chart-bar" width="400" height="400" data-data="<%= Transaction.expense.map{ |x| x.amount }.sum %>"></canvas>
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         Pie Chart for Categories
       </div>
         <div class="card-body">
-          <canvas id="chart-pie" width="400" height="400" %>"></canvas>
+          <canvas id="chart-pie" width="400" height="400" data-data="<%= Transaction.income.map{ |x| x.amount }.sum.to_json.html_safe %>"%>"></canvas>
         </div>
     </div>
 
