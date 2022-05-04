@@ -2,7 +2,8 @@
   <h2>Dashboard</h2>
   <h2>Hi there, <%= current_user.email %></h2>
   <h2>Profile</h2>
-  <h2>Reports</h2>
+
+  <%= link_to 'Reports', page_path('reports') %>
 
   <%= link_to 'Back', home_path, class: 'btn btn-dark ml-3' %>
   <%= link_to 'Create transaction', new_transaction_path, class: 'btn btn-dark ml-3' %>
