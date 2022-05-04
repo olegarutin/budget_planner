@@ -7,10 +7,9 @@ var chartBar = new Chart1(ctx1, {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: 'Levels your money run low',
-            // data: JSON.parse(ctx.data.data),
+            data: JSON.parse(ctx1.data.data),
             // data: $('#chart-bar').data('data'),
-            // data: [(#{Transaction.all.income.map{ |x| x.amount }.sum.to_json}), ({Transaction.all.expense.map{ |x| x.amount }.sum.to_json})]
-            data: [10, 25, 35, 6, 85, 45],
+            // data: [10, 25, 35, 6, 85, 45],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

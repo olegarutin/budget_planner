@@ -6,7 +6,7 @@
         Bar Chart for Salary/Expense
       </div>
         <div class="card-body">
-          <canvas id="chart-bar" width="400" height="400" data-data="<%= Transaction.expense.map{ |x| x.amount }.sum %>"></canvas>
+          <canvas id="chart-bar" width="400" height="400" data-data="<%= Transaction.expense.map{ |x| x.amount }.sum %>" data-labels="<%= Transaction.expense.map{ |x| x.category_id } %>"></canvas>
         </div>
     </div>
 
