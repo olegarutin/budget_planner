@@ -4,14 +4,10 @@ ctx2 = document.getElementById('chart-pie');
 chartPie = new Chart2(ctx2, {
     type: 'pie',
     data: {
-      labels: [
-        'Red',
-        'Blue',
-        'Yellow'
-      ],
+      labels: $('#chart-bar').data("labels"),
       datasets: [{
         label: 'My First Dataset',
-        data: [300, 50, 100],
+        data: $('#chart-bar').data("data"),
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',

@@ -4,12 +4,10 @@ ctx1 = document.getElementById('chart-bar');
 var chartBar = new Chart1(ctx1, {
     type: 'bar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: $('#chart-bar').data("labels"),
         datasets: [{
             label: 'Levels your money run low',
-            data: JSON.parse(ctx1.data.data),
-            // data: $('#chart-bar').data('data'),
-            // data: [10, 25, 35, 6, 85, 45],
+            data: $('#chart-bar').data("data"),
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

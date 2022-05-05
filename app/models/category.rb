@@ -5,6 +5,4 @@ class Category < ApplicationRecord
   has_many :transactions, dependent: :destroy
 
   enum transaction_type: %i[income expense]
-
-  scope :user_categories, -> { Category.joins(:user).where(user_id: user.id) }
 end

@@ -1,3 +1,5 @@
+<h3><%= link_to 'Dashboard', page_path('dashboard') %></h3>
+<hr>
 <div class="row">
   <div class="col-md-6">
 
@@ -6,7 +8,7 @@
         Bar Chart for Salary/Expense
       </div>
         <div class="card-body">
-          <canvas id="chart-bar" width="400" height="400" data-data="<%= Transaction.expense.map{ |x| x.amount }.sum %>" data-labels="<%= Transaction.expense.map{ |x| x.category_id } %>"></canvas>
+          <canvas id="chart-bar" width="400" height="400" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.user_categories %>"></canvas>
         </div>
     </div>
 
@@ -19,7 +21,7 @@
         Pie Chart for Categories
       </div>
         <div class="card-body">
-          <canvas id="chart-pie" width="400" height="400" data-data="<%= Transaction.income.map{ |x| x.amount }.sum.to_json.html_safe %>"%>"></canvas>
+          <canvas id="chart-pie" width="400" height="400" data-data="<%#= %>"%>"></canvas>
         </div>
     </div>
 
