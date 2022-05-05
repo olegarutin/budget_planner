@@ -1,6 +1,14 @@
-<h1>HOME</h1>
-<% if current_user %>
-  <%= link_to 'Dashboard', page_path('dashboard') %>
-  <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-dark', data: { turbo: false } %>
-<% end %>
-<%= link_to 'Create wallet', new_wallet_path %>
+<div>
+  <h1 class='my-4'>HOME</h1>
+  <% if current_user %>
+    <div class='d-flex justify-content-center'>
+      <%= link_to 'Dashboard', page_path('dashboard'), class: 'btn btn-dark mx-2' %>
+      <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'btn btn-dark mx-2 w-100', data: { turbo: false } %>
+    </div>
+  <% else %>
+    <div class='d-flex justify-content-center'>
+      <%= link_to 'Log in', new_user_session_path, class: 'btn btn-dark mx-2' %>
+      <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-dark mx-2' %>
+    </div>
+  <% end %>
+</div>

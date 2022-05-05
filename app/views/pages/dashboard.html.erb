@@ -1,17 +1,15 @@
-<div class='text-center'>
+<div>
   <h2>Dashboard</h2>
-  <h4>Hi there, <%= current_user.email %></h4>
+  <h2>Hi there, <%= current_user.email %></h2>
+  <h2>Profile</h2>
+  <h2>Reports</h2>
 
   <%= link_to 'Back', home_path, class: 'btn btn-dark ml-3' %>
-
-  <h3>Profile</h3>
-  <h3>Reports</h3>
-  <h3>
-  <%= link_to 'Create transaction', new_transaction_path %>
-  </h3>
+  <%= link_to 'Create transaction', new_transaction_path, class: 'btn btn-dark ml-3' %>
+  <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark ml-3' %>
 
   <div class='row'>
-    <h1 class='my-5 mx-auto'>All Wallet</h1>
+    <h1 class='my-5'>All Wallet</h1>
     <% current_user.wallets.each do |wallet| %>
       <div class='col-3'>
         <%= render 'wallets/wallet', wallet: wallet %>
@@ -20,9 +18,9 @@
   </div>
 
   </div>
-  <div class='row text-center'>
-    <h1 class='my-5 mx-auto'>All Transacion</h1>
-    <% Transaction.all.each do | transaction| %>
+  <div class='row'>
+    <h1 class='my-5'>All Transacion</h1>
+    <% Transaction.all.each do |transaction| %>
       <div class='col-3'>
         <%= render 'transactions/transaction', transaction: transaction %>
       </div>
