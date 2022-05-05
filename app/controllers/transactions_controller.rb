@@ -19,7 +19,7 @@ class TransactionsController < ApplicationController
     )
 
     if @transaction.save
-      redirect_to root_path
+      redirect_to page_path('dashboard')
     else
       render :new
     end
