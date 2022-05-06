@@ -36,6 +36,8 @@
     <%= f.label :note %>
     <%= f.text_area :note, class: 'form-control mb-4 border-dark text-center' %>
 
+    <%= f.hidden_field :user_id, value: current_user.id %>
+
     <%= f.submit 'Create', class: 'btn btn-dark w-50' %>
   <% end %>
 </div>

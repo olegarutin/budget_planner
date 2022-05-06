@@ -1,0 +1,29 @@
+<h3><%= link_to 'Dashboard', page_path('dashboard') %></h3>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        Bar Chart for Salary/Expense
+      </div>
+        <div class="card-body">
+          <canvas id="chart-bar" width="400" height="400" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+        </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        Pie Chart for Categories
+      </div>
+        <div class="card-body">
+          <canvas id="chart-pie" width="400" height="400" data-data="<%#= %>"%>"></canvas>
+        </div>
+    </div>
+
+  </div>
+</div>

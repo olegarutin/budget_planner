@@ -6,6 +6,7 @@ class Transaction < ApplicationRecord
 
   belongs_to :wallet
   belongs_to :category
+  belongs_to :user
 
   enum transaction_type: TYPES
 end
