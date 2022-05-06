@@ -5,10 +5,21 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
+  def new
+    redirect_to new_wallet_path if current_user.wallets.empty?
+  end
+
   def create
     @transaction = Transaction.create(transaction_params)
+
+    WalletUpdater.call(
+      amount: params[:amount],
+      transaction: @transaction,
+      transaction_type: params[:transaction_type]
+    )
+
     if @transaction.save
-      redirect_to root_path
+      redirect_to page_path('dashboard')
     else
       render :new
     end

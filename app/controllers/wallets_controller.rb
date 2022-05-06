@@ -4,7 +4,7 @@ class WalletsController < ApplicationController
   def create
     @wallet = Wallet.create(wallet_params)
     if @wallet.save
-      redirect_to root_path
+      redirect_to page_path('dashboard')
     else
       render :new
     end
