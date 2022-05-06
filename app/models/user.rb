@@ -6,23 +6,23 @@ class User < ApplicationRecord
   has_many :categories, dependent: :destroy
   has_many :transactions, dependent: :destroy
 
-  def user_categories
-    Transaction.expense.select(:category_id).group(:category_id).count.keys
+  has_many :expense_transaction_categories,
+    -> { where("transactions.transaction_type = 1") },
+    through: :transactions, source: :category
+
+  has_many :income_transaction_categories,
+    -> { where("transactions.transaction_type = 0") },
+    through: :transactions, source: :category
+
+  def user_categories(type: :expense)
+    public_send("#{type}_transaction_categories").ids
   end
 
-  def user_catefories_count
-    Transaction.expense.select(:category_id).group(:category_id).count.values
+  def amount_for_categories(type: :expense)
+    transactions.public_send(type).group(:category_id).sum(:amount).values
   end
 
-  def amount_spent_on_transaction
-    Transaction.expense.map{ |x| x.amount }
-  end
-
-  def amount_for_categories
-    user_categories.zip(amount_spent_on_transaction).map{ |i, j| i * j }
-  end
-
-  def category_title
-    Category.find(user_categories).map { |c| c.title }
+  def category_title(type: :expense)
+    public_send("#{type}_transaction_categories").pluck(:title)
   end
 end
