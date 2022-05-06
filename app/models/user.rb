@@ -21,4 +21,8 @@ class User < ApplicationRecord
   def amount_for_categories
     user_categories.zip(amount_spent_on_transaction).map{ |i, j| i * j }
   end
+
+  def category_title
+    Category.find(user_categories).map { |c| c.title }
+  end
 end
