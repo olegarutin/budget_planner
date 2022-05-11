@@ -1,6 +1,7 @@
 <h3><%= link_to 'Dashboard', dashboards_path %></h3>
 <hr>
 <div class="row">
+
   <div class="col-md-6">
 
     <div class="card">
@@ -8,10 +9,9 @@
         Bar Chart for Salary/Expense
       </div>
         <div class="card-body">
-          <canvas id="chart-bar" width="400" height="400" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+          <canvas id="chart-bar" width="300" height="300" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
         </div>
     </div>
-
   </div>
 
   <div class="col-md-6">
@@ -21,11 +21,37 @@
         Pie Chart for Categories
       </div>
         <div class="card-body">
-          <canvas id="chart-pie" width="400" height="400" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+          <canvas id="chart-pie" width="300" height="300" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
         </div>
     </div>
-
   </div>
+
 </div>
 
-<!-- { onchange: 'this.form.submit();' } -->
+<div class="row">
+
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        Radar Chart for Income/Expense
+      </div>
+        <div class="card-body">
+          <canvas id="chart-radar" width="300" height="300" data-data="<%#= current_user.amount_for_categories %>" data-labels="<%#= current_user.category_title %>"></canvas>
+        </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="card">
+      <div class="card-header">
+        Line Chart for XZ
+      </div>
+        <div class="card-body">
+          <canvas id="chart-line" width="300" height="300" data-data="<%#= current_user.amount_for_categories %>" data-labels="<%#= current_user.category_title %>"></canvas>
+        </div>
+    </div>
+  </div>
+
+</div>
