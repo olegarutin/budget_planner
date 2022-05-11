@@ -112,7 +112,7 @@ var Line = function() {
   chartLine = new Chart4(ctx4, {
     type: 'line',
     data: {
-      labels: Utils.months({count: 12}),
+      labels: ['January', 'February', 'March'],
       datasets: [{
           label: 'My First Dataset',
           data: [65, 59, 80, 81, 56, 55, 40],
