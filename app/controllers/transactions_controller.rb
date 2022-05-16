@@ -16,6 +16,19 @@ class TransactionsController < ApplicationController
       transaction: @transaction,
       transaction_type: params[:transaction_type]
     )
+    if @transaction.save
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.replace(ActionView::RecordIdentifier.dom_id(@transaction.wallet),
+              partial: 'wallets/wallet',
+              locals: { wallet: @transaction.wallet })
+          ]
+        end
+      end
+    else
+      render :new
+    end
   end
 
   def update

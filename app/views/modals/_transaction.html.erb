@@ -1,6 +1,10 @@
-<button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#AddTransaction'>
+<% if current_user.wallets.present? %>
+  <button type='button' class='btn btn-dark mb-3' data-bs-toggle='modal' data-bs-target='#AddTransaction'>
   Add Transaction
-</button>
+  </button>
+<% else %>
+  <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark' %>
+<% end %>
 
 <div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true'>
   <div class='modal-dialog modal-lg mx-auto my-4'>
