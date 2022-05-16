@@ -215,7 +215,7 @@ DEPENDENCIES
   pry
   puma (~> 5.0)
   rails (~> 7.0.1)
-  redis (~> 4.0)
+  redis
   sprockets-rails
   stimulus-rails
   turbo-rails
