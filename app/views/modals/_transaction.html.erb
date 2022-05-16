@@ -1,0 +1,58 @@
+<button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#AddTransaction'>
+  Add Transaction
+</button>
+
+<div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-lg mx-auto my-4'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
+      <div class='modal-body mx-5'>
+        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border' do |f| %>
+          <% if @transaction %>
+            <% @transaction.errors.full_messages.each do |msg| %>
+              <div class='alert alert-dark mx-auto mb-4 mt-3'>
+                <%= msg %>
+              </div>
+            <% end %>
+          <% end %>
+          <div class='row justify-content-center mb-4'>
+            <div class='col-5'>
+              <span class='border-bottom m-auto d-block'>Wallet</span>
+              <div class='d-flex border-bottom'>
+                <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
+                <%= f.select(:wallet_id, options_for_select(current_user.wallets.map { |wallet| [wallet.name, wallet.id] }), {}, { class: 'form-select shadow-none text-center border-0' }) %>
+              </div>
+            </div>
+
+            <div class='col-5'>
+              <span class='border-bottom m-auto d-block'>Amount</span>
+              <div class='d-flex border-bottom'>
+                <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
+                <%= f.number_field :amount, value: 0, class: 'form-control text-cetner border-0 text-center' %>
+              </div>
+            </div>
+          </div>
+
+          <%= f.label :transaction_type %>
+          <%= f.select(:transaction_type, Transaction.transaction_types.keys, {}, { class: 'form-control text-center mb-4' }) %>
+
+          <%= f.label :category %>
+          <%= f.select(:category_id, options_for_select(Category.all.map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center mb-4' }) %>
+
+          <%= f.label :note %>
+          <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
+
+          <%= f.hidden_field :user_id, value: current_user.id %>
+
+          <div class='modal-footer justify-content-center'>
+            <%= f.submit 'Create', class: 'btn btn-secondary', 'data-bs-dismiss': 'modal' %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
