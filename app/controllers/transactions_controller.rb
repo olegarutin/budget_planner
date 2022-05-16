@@ -11,18 +11,11 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.create(transaction_params)
-
     WalletUpdater.call(
       amount: params[:amount],
       transaction: @transaction,
       transaction_type: params[:transaction_type]
     )
-
-    if @transaction.save
-      redirect_to page_path('dashboard')
-    else
-      render :new
-    end
   end
 
   def update

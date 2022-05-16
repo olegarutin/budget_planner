@@ -1,2 +1,7 @@
-<h2>Transactions</h2>
-<p><%= render @transactions %></p>
+<div class='container mx-auto'>
+  <h2 class=' mb-5'>Transactions</h2>
+  <%= turbo_stream_from 'transactions' %>
+  <%= turbo_frame_tag 'transactions', class: 'row' do %>
+    <%= render @transactions %>
+  <% end %>
+</div>

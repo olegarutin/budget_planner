@@ -1,5 +1,7 @@
-<p>Category: <%= transaction.category.title %></p>
-<p>Type: <%= transaction.transaction_type %></p>
-<p>Amount: <%= transaction.amount %></p>
-<p>Note: <%= transaction.note %></p>
-<hr>
+<%= turbo_frame_tag dom_id(transaction), class: 'col-3' do %>
+  <p>Category: <%= transaction.category.title %></p>
+  <p>Type: <%= transaction.transaction_type %></p>
+  <p>Amount: <%= transaction.amount %></p>
+  <p>Note: <%= transaction.note %></p>
+  <hr>
+<% end %>
