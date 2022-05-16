@@ -1,30 +1,44 @@
-<div>
-  <h2>Dashboard</h2>
-  <h2>Hi there, <%= current_user.email %></h2>
-  <h2>Profile</h2>
-
-  <%= link_to 'Reports', page_path('reports') %>
-
-  <%= link_to 'Back', home_path, class: 'btn btn-dark ml-3' %>
-  <%= link_to 'Create transaction', new_transaction_path, class: 'btn btn-dark ml-3' %>
-  <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark ml-3' %>
-
-  <div class='row'>
-    <h1 class='my-5'>All Wallet</h1>
-    <% current_user.wallets.each do |wallet| %>
-      <div class='col-3'>
-        <%= render 'wallets/wallet', wallet: wallet %>
+<div class='container'>
+  <nav class='navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3'>
+    <div class='container'>
+      <a class='navbar-brand border-bottom' href='#'>Budget planner</a>
+      <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+        <span class='navbar-toggler-icon'></span>
+      </button>
+      <li class='dropdown'>
+        <button class='btn btn-outline-light dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+          My wallets
+        </button>
+        <ul class='dropdown-menu py-2 px-4' aria-labelledby='dropdownMenuButton1'>
+          <% current_user.wallets.each do |wallet| %>
+            <%= render 'wallets/wallet', wallet: wallet %>
+          <% end %>
+          <%= link_to 'Create wallet', new_wallet_path, class: 'text-dark' %>
+        </ul>
+      </li>
+      <div class='collapse navbar-collapse' id='navbarResponsive'>
+        <ul class='navbar-nav ms-auto'>
+          <li class='nav-item'>
+            <%= link_to 'Dashboard', page_path('dashboard'), class: 'active nav-link' %>
+          </li>
+          <li class='nav-item'>
+            <%= link_to 'Home', home_path, class: 'nav-link' %>
+          </li>
+          <li class='nav-item'>
+            <%= link_to 'Reports', page_path('reports'), class: 'nav-link' %>
+          </li>
+        </ul>
       </div>
-    <% end %>
-  </div>
+    </div>
+  </nav>
 
-  </div>
-  <div class='row'>
-    <h1 class='my-5'>All Transacion</h1>
-    <% Transaction.all.each do |transaction| %>
-      <div class='col-3'>
-        <%= render 'transactions/transaction', transaction: transaction %>
-      </div>
+  <%= turbo_stream_from 'transactions' %>
+  <h1 class='pt-5 mb-4'>All Transactions</h1>
+  <%= turbo_frame_tag 'transactions', class: 'row', id: 'test' do %>
+    <% current_user.transactions.each do |transaction| %>
+      <%= render 'transactions/transaction', transaction: transaction %>
     <% end %>
-  </div>
+  <% end %>
+
+  <%= render 'modals/transaction' %>
 </div>
