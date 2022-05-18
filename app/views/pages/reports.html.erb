@@ -1,57 +1,59 @@
 <h3><%= link_to 'Dashboard', dashboards_path %></h3>
 <hr>
-<div class="row">
+<div class="container">
+  <div class="row row-cols-2">
 
-  <div class="col-md-6">
+    <div class="col">
 
-    <div class="card">
-      <div class="card-header">
-        Bar Chart for Salary/Expense
-      </div>
-        <div class="card-body">
-          <canvas id="chart-bar" width="300" height="300" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+      <div class="card">
+        <div class="card-header">
+          Bar Chart for Salary/Expense
         </div>
+          <div class="card-body">
+            <canvas id="chart-bar" width="200" height="200" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+          </div>
+      </div>
     </div>
+
+    <div class="col">
+
+      <div class="card">
+        <div class="card-header">
+          Pie Chart for Categories
+        </div>
+          <div class="card-body">
+            <canvas id="chart-pie" width="200" height="200" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+          </div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="col-md-6">
+  <div class="row">
 
-    <div class="card">
-      <div class="card-header">
-        Pie Chart for Categories
-      </div>
-        <div class="card-body">
-          <canvas id="chart-pie" width="300" height="300" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.category_title %>"></canvas>
+    <div class="col">
+
+      <div class="card">
+        <div class="card-header">
+          Radar Chart for Income/Expense
         </div>
-    </div>
-  </div>
-
-</div>
-
-<div class="row">
-
-  <div class="col-md-6">
-
-    <div class="card">
-      <div class="card-header">
-        Radar Chart for Income/Expense
+          <div class="card-body">
+            <canvas id="chart-radar" width="200" height="200" data-data1="<%= current_user.array_all_expense %>" data-data2="<%= current_user.array_all_income %>" data-labels="<%= current_user.all_categories_titles %>"></canvas>
+          </div>
       </div>
-        <div class="card-body">
-          <canvas id="chart-radar" width="300" height="300" data-data="<%#= current_user.amount_for_categories %>" data-labels="<%#= current_user.category_title %>"></canvas>
-        </div>
     </div>
-  </div>
 
-  <div class="col-md-6">
+    <div class="col">
 
-    <div class="card">
-      <div class="card-header">
-        Line Chart for XZ
+      <div class="card">
+        <div class="card-header">
+          Line Chart for XZ
+        </div>
+          <div class="card-body">
+            <canvas id="chart-line" width="200" height="200" data-data="<%= current_user.amount_for_categories %>" data-labels="<%= current_user.all_categories_titles %>"></canvas>
+          </div>
       </div>
-        <div class="card-body">
-          <canvas id="chart-line" width="300" height="300" data-data="<%#= current_user.amount_for_categories %>" data-labels="<%#= current_user.category_title %>"></canvas>
-        </div>
     </div>
-  </div>
 
+  </div>
 </div>

@@ -70,18 +70,10 @@ var Radar = function() {
   chartRadar = new Chart3(ctx3, {
     type: 'radar',
     data: {
-      labels: [
-        'Eating',
-        'Drinking',
-        'Sleeping',
-        'Designing',
-        'Coding',
-        'Cycling',
-        'Running'
-      ],
+      labels: $('#chart-radar').data("labels"),
       datasets: [{
-        label: 'XZ 1',
-        data: [65, 59, 90, 81, 56, 55, 40],
+        label: 'Expense',
+        data1: $('#chart-radar').data("data1"),
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
@@ -90,8 +82,8 @@ var Radar = function() {
         pointHoverBackgroundColor: '#fff',
         pointHoverBorderColor: 'rgb(255, 99, 132)'
       }, {
-        label: 'XZ 2',
-        data: [28, 48, 40, 19, 96, 27, 100],
+        label: 'Income',
+        data2: $('#chart-radar').data("data1"),
         fill: true,
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgb(54, 162, 235)',
@@ -112,17 +104,17 @@ var Line = function() {
   chartLine = new Chart4(ctx4, {
     type: 'line',
     data: {
-      labels: ['January', 'February', 'March'],
+      labels: $('#chart-line').data("labels"),
       datasets: [{
-          label: 'My First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
-          fill: false,
+          label: 'SMTH',
+          data: $('#chart-line').data("data"),
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
         }]
     }
   });
 }
+
 
 document.addEventListener("turbo:load", () => {
   Bar();
