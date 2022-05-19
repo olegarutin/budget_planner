@@ -10,6 +10,8 @@ class Transaction < ApplicationRecord
 
   enum transaction_type: TYPES
 
+  validates :amount, numericality: { greater_than: 0 }
+
   after_create_commit { broadcast_append_to 'transactions' }
   after_update_commit { broadcast_replace_to 'transactions' }
   after_destroy_commit { broadcast_remove_to 'transactions' }
