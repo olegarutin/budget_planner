@@ -2,7 +2,7 @@ class WalletsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @wallet = Wallet.create(wallet_params)
+    @wallet = Wallet.new(wallet_params)
     if @wallet.save
       redirect_to page_path('dashboard')
     else

@@ -6,12 +6,8 @@ class TransactionsController < ApplicationController
     @transactions = Transaction.all
   end
 
-  def new
-    redirect_to new_wallet_path if current_user.wallets.empty?
-  end
-
   def create
-    @transaction = Transaction.create(transaction_params)
+    @transaction = Transaction.new(transaction_params.merge(user: current_user))
     WalletUpdater.call(
       amount: params[:amount],
       transaction: @transaction,
@@ -51,7 +47,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.permit(:amount, :note, :transaction_type, :wallet_id, :category_id, :user_id)
+    params.permit(:amount, :note, :transaction_type, :wallet_id, :category_id)
   end
 
   def set_transaction

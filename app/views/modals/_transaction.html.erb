@@ -41,15 +41,12 @@
           </div>
 
           <%= f.label :transaction_type %>
-          <%= f.select(:transaction_type, Transaction.transaction_types.keys, {}, { class: 'form-control text-center mb-4' }) %>
+          <%= f.select(:transaction_type, Transaction::TYPES, {}, { class: 'form-control text-center mb-4' }) %>
 
           <%= f.label :category %>
-          <%= f.select(:category_id, options_for_select(Category.all.map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center mb-4' }) %>
-
+          <%= f.select(:category, Category.all.map{ |p| [p.title, p.id, title: image_url(p.image)]}) %>
           <%= f.label :note %>
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
-
-          <%= f.hidden_field :user_id, value: current_user.id %>
 
           <div class='modal-footer justify-content-center'>
             <%= f.submit 'Create', class: 'btn btn-secondary', 'data-bs-dismiss': 'modal' %>
