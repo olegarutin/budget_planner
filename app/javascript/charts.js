@@ -8,7 +8,7 @@ var Bar = function() {
     data: {
       labels: $('#chart-bar').data("labels"),
       datasets: [{
-        label: 'Levels your money run low',
+        label: 'Amount for categories',
         data: $('#chart-bar').data("data"),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -49,7 +49,7 @@ var Pie = function() {
     data: {
       labels: $('#chart-pie').data("labels"),
       datasets: [{
-        label: 'My First Dataset',
+        label: 'Pie Chart',
         data: $('#chart-pie').data("data"),
         backgroundColor: [
           'rgb(255, 99, 132)',
@@ -62,36 +62,34 @@ var Pie = function() {
   });
 }
 
-var Radar = function() {
+var StackedBar = function() {
 
   Chart3 = require('chart.js')
 
-  ctx3 = document.getElementById('chart-radar');
-  chartRadar = new Chart3(ctx3, {
-    type: 'radar',
+  ctx3 = document.getElementById('chart-stacked');
+  chartStacked = new Chart3(ctx3, {
+    type: 'line',
     data: {
-      labels: $('#chart-radar').data("labels"),
+      labels: $('#chart-stacked').data("labels"),
       datasets: [{
         label: 'Expense',
-        data1: $('#chart-radar').data("data1"),
-        fill: true,
+        data1: $('#chart-stacked').data("data1"),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgb(255, 99, 132)',
-        pointBackgroundColor: 'rgb(255, 99, 132)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(255, 99, 132)'
+        stack: 'combined',
+        type: 'bar'
       }, {
         label: 'Income',
-        data2: $('#chart-radar').data("data1"),
-        fill: true,
+        data2: $('#chart-stacked').data("data2"),
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgb(54, 162, 235)',
-        pointBackgroundColor: 'rgb(54, 162, 235)',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: 'rgb(54, 162, 235)'
+        stack: 'combined'
       }]
+    },
+    scales: {
+      y: {
+        stacked: true
+      }
     }
   });
 }
@@ -119,6 +117,6 @@ var Line = function() {
 document.addEventListener("turbo:load", () => {
   Bar();
   Pie();
-  Radar();
+  StackedBar();
   Line();
 });
