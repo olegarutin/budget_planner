@@ -3,7 +3,10 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: :destroy
 
   def index
-    @transactions = Transaction.all
+    @transactions = current_user.transactions
+    return unless params[:query]
+
+    @transactions = @transactions.where('note ILIKE ?', "%#{params[:query]}%")
   end
 
   def create
