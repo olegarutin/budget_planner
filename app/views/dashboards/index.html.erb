@@ -3,11 +3,14 @@
 
   <%= turbo_stream_from 'transactions' %>
   <h1 class='pt-5 mb-4'>All Transactions</h1>
-  <%= turbo_frame_tag 'transactions', class: 'row' do %>
-    <% current_user.transactions.each do |transaction| %>
-      <%= render 'transactions/transaction', transaction: transaction %>
-    <% end %>
+
+
+  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-5') do |form| %>
+    <%= form.label :query, 'Search by hashtag:' %>
+    <%= form.text_field :query, data: { action: "input->transactions#search" } %>
   <% end %>
+
+  <%= render 'transactions/transactions', transactions: @transactions %>
 
   <%= render 'modals/transaction' %>
 </div>
