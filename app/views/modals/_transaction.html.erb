@@ -44,7 +44,8 @@
           <%= f.select(:transaction_type, Transaction::TYPES, {}, { class: 'form-control text-center mb-4' }) %>
 
           <%= f.label :category %>
-          <%= f.select(:category, Category.all.map{ |p| [p.title, p.id, title: image_url(p.image)]}) %>
+          <%= f.select(:category_id, options_for_select(@categories.where(user: [current_user, nil]).map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center mb-4' }) %>
+
           <%= f.label :note %>
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
 
