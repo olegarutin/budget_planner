@@ -5,9 +5,21 @@
   <h1 class='pt-5 mb-4'>All Transactions</h1>
 
 
-  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-5') do |form| %>
-    <%= form.label :query, 'Search by hashtag:' %>
-    <%= form.text_field :query, data: { action: "input->transactions#search" } %>
+  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-5 d-flex justify-content-center') do |form| %>
+    <div class='mx-2'>
+      <%= form.label :query, 'Search by hashtag:', class: 'd-block' %>
+      <%= form.text_field :query, data: { action: 'input->transactions#search' }, class: 'form-control' %>
+    </div>
+    <div class='mx-2'>
+      <%= form.label :category_id, 'Search by category:', class: 'd-block' %>
+      <%= form.select :category,
+        options_for_select(@categories.pluck(:title, :id),
+          session.dig('filters', 'category_id')),
+        { include_blank: 'All Teams' },
+        class: 'form-select',
+        data: { action: 'input->transactions#search' }
+      %>
+    </div>
   <% end %>
 
   <%= render 'transactions/transactions', transactions: @transactions %>

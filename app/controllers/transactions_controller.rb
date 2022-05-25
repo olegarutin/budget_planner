@@ -3,10 +3,10 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: :destroy
 
   def index
-    @transactions = current_user.transactions
-    return unless params[:query]
+    @transactions = current_user.transactions.includes(:category)
 
-    @transactions = @transactions.where('note ILIKE ?', "%#{params[:query]}%")
+    @transactions.where!('note ILIKE ?', "%#{params[:query]}%") if params[:query].present?
+    @transactions.where!(category_id: params[:category]) if params[:category].present?
   end
 
   def create
