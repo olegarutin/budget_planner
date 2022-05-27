@@ -5,22 +5,32 @@
   <h1 class='pt-5 mb-4'>All Transactions</h1>
 
 
-  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 d-flex justify-content-center') do |form| %>
-    <div class='mx-2'>
+  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
+    <div class='mx-2 col-2'>
       <%= form.label :query, 'Search by hashtag:', class: 'd-block' %>
       <%= form.text_field :query, data: { action: 'input->transactions#search' }, class: 'form-control' %>
     </div>
-    <div class='mx-2'>
-      <%= form.label :category_id, 'Search by category:', class: 'd-block' %>
+    <div class='mx-2 col-2'>
+      <%= form.label :category, 'Search by category:', class: 'd-block' %>
       <%= form.select :category,
-        options_for_select(@categories.pluck(:title, :id),
-          session.dig('filters', 'category_id')),
+        options_for_select(@categories.pluck(:title, :id)),
         { include_blank: 'All Teams' },
         class: 'form-select',
         data: { action: 'input->transactions#search' }
       %>
     </div>
-    <%= link_to 'Reset', transactions_path, data: { turbo_frame: 'transactions' }, class:'btn bg-danger h-50 my-4' %>
+    <div class='mx-2 col-2'>
+      <%= form.label :day, 'Search by time:', class: 'd-block' %>
+      <%= form.select :day,
+        options_for_select([['Day', 1], ['Week', 7], ['Two weeks', 14], ['Month', 30], ['Two months', 60], ['Half-year', 182], ['Year', 365]]),
+        { include_blank: 'All Time' },
+        class: 'form-select',
+        data: { action: 'input->transactions#search' }
+      %>
+    </div>
+    <div class='col-1'>
+      <%= link_to 'Reset', transactions_path, data: { turbo_frame: 'transactions' }, class:'btn bg-danger' %>
+    </div>
   <% end %>
 
 
