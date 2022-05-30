@@ -1,5 +1,15 @@
-<% transaction.errors.full_messages.each do |msg| %>
+<% if pattern.errors.any? %>
   <div class='alert alert-danger mx-auto mb-4 mt-3 w-75' id='error'>
+    <% pattern.errors.full_messages.each do |msg| %>
+      <%= msg %>
+      <br>
+    <% end %>
+  </div>
+<% end %>
+
+<% flash.each do |type, msg| %>
+  <div class='alert alert-success mx-auto mb-4 mt-3 w-75'>
     <%= msg %>
   </div>
 <% end %>
+

@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
             turbo_stream.before(
               'transactions',
               partial: 'shared/error_messages',
-              locals: { transaction: @transaction }
+              locals: { pattern: @transaction }
             )
         end
       end
