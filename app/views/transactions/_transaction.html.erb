@@ -1,5 +1,8 @@
-<p>Category: <%= transaction.category.title %></p>
-<p>Type: <%= transaction.transaction_type %></p>
-<p>Amount: <%= transaction.amount %></p>
-<p>Note: <%= transaction.note %></p>
-<hr>
+<div class='col-3 position-relative' id='<%= dom_id(transaction) %>'>
+  <p>Category: <%= transaction.category.title %></p>
+  <p>Type: <%= transaction.transaction_type %></p>
+  <p>Amount: <%= transaction.amount %></p>
+  <p>Note: <%= transaction.note %></p>
+  <hr>
+  <%= button_to '', transaction_path(transaction), method: 'delete', class:'btn-close bg-danger position-absolute top-0 end-0' %>
+</div>
