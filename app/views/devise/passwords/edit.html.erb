@@ -4,7 +4,7 @@
     <h2 class='mb-4'>Change your password</h2>
 
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, 'data-turbo': false }) do |f| %>
-      <%= render '/shared/error_messages', resource: resource %>
+      <%= render '/shared/error_messages', pattern: resource %>
       <%= render '/shared/notifications'%>
 
       <%= f.hidden_field :reset_password_token %>
