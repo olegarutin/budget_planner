@@ -1,5 +1,5 @@
 <div class='col-lg-6 offset-lg-3 border p-5'>
-  <div class='form-centered'>
+  <div class='form-centered w-75 mx-auto'>
     <h2 class='mb-4'>Log in</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { 'data-turbo': false }) do |f| %>
@@ -10,17 +10,18 @@
         <%= f.email_field :email, class: 'form-control form-control-sm', autofocus: true, autocomplete: 'email' %>
       </div>
 
-      <div class='field mb-2'>
+      <div class='field mb-2 position-relative' data-controller='password-visibility'>
         <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control form-control-sm', autocomplete: 'current-password' %>
+        <%= f.password_field :password, class: 'form-control form-control-sm', autocomplete: 'current-password', 'data-password-visibility-target': 'input' %>
+        <button data-action='password-visibility#toggle' class='rounded btn-outline-dark position-absolute bottom-0 end-0'>
+          <span class='bi bi-eye'>
+          </button>
       </div>
 
-        <% if devise_mapping.rememberable? %>
-          <div class='mb-2'>
-            <%= f.label :remember_me %>
-            <%= f.check_box :remember_me, class: 'form-check-input' %>
-          </div>
-        <% end %>
+      <div class='mb-2'>
+        <%= f.label :remember_me %>
+        <%= f.check_box :remember_me, class: 'form-check-input' %>
+      </div>
 
       <div class='actions'>
         <%= f.submit 'Log in', class: ' mx-1 btn btn-dark' %>
