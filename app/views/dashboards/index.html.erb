@@ -4,6 +4,7 @@
   <%= turbo_stream_from 'transactions' %>
   <h1 class='pt-5 mb-4'>All Transactions</h1>
 
+  <%= render 'shared/notifications' %>
 
   <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
     <div class='mx-2 col-2'>
