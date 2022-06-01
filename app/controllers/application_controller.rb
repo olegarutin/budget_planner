@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def turbo_frame_request_variant
     request.variant = :turbo_frame if turbo_frame_request?
   end
+
+  def after_sign_in_path_for(resource)
+    dashboards_path
+  end
 end
