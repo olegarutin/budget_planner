@@ -9,21 +9,8 @@
 
       <%= f.hidden_field :reset_password_token %>
 
-      <div class='field mb-2 position-relative' data-controller='password-visibility'>
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control form-control-sm', autocomplete: 'current-password', 'data-password-visibility-target': 'input' %>
-        <button data-action='password-visibility#toggle' class='rounded btn-outline-dark position-absolute bottom-0 end-0'>
-          <span class='bi bi-eye'>
-          </button>
-      </div>
-
-      <div class='field mb-3 position-relative' data-controller='password-visibility'>
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: 'form-control form-control-sm', autocomplete: 'current-password', 'data-password-visibility-target': 'input' %>
-        <button data-action='password-visibility#toggle' class='rounded btn-outline-dark position-absolute bottom-0 end-0'>
-          <span class='bi bi-eye'>
-          </button>
-      </div>
+      <%= render 'devise/shared/password_field', f: f, field: :password %>
+      <%= render 'devise/shared/password_field', f: f, field: :password_confirmation %>
 
       <div class='actions'>
         <%= f.submit 'Change my password', class: 'btn btn-dark' %>
