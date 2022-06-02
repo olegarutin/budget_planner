@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
 
     @transactions.where!('note ILIKE ?', "%#{params[:query]}%") if params[:query].present?
     @transactions.where!(category_id: params[:category]) if params[:category].present?
-    @transactions.where!(created_at: params[:day].to_i.day.ago..Date.today) if params[:day].present?
+    @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now) if params[:day].present?
   end
 
   def create
