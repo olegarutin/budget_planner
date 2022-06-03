@@ -6,9 +6,9 @@
 
   <%= render 'shared/notifications' %>
 
-  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
+  <%= form_with(url: transactions_path, method: 'get', id: 'form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
     <div class='mx-2 col-2'>
-      <%= form.label :query, 'Search by hashtag:', class: 'd-block' %>
+      <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
       <%= form.text_field :query, data: { action: 'input->transactions#search' }, class: 'form-control' %>
     </div>
     <div class='mx-2 col-2'>
@@ -30,10 +30,9 @@
       %>
     </div>
     <div class='col-1'>
-      <%= link_to 'Reset', transactions_path, data: { turbo_frame: 'transactions' }, class:'btn bg-danger' %>
+      <%= link_to 'Reset', transactions_path, data: { action: 'click->transactions#reset', turbo_frame: 'transactions' }, class:'btn bg-danger' %>
     </div>
   <% end %>
-
 
   <%= render 'transactions/transactions', transactions: @transactions %>
 
