@@ -3,7 +3,7 @@ class Wallet < ApplicationRecord
   has_many :transactions, dependent: :destroy
 
   validates :name, :currency, presence: true
-  validates :quantity, numericality: { greater_than: 0 }
+  validates :quantity, numericality: { greater_than: 0 }, on: :create
 
   scope :date_range, -> (start_date, end_date) { where(created_at: start_date.beginning_of_day..end_date.end_of_day) }
 end
