@@ -5,11 +5,11 @@ export default class extends Controller {
   search() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
-      this.element.requestSubmit();
+      document.getElementById('search_transactions_form').requestSubmit();
     }, 200);
   }
 
   reset() {
-    $('#form').trigger('reset');
+    $('#search_transactions_form').trigger('reset');
   }
 }
