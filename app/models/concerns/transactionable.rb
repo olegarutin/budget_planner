@@ -1,18 +1,15 @@
 module Transactionable
   extend ActiveSupport::Concern
 
-  included do
-    scope :for_date_range, -> (start_date, end_date) { transactions.where(created_at: start_date.beginning_of_day..end_date.end_of_day)}
-  end
-	
-
-
-  def user_categories(type: :expense)
-    transactions.public_send(type).pluck(:category_id).uniq
+  def user_categories(transaction_type)
+    transactions.public_send(transaction_type)
+    .pluck(:category_id).uniq
   end
 
-  def amount_for_categories(type: :expense)
-    transactions.public_send(type).includes(:category).group(:category_id).sum(:amount).values
+  def amount_for_categories(transaction_type)
+    transactions.public_send(transaction_type)
+      .includes(:category).group(:category_id)
+      .sum(:amount).values
   end
 
   def amount_for_income(type: :income)
@@ -33,5 +30,9 @@ module Transactionable
 
   def expense_categories_title
     transactions.expense.includes(:category).pluck(:title).uniq
+  end
+
+  def transactoinable_params
+    #params[:transaction_type], params[:start_date], params[:end_date]
   end
 end
