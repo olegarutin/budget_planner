@@ -7,18 +7,18 @@ class TransactionsController < ApplicationController
 
     @transactions.where!('note ILIKE ?', "%#{params[:query]}%") if params[:query].present?
     @transactions.where!(category_id: params[:category]) if params[:category].present?
-    @transactions.where!(created_at: params[:day].to_i.day.ago..Date.today) if params[:day].present?
+    @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now) if params[:day].present?
   end
 
   def create
     @transaction = Transaction.new(transaction_params.merge(user: current_user))
-    WalletUpdater.call(
-      amount: params[:amount],
-      transaction: @transaction,
-      transaction_type: params[:transaction_type]
-    )
     respond_to do |format|
       if @transaction.save
+        WalletUpdater.call(
+          amount: params[:amount],
+          transaction: @transaction,
+          transaction_type: params[:transaction_type]
+        )
         format.turbo_stream do
           render turbo_stream:
             turbo_stream.replace(
@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
             turbo_stream.before(
               'transactions',
               partial: 'shared/error_messages',
-              locals: { transaction: @transaction }
+              locals: { pattern: @transaction }
             )
         end
       end

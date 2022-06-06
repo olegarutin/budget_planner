@@ -1,31 +1,20 @@
-<div class="col-lg-6 offset-lg-3">
-  <div class="form-centered">
+<div class='col-lg-6 offset-lg-3 border p-5'>
+  <div class='form-centered w-75 mx-auto'>
 
-    <h2>Change your password</h2>
+    <h2 class='mb-4'>Change your password</h2>
 
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, 'data-turbo': false }) do |f| %>
+      <%= render '/shared/error_messages', pattern: resource %>
+      <%= render '/shared/notifications'%>
+
       <%= f.hidden_field :reset_password_token %>
 
-      <div class="field">
-        <%= f.label :password, "New password" %><br />
-        <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-        <% end %>
-        <%= f.password_field :password, class: "form-control form-control-sm", autofocus: true, autocomplete: "new-password" %>
-      </div>
+      <%= render 'devise/shared/password_field', f: f, field: :password %>
+      <%= render 'devise/shared/password_field', f: f, field: :password_confirmation %>
 
-      <div class="field">
-        <%= f.label :password_confirmation, "Confirm new password" %><br />
-        <%= f.password_field :password_confirmation, class: "form-control form-control-sm", autocomplete: "new-password" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Change my password", class: "btn btn-dark" %>
+      <div class='actions'>
+        <%= f.submit 'Change my password', class: 'btn btn-dark' %>
       </div>
     <% end %>
   </div>
 </div>
-<br>
-
-<%= render "devise/shared/links" %>

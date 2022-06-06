@@ -14,7 +14,7 @@
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
       <div class='modal-body mx-5'>
-        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border' do |f| %>
+        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', turbo_frame: 'transactions' } do |f| %>
           <% if @transaction %>
             <% @transaction.errors.full_messages.each do |msg| %>
               <div class='alert alert-dark mx-auto mb-4 mt-3'>
@@ -50,8 +50,8 @@
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
 
           <div class='modal-footer justify-content-center'>
-            <%= f.submit 'Create', class: 'btn btn-secondary', 'data-bs-dismiss': 'modal' %>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button>
+            <%= f.submit 'Create', class: 'btn btn-secondary', data: { action: 'transactions#search', turbo_frame: 'transactions', 'bs-dismiss': 'modal' } %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action="click->transactions#reset" turbo-frame='transactions'>Close</button>
           </div>
         <% end %>
       </div>

@@ -18,13 +18,16 @@
     <div class='collapse navbar-collapse' id='navbarResponsive'>
       <ul class='navbar-nav ms-auto'>
         <li class='nav-item'>
-          <%= link_to 'Dashboard', page_path('dashboard'), class: 'active nav-link' %>
+          <%= link_to 'Dashboard', dashboards_path, class: 'btn btn-dark mx-2' %>
         </li>
         <li class='nav-item'>
           <%= link_to 'Home', home_path, class: 'nav-link' %>
         </li>
         <li class='nav-item'>
           <%= link_to 'Reports', page_path('reports'), class: 'nav-link' %>
+        </li>
+        <li class='nav-item'>
+          <%= button_to 'Log out', destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'btn btn-dark' %>
         </li>
       </ul>
     </div>
