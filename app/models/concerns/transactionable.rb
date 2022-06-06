@@ -3,7 +3,7 @@ module Transactionable
 
   def user_categories(transaction_type)
     transactions.public_send(transaction_type)
-    .pluck(:category_id).uniq
+      .pluck(:category_id).uniq
   end
 
   def amount_for_categories(transaction_type)
