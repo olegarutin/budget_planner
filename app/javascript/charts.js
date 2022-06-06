@@ -62,61 +62,8 @@ var Pie = function() {
   });
 }
 
-var StackedBar = function() {
-
-  Chart3 = require('chart.js')
-
-  ctx3 = document.getElementById('chart-stacked');
-  chartStacked = new Chart3(ctx3, {
-    type: 'line',
-    data: {
-      labels: $('#chart-stacked').data("labels"),
-      datasets: [{
-        label: 'Expense',
-        data1: $('#chart-stacked').data("data1"),
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgb(255, 99, 132)',
-        stack: 'combined',
-        type: 'bar'
-      }, {
-        label: 'Income',
-        data2: $('#chart-stacked').data("data2"),
-        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-        borderColor: 'rgb(54, 162, 235)',
-        stack: 'combined'
-      }]
-    },
-    scales: {
-      y: {
-        stacked: true
-      }
-    }
-  });
-}
-
-var Line = function() {
-
-  Chart4 = require('chart.js')
-
-  ctx4 = document.getElementById('chart-line');
-  chartLine = new Chart4(ctx4, {
-    type: 'line',
-    data: {
-      labels: $('#chart-line').data("labels"),
-      datasets: [{
-          label: 'SMTH',
-          data: $('#chart-line').data("data"),
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1
-        }]
-    }
-  });
-}
-
 
 document.addEventListener("turbo:load", () => {
   Bar();
   Pie();
-  StackedBar();
-  Line();
 });

@@ -5,8 +5,8 @@
   <%= form_with model: @transaction, method: :get do |form| %>
     <div class='form-group'>
       <%= form.select :transaction_type, current_user.transactions.transaction_types.keys, { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();' } %>
-      <%= form.date_field :start_date, value: 7.days.ago.to_date.to_s %>
-      <%= form.date_field :end_date, value: Date.today.to_date.to_s %>
+      <%= form.date_field :start_date, value: @start_date %>
+      <%= form.date_field :end_date, value: @end_date %>
       <%= form.submit %>
     </div>
 
@@ -39,34 +39,4 @@
     </div>
 
   <% end %>
-
-
-
-  <div class="row row-cols-2">
-
-    <div class="col">
-
-      <div class="card">
-        <div class="card-header">
-          Bar&Line Chart for Income/Expense
-        </div>
-          <div class="card-body">
-            <canvas id="chart-stacked" width="200" height="200" data-data1="<%#= current_user.transactions.amount_for_categories %>" data-data2="<%#= current_user.transactions.amount_for_income %>" data-labels="<%#= current_user.transactions.expense_categories_titles %>"></canvas>
-          </div>
-      </div>
-    </div>
-
-    <div class="col">
-
-      <div class="card">
-        <div class="card-header">
-          Line Chart for XZ
-        </div>
-          <div class="card-body">
-            <canvas id="chart-line" width="200" height="200" data-data="<%#= current_user.transactions.amount_for_categories %>" data-labels="<%#= current_user.transactions.expense_categories_titles %>"></canvas>
-          </div>
-      </div>
-    </div>
-
-  </div>
 </div>
