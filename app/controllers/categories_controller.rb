@@ -10,12 +10,18 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.create(category_params)
-
-    if @category.save
-      redirect_to new_transaction_path
-    else
-      render :new
+    @category = Category.new(category_params.merge(user: current_user))
+    respond_to do |format|
+      if @category.save
+        format.turbo_stream do
+          render turbo_stream:
+            turbo_stream.replace(
+              'categories_select',
+              partial: 'transactions/category_select',
+              locals: { categories: Category.all, selected: @category.id }
+            )
+        end
+      end
     end
   end
 
@@ -38,6 +44,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :image)
+    params.permit(:title, :image, :transaction_type)
   end
 end

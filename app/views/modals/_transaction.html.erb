@@ -1,7 +1,7 @@
 <% if current_user.wallets.present? %>
-  <button type='button' class='btn btn-dark mb-3' data-bs-toggle='modal' data-bs-target='#AddTransaction'>
+  <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddTransaction'>
   Add Transaction
-  </button>
+  </a>
 <% else %>
   <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark' %>
 <% end %>
@@ -43,10 +43,13 @@
           <%= f.label :transaction_type %>
           <%= f.select(:transaction_type, Transaction::TYPES, {}, { class: 'form-control text-center mb-4' }) %>
 
-          <%= f.label :category %>
-          <%= f.select(:category_id, options_for_select(@categories.map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center mb-4' }) %>
+          <%= render 'transactions/category_select', categories: @categories, selected: nil %>
 
-          <%= f.label :note %>
+          <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory'>
+            Add Category
+          </a>
+
+          <%= f.label :note, class: 'd-block' %>
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
 
           <div class='modal-footer justify-content-center'>
