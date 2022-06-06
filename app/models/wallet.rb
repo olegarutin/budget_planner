@@ -2,6 +2,7 @@ class Wallet < ApplicationRecord
   belongs_to :user
   has_many :transactions, dependent: :destroy
 
+  validates :name, uniqueness: true, length: { maximum: 64 }, on: :create
   validates :name, :currency, presence: true
   validates :quantity, numericality: { greater_than: 0 }, on: :create
 

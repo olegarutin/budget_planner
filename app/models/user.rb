@@ -3,6 +3,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  PASSWORD_ERROR_MESSAGE = 'must be between 6 and 18 characters,
+    must contain letters in mixed case, must contain numbers'.freeze
+
+  validates :password, format: {
+    with: /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,18}\z/,
+    message: PASSWORD_ERROR_MESSAGE
+  }
+
   has_many :wallets, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :transactions, dependent: :destroy

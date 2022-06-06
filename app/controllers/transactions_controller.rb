@@ -12,13 +12,13 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params.merge(user: current_user))
-    WalletUpdater.call(
-      amount: params[:amount],
-      transaction: @transaction,
-      transaction_type: params[:transaction_type]
-    )
     respond_to do |format|
       if @transaction.save
+        WalletUpdater.call(
+          amount: params[:amount],
+          transaction: @transaction,
+          transaction_type: params[:transaction_type]
+        )
         format.turbo_stream do
           render turbo_stream:
             turbo_stream.replace(
