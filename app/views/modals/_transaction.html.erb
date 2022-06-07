@@ -13,7 +13,14 @@
         <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
+
       <div class='modal-body mx-5'>
+        <div id='errors'>
+          <% if @transaction %>
+            <%= render 'shared/error_messages', pattern: @transaction %>
+          <% end %>
+        </div>
+
         <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', turbo_frame: 'transactions' } do |f| %>
           <% if @transaction %>
             <% @transaction.errors.full_messages.each do |msg| %>
@@ -41,7 +48,7 @@
           </div>
 
           <%= f.label :transaction_type %>
-          <%= f.select(:transaction_type, Transaction::TYPES, {}, { class: 'form-control text-center mb-4' }) %>
+          <%= f.select(:transaction_type, Transaction::TYPES, { include_blank: true }, { class: 'form-control text-center mb-4', data: { action: 'input->transactions#sort' } }) %>
 
           <%= render 'transactions/category_select', categories: @categories, selected: nil %>
 
@@ -53,8 +60,8 @@
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
 
           <div class='modal-footer justify-content-center'>
-            <%= f.submit 'Create', class: 'btn btn-secondary', data: { action: 'transactions#search', turbo_frame: 'transactions', 'bs-dismiss': 'modal' } %>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action="click->transactions#reset" turbo-frame='transactions'>Close</button>
+            <%= f.submit 'Create', class: 'btn btn-secondary', data: { action: 'transactions#search', turbo_frame: 'transactions', 'bs-dismiss':'modal' } %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action='click->transactions#reset' turbo-frame='transactions'>Close</button>
           </div>
         <% end %>
       </div>

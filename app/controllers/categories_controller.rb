@@ -1,10 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
-  def index
-    @categories = Category.all
-  end
-
   def new
     @category = Category.new
   end
@@ -18,7 +14,16 @@ class CategoriesController < ApplicationController
             turbo_stream.replace(
               'categories_select',
               partial: 'transactions/category_select',
-              locals: { categories: Category.all, selected: @category.id }
+              locals: { categories: Category.all.where(user: [current_user, nil]), selected: @category.id }
+            )
+        end
+      else
+        format.turbo_stream do
+          render turbo_stream:
+            turbo_stream.before(
+              'errors',
+              partial: 'shared/error_messages',
+              locals: { pattern: @category }
             )
         end
       end
