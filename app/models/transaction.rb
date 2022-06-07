@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-  include Transactionable
+  extend Transactionable
 
   INCOME_TYPE = :income
   EXPENSE_TYPE = :expense

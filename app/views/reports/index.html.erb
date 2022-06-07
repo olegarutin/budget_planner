@@ -19,7 +19,7 @@
               Bar Chart for Expenses by Categories
             </div>
               <div class="card-body">
-                <canvas id="chart-bar" width="200" height="200" data-data="<%= current_user.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
+                <canvas id="chart-bar" width="200" height="200" data-data="<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
               </div>
           </div>
         </div>
@@ -31,7 +31,7 @@
               Pie Chart for Expenses by Categories
             </div>
               <div class="card-body">
-                <canvas id="chart-pie" width="200" height="200" data-data="<%= current_user.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
+                <canvas id="chart-pie" width="200" height="200" data-data="<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
               </div>
           </div>
         </div>
