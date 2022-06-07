@@ -15,7 +15,7 @@ module Transactionable
   end
 
   def category_title(transaction_type, start_date, end_date)
-    transactions.for_date_range(@start_date, @end_date)
+    transactions.for_date_range(start_date, end_date)
       .public_send(transaction_type)
       .includes(:category).pluck(:title).uniq
   end
