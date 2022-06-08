@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :transactions
   resources :wallets
   resources :dashboards
+  resources :reports
 end
