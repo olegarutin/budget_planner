@@ -1,6 +1,7 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+  static targets = [ "button" ]
 
   search() {
     clearTimeout(this.timeout);
@@ -11,9 +12,5 @@ export default class extends Controller {
 
   reset() {
     $('#search_transactions_form').trigger('reset');
-  }
-
-  sort() {
-    this.element.requestSubmit();
   }
 }
