@@ -1,6 +1,6 @@
 <h3><%= link_to 'Dashboard', dashboards_path %></h3>
 <hr>
-<div class="container">
+<div class='container'>
 
   <%= form_with model: @transaction, method: :get do |form| %>
     <div class='form-group'>
@@ -10,33 +10,28 @@
       <%= form.submit %>
     </div>
 
-      <div class="row row-cols-2">
-
-        <div class="col">
-
-          <div class="card">
-            <div class="card-header">
+      <div class='row row-cols-2'>
+        <div class='col'>
+          <div class='card'>
+            <div class='card-header'>
               Bar Chart for Expenses by Categories
             </div>
-              <div class="card-body">
-                <canvas id="chart-bar" width="200" height="200" data-data="<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
+              <div class='card-body'>
+                <canvas id='chart-bar' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>'></canvas>
               </div>
           </div>
         </div>
  
-        <div class="col">
-
-          <div class="card">
-            <div class="card-header">
+        <div class='col'>
+          <div class='card'>
+            <div class='card-header'>
               Pie Chart for Expenses by Categories
             </div>
-              <div class="card-body">
-                <canvas id="chart-pie" width="200" height="200" data-data="<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>" data-labels="<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>"></canvas>
+              <div class='card-body'>
+                <canvas id='chart-pie' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>'></canvas>
               </div>
           </div>
         </div>
-
     </div>
-
   <% end %>
 </div>

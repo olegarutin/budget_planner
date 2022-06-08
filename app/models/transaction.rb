@@ -19,6 +19,4 @@ class Transaction < ApplicationRecord
 
   after_update_commit { broadcast_replace_to 'transactions' }
   after_destroy_commit { broadcast_remove_to 'transactions' }
-
-  scope :for_date_range, -> (start_date, end_date) { where(created_at: start_date.beginning_of_day..end_date.end_of_day)}
 end

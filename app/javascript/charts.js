@@ -62,7 +62,6 @@ var Pie = function() {
   });
 }
 
-
 document.addEventListener("turbo:load", () => {
   Bar();
   Pie();
