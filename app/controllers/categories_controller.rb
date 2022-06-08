@@ -5,6 +5,10 @@ class CategoriesController < ApplicationController
     @category = Category.new
   end
 
+  def index
+    @categories = Category.all.where(user: [current_user, nil]).send(params[:transaction_type])
+  end
+
   def create
     @category = Category.new(category_params.merge(user: current_user))
     respond_to do |format|
