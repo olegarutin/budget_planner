@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'transaction_errors', partial: 'shared/error_messages', locals: { pattern: @transaction } %>
+
+<% if @transaction.save %>
+  <%= turbo_stream.replace 'transaction_modal', partial: 'modals/transaction' %>
+<% end %>

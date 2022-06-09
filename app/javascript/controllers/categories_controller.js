@@ -7,4 +7,10 @@ export default class extends Controller {
     this.buttonTargets.forEach(button => button.classList.remove('btn-outline-success', 'border-success'));
     e.target.classList.add('btn-outline-success', 'border-success');
   }
+
+  modalHide(e) {
+    if (e.detail.success) {
+      $('#AddCategory').modal('hide');
+    }
+  }
 }

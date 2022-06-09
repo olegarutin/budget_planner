@@ -1,5 +1,5 @@
 <% if pattern.errors.any? %>
-  <div class='alert alert-danger mx-auto mb-4 mt-3 w-75' id='error'>
+  <div class='alert alert-danger mx-auto mb-4 mt-3 w-75' id='errors'>
     <% pattern.errors.full_messages.each do |msg| %>
       <%= msg %>
       <br>

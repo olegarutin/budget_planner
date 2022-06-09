@@ -13,23 +13,9 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params.merge(user: current_user))
     respond_to do |format|
       if @category.save
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.replace(
-              'categories_select',
-              partial: 'transactions/category_select',
-              locals: { categories: Category.all.where(user: [current_user, nil]), selected: @category.id }
-            )
-        end
+        format.turbo_stream { render :create }
       else
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.before(
-              'errors',
-              partial: 'shared/error_messages',
-              locals: { pattern: @category }
-            )
-        end
+        format.turbo_stream { render :create, status: :found }
       end
     end
   end

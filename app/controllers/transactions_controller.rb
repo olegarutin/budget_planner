@@ -13,18 +13,11 @@ class TransactionsController < ApplicationController
 
   def create
     @categories = Category.all.where(user: [current_user, nil])
-    @transaction = Transaction.new(transaction_params.merge(user: current_user))
+    @transaction = Transaction.new(transaction_params
+      .merge(user: current_user, transaction_type: @category.transaction_type))
     respond_to do |format|
-      if params[:transaction_type].present?
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.replace(
-              'categories_select',
-              partial: 'transactions/category_select',
-              locals: { categories: @categories.send(params[:transaction_type]), selected: nil }
-            )
-        end
-      elsif @transaction.save
+      if @transaction.save
+        format.turbo_stream { render :create }
         WalletUpdater.call(
           amount: params[:amount],
           transaction: @transaction,
@@ -39,14 +32,7 @@ class TransactionsController < ApplicationController
             )
         end
       else
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.before(
-              'transactions',
-              partial: 'shared/error_messages',
-              locals: { pattern: @transaction }
-            )
-        end
+        format.turbo_stream { render :create, status: :found }
       end
     end
   end
@@ -62,7 +48,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.permit(:amount, :note, :transaction_type, :wallet_id, :category_id)
+    params.permit(:amount, :note, :wallet_id, :category_id)
   end
 
   def set_transaction

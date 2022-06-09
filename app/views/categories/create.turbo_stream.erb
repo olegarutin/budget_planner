@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'category_errors', partial: 'shared/error_messages', locals: { pattern: @category } %>
+
+<% if @category.save %>
+  <%= turbo_stream.replace 'category_modal', partial: 'modals/category' %>
+<% end %>
