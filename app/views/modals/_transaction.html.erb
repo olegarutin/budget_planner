@@ -1,7 +1,7 @@
 <% if current_user.wallets.present? %>
-  <button type='button' class='btn btn-dark mb-3' data-bs-toggle='modal' data-bs-target='#AddTransaction'>
+  <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddTransaction'>
   Add Transaction
-  </button>
+  </a>
 <% else %>
   <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark' %>
 <% end %>
@@ -13,8 +13,15 @@
         <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
+
       <div class='modal-body mx-5'>
-        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', turbo_frame: 'transactions' } do |f| %>
+        <div id='errors'>
+          <% if @transaction %>
+            <%= render 'shared/error_messages', pattern: @transaction %>
+          <% end %>
+        </div>
+
+        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions' } do |f| %>
           <% if @transaction %>
             <% @transaction.errors.full_messages.each do |msg| %>
               <div class='alert alert-dark mx-auto mb-4 mt-3'>
@@ -40,18 +47,25 @@
             </div>
           </div>
 
-          <%= f.label :transaction_type %>
-          <%= f.select(:transaction_type, Transaction::TYPES, {}, { class: 'form-control text-center mb-4' }) %>
+          <div data-controller='categories'>
+            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
+            <%= link_to 'Income', categories_path('transaction_type': 'income'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
+          </div>
 
-          <%= f.label :category %>
-          <%= f.select(:category_id, options_for_select(@categories.map { |category| [category.title, category.id] }), {}, { class: 'form-control text-center mb-4' }) %>
+          <%= turbo_frame_tag 'categories' do %>
+            <%= render 'transactions/category_select', categories: @categories, selected: nil %>
+          <% end %>
 
-          <%= f.label :note %>
+          <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory'>
+            Add Category
+          </a>
+
+          <%= f.label :note, class: 'd-block' %>
           <%= f.text_area :note, class: 'form-control mb-4 text-center' %>
 
           <div class='modal-footer justify-content-center'>
-            <%= f.submit 'Create', class: 'btn btn-secondary', data: { action: 'transactions#search', turbo_frame: 'transactions', 'bs-dismiss': 'modal' } %>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action="click->transactions#reset" turbo-frame='transactions'>Close</button>
+            <%= f.submit 'Create', class: 'btn btn-secondary', data: { action: 'transactions#search', turbo_frame: 'transactions', 'bs-dismiss':'modal' } %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action='click->transactions#reset' turbo-frame='transactions'>Close</button>
           </div>
         <% end %>
       </div>

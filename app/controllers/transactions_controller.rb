@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transaction, only: :destroy
+  before_action :set_category, only: :create
 
   def index
     @transactions = current_user.transactions.includes(:category)
@@ -11,13 +12,23 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    @categories = Category.all.where(user: [current_user, nil])
     @transaction = Transaction.new(transaction_params.merge(user: current_user))
     respond_to do |format|
-      if @transaction.save
+      if params[:transaction_type].present?
+        format.turbo_stream do
+          render turbo_stream:
+            turbo_stream.replace(
+              'categories_select',
+              partial: 'transactions/category_select',
+              locals: { categories: @categories.send(params[:transaction_type]), selected: nil }
+            )
+        end
+      elsif @transaction.save
         WalletUpdater.call(
           amount: params[:amount],
           transaction: @transaction,
-          transaction_type: params[:transaction_type]
+          transaction_type: @category.transaction_type
         )
         format.turbo_stream do
           render turbo_stream:
@@ -56,5 +67,9 @@ class TransactionsController < ApplicationController
 
   def set_transaction
     @transaction = Transaction.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])
   end
 end

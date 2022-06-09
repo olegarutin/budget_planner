@@ -1,21 +1,36 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
 
-  def index
-    @categories = Category.all
-  end
-
   def new
     @category = Category.new
   end
 
-  def create
-    @category = Category.create(category_params)
+  def index
+    @categories = Category.all.where(user: [current_user, nil]).send(params[:transaction_type])
+  end
 
-    if @category.save
-      redirect_to new_transaction_path
-    else
-      render :new
+  def create
+    @category = Category.new(category_params.merge(user: current_user))
+    respond_to do |format|
+      if @category.save
+        format.turbo_stream do
+          render turbo_stream:
+            turbo_stream.replace(
+              'categories_select',
+              partial: 'transactions/category_select',
+              locals: { categories: Category.all.where(user: [current_user, nil]), selected: @category.id }
+            )
+        end
+      else
+        format.turbo_stream do
+          render turbo_stream:
+            turbo_stream.before(
+              'errors',
+              partial: 'shared/error_messages',
+              locals: { pattern: @category }
+            )
+        end
+      end
     end
   end
 
@@ -38,6 +53,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :image)
+    params.permit(:title, :image, :transaction_type)
   end
 end
