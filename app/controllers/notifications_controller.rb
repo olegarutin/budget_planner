@@ -9,7 +9,8 @@ class NotificationsController < ApplicationController
       @notification = Notification.new(
           endpoint: params[:endpoint],
           auth_key: params[:keys][:auth],
-          p256dh_key: params[:keys][:p256dh]
+          p256dh_key: params[:keys][:p256dh],
+          user: current_user
         )
     end
     if @notification.save

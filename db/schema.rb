@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_10_190355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.string "image"
-    t.integer "transaction_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -30,6 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
     t.string "p256dh_key"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -60,7 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
   create_table "wallets", force: :cascade do |t|
     t.text "name"
     t.text "currency"
-    t.integer "quantity", default: 0
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -68,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "wallets"
   add_foreign_key "wallets", "users"
