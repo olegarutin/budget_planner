@@ -18,4 +18,11 @@ export default class extends Controller {
       this.search();
     }
   }
+
+  modalShow(e) {
+    $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
+    $('#AddTransaction').find('form').trigger('reset');
+    $('#AddTransaction').modal('show');
+    $('#transaction_errors').empty();
+  }
 }
