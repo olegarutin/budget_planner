@@ -1,71 +1,60 @@
- <%= turbo_frame_tag 'transaction_modal' do %>
+<div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true'>
+  <div class='modal-dialog modal-lg mx-auto my-4'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
 
-  <% if current_user.wallets.present? %>
-    <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddTransaction'>
-    Add Transaction
-    </a>
-  <% else %>
-    <%= link_to 'Create wallet', new_wallet_path, class: 'btn btn-dark' %>
-  <% end %>
-
-  <div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true'>
-    <div class='modal-dialog modal-lg mx-auto my-4'>
-      <div class='modal-content'>
-        <div class='modal-header'>
-          <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
-          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-        </div>
-
-        <div class='modal-body mx-5'>
-          <div id='transaction_errors'>
-            <% if @transaction %>
-              <%= render 'shared/error_messages', pattern: @transaction %>
-            <% end %>
-          </div>
-
-          <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', action: 'turbo:submit-end->transactions#modalHide' } do |f| %>
-
-            <div class='row justify-content-center mb-4'>
-              <div class='col-5'>
-                <span class='border-bottom m-auto d-block'>Wallet</span>
-                <div class='d-flex border-bottom'>
-                  <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
-                  <%= f.select(:wallet_id, options_for_select(current_user.wallets.map { |wallet| [wallet.name, wallet.id] }), {}, { class: 'form-select shadow-none text-center border-0' }) %>
-                </div>
-              </div>
-
-              <div class='col-5'>
-                <span class='border-bottom m-auto d-block'>Amount</span>
-                <div class='d-flex border-bottom'>
-                  <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
-                  <%= f.number_field :amount, value: 0, min: 0, class: 'form-control text-cetner border-0 text-center', required: true %>
-                </div>
-              </div>
-            </div>
-
-            <div data-controller='categories'>
-              <%= link_to 'Expense', categories_path('transaction_type': 'expense'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
-              <%= link_to 'Income', categories_path('transaction_type': 'income'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
-            </div>
-
-            <%= turbo_frame_tag 'categories' do %>
-              <%= render 'transactions/category_select', categories: @categories, selected: nil %>
-            <% end %>
-
-            <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory'>
-              Add Category
-            </a>
-
-            <%= f.label :note, class: 'd-block' %>
-            <%= f.text_area :note, class: 'form-control mb-4 text-center', autocomplete: 'off' %>
-
-            <div class='modal-footer justify-content-center'>
-              <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transactions' } %>
-              <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' data-action='click->transactions#reset' turbo-frame='transactions'>Close</button>
-            </div>
+      <div class='modal-body mx-5'>
+        <div id='transaction_errors'>
+          <% if @transaction %>
+            <%= render 'shared/error_messages', pattern: @transaction %>
           <% end %>
         </div>
+
+        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', action: 'turbo:submit-end->transactions#modalHide' } do |f| %>
+          <div class='row justify-content-center mb-4'>
+            <div class='col-5'>
+              <span class='border-bottom m-auto d-block'>Wallet</span>
+              <div class='d-flex border-bottom'>
+                <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
+                <%= f.select(:wallet_id, options_for_select(current_user.wallets.map { |wallet| [wallet.name, wallet.id] }), {}, { class: 'form-select shadow-none text-center border-0' }) %>
+              </div>
+            </div>
+
+            <div class='col-5'>
+              <span class='border-bottom m-auto d-block'>Amount</span>
+              <div class='d-flex border-bottom'>
+                <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
+                <%= f.number_field :amount, value: 0, min: 0, class: 'form-control text-cetner border-0 text-center', required: true %>
+              </div>
+            </div>
+          </div>
+
+          <div data-controller='categories'>
+            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
+            <%= link_to 'Income', categories_path('transaction_type': 'income'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
+          </div>
+
+          <%= turbo_frame_tag 'categories' do %>
+            <%= render 'transactions/category_select', categories: @categories, selected: nil %>
+          <% end %>
+
+          
+            <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory' data-controller='categories' data-action='click->categories#resetModal'>
+              Add Category
+            </a>
+        
+          <%= f.label :note, class: 'd-block' %>
+          <%= f.text_area :note, class: 'form-control mb-4 text-center', autocomplete: 'off' %>
+
+          <div class='modal-footer justify-content-center'>
+            <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transaction_modal', action: 'transactions#modalHide' } %>
+            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' turbo-frame='transactions'>Close</button>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
-<% end %>
+</div>

@@ -32,7 +32,7 @@
             </div>
 
             <div class='modal-footer justify-content-center'>
-              <%= f.submit 'Create', class: 'btn btn-dark', data: {  'bs-target': '#AddTransaction' } %>
+              <%= f.submit 'Create', class: 'btn btn-dark', data: { turbo_frame: 'categories', 'bs-target': '#AddTransaction' } %>
               <button type='button' class='btn btn-dark' data-bs-target='#AddTransaction' data-bs-toggle='modal'>Close</button>
             </div>
           <% end %>
