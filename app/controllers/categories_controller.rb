@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_categories, only: :create
 
   def new
     @category = Category.new
@@ -10,7 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params.merge(user: current_user))
+    @category = Category.new(category_params)
     respond_to do |format|
       if @category.save
         format.turbo_stream { render :create }
@@ -39,6 +40,10 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.permit(:title, :image, :transaction_type)
+    params.permit(:title, :image, :transaction_type).merge(user: current_user)
+  end
+
+  def set_categories
+    @categories = Category.all.where(user: [current_user, nil])
   end
 end
