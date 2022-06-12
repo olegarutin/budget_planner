@@ -4,5 +4,5 @@
     partial: 'wallets/wallet',
     locals: { wallet: @transaction.wallet } %>
 <% else %>
-  <%= turbo_stream.replace 'transaction_errors', partial: 'shared/error_messages', locals: { pattern: @transaction } %>
+  <%= turbo_stream.update 'transaction_errors', partial: 'shared/error_messages', locals: { pattern: @transaction } %>
 <% end %>

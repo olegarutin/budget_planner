@@ -12,14 +12,14 @@ export default class extends Controller {
     $('#search_transactions_form').trigger('reset');
   }
 
-  modalHide(e) {
+  hideModal(e) {
     if (e.detail.success) {
       $('#AddTransaction').modal('hide');
       this.search();
     }
   }
 
-  modalShow(e) {
+  showModal(e) {
     $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
     $('#AddTransaction').find('form').trigger('reset');
     $('#AddTransaction').modal('show');

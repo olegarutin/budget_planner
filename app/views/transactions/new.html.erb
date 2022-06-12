@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'transaction_modal' do %>
-  <%= link_to  'add', new_transaction_path, data: { toggle: 'modal', 'bs-target': 'AddTransaction', controller: 'transactions', action: 'transactions#modalShow' }, class: 'btn btn-link', method: 'get' %>
+  <%= link_to  'add', new_transaction_path, data: { toggle: 'modal', 'bs-target': 'AddTransaction', controller: 'transactions', action: 'transactions#showModal' }, class: 'btn btn-link', method: 'get' %>
 <% end %>
 <%= turbo_frame_tag 'categories' do %>
   <%= render 'transactions/category_select', categories: @categories, selected: nil %>

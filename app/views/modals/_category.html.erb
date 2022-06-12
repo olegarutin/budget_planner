@@ -7,13 +7,14 @@
           <button type='button' class='btn-close' data-bs-target='#AddTransaction' data-bs-toggle='modal' aria-label='Close'></button>
         </div>
         <div class='modal-body mx-5'>
-          <div id='category_errors'>
-            <% if @category %>
-              <%= render 'shared/error_messages', pattern: @category %>
-            <% end %>
-          </div>
 
-          <%= form_with url: categories_path, method: :post, data: { controller: 'categories', action: 'turbo:submit-end->categories#modalHide' } do |f| %>
+          <%= form_with url: categories_path, method: :post, data: { controller: 'categories', action: 'turbo:submit-end->categories#hideModal' } do |f| %>
+            <%= turbo_frame_tag 'category_errors' do %>
+              <% if @category %>
+                <%= render 'shared/error_messages', pattern: @category %>
+              <% end %>
+            <% end %>
+
             <div>
               <%= f.label :title, class: 'd-block' %>
               <%= f.text_field :title, class: 'form-control' %>

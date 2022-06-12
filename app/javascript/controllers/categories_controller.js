@@ -9,12 +9,12 @@ export default class extends Controller {
   }
 
   resetModal() {
-    console.log('dfdf');
     $('#AddCategory').find('form').trigger('reset');
+    $('#category_errors').empty();
     $('#transaction_errors').empty();
   }
 
-  modalHide(e) {
+  hideModal(e) {
     if (e.detail.success) {
       $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
       $('#AddTransaction').modal('show');

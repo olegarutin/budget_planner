@@ -7,13 +7,13 @@
       </div>
 
       <div class='modal-body mx-5'>
-        <div id='transaction_errors'>
-          <% if @transaction %>
-            <%= render 'shared/error_messages', pattern: @transaction %>
+        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', action: 'turbo:submit-end->transactions#hideModal' } do |f| %>
+          <%= turbo_frame_tag 'transaction_errors' do %>
+            <% if @transaction %>
+              <%= render 'shared/error_messages', pattern: @transaction %>
+            <% end %>
           <% end %>
-        </div>
 
-        <%= form_with url: transactions_path, method: :post, class: 'm-auto px-4 pt-4 my-4 border', data: { controller: 'transactions', action: 'turbo:submit-end->transactions#modalHide' } do |f| %>
           <div class='row justify-content-center mb-4'>
             <div class='col-5'>
               <span class='border-bottom m-auto d-block'>Wallet</span>
@@ -50,7 +50,7 @@
           <%= f.text_area :note, class: 'form-control mb-4 text-center', autocomplete: 'off' %>
 
           <div class='modal-footer justify-content-center'>
-            <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transaction_modal', action: 'transactions#modalHide' } %>
+            <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transaction_modal', action: 'transactions#hideModal' } %>
             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' turbo-frame='transactions'>Close</button>
           </div>
         <% end %>
