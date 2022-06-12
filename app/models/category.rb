@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: { scope: :user_id }, length: { maximum: 20 }
 
   belongs_to :user, optional: true
   has_many :transactions, dependent: :destroy
