@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :wallets, dependent: :destroy
   has_many :categories, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   def self.from_omniauth(access_token)
     data = access_token.info
