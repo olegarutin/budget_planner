@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_13_151135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,14 +22,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
-  end
-
-  create_table "notifications", force: :cascade do |t|
-    t.string "endpoint"
-    t.string "auth_key"
-    t.string "p256dh_key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -65,6 +57,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_10_144007) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
+  create_table "webpush_subscriptions", force: :cascade do |t|
+    t.string "endpoint"
+    t.string "auth_key"
+    t.string "p256dh_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "categories", "users"

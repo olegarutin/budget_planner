@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'notifications/index'
+  get 'webpush_subscriptions', to: 'webpush_subscriptions#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users
 
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   resources :wallets
   resources :dashboards
   resources :reports
-  resources :notifications
+  resources :webpush_subscriptions
 end

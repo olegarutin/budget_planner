@@ -1,4 +1,4 @@
-<h1>Notifications</h1>
+<h1>Webpush Subscriptions</h1>
 <script>
 	const vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['WEBPUSH_PUBLIC_KEY']).bytes %>);
 
@@ -16,7 +16,7 @@
 		    userVisibleOnly: true,
 		    applicationServerKey: vapidPublicKey
 		  }).then(async function(PushSubscription) {
-	  		const data = await fetch('/notifications', {
+	  		const data = await fetch('/webpush_subscriptions', {
 	  			method: 'POST',
 	  			headers: {
 	  				'Content-Type': 'application/json',

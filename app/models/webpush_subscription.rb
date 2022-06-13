@@ -1,5 +1,6 @@
-class Notification < ApplicationRecord
-	 def send(message)
+class WebpushSubscription < ApplicationRecord
+
+	 def send_to_user(message)
     Webpush.payload_send(
         message: message, 
         endpoint: endpoint, 
