@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
+  before_action :set_categories, only: :create
 
   def new
     @category = Category.new
@@ -10,26 +11,12 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params.merge(user: current_user))
+    @category = Category.new(category_params)
     respond_to do |format|
       if @category.save
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.replace(
-              'categories_select',
-              partial: 'transactions/category_select',
-              locals: { categories: Category.all.where(user: [current_user, nil]), selected: @category.id }
-            )
-        end
+        format.turbo_stream { render :create }
       else
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.before(
-              'errors',
-              partial: 'shared/error_messages',
-              locals: { pattern: @category }
-            )
-        end
+        format.turbo_stream { render :create, status: :found }
       end
     end
   end
@@ -53,6 +40,10 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.permit(:title, :image, :transaction_type)
+    params.permit(:title, :image, :transaction_type).merge(user: current_user)
+  end
+
+  def set_categories
+    @categories = Category.all.where(user: [current_user, nil])
   end
 end
