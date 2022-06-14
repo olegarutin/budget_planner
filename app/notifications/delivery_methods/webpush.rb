@@ -6,6 +6,7 @@ class DeliveryMethods::Webpush < Noticed::DeliveryMethods::Base
     end
   end
 
+
   # You may override this method to validate options for the delivery method
   # Invalid options should raise a ValidationError
   #
