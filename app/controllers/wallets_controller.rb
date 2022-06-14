@@ -3,10 +3,12 @@ class WalletsController < ApplicationController
 
   def create
     @wallet = Wallet.new(wallet_params)
-    if @wallet.save
-      redirect_to dashboard_path
-    else
-      render :new
+    respond_to do |format|
+      if @wallet.save
+        format.turbo_stream { render :create }
+      else
+        format.turbo_stream { render :create, status: :found }
+      end
     end
   end
 
@@ -21,6 +23,6 @@ class WalletsController < ApplicationController
   private
 
   def wallet_params
-    params.permit(:name, :currency, :quantity, :user_id)
+    params.permit(:name, :currency, :quantity).merge(user: current_user)
   end
 end

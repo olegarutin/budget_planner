@@ -1,0 +1,5 @@
+<% if @wallet.save %>
+  <%= turbo_stream.replace 'wallet_modal', partial: 'modals/wallet' %>
+<% else %>
+  <%= turbo_stream.update 'wallet_errors', partial: 'shared/error_messages', locals: { pattern: @wallet } %>
+<% end %>
