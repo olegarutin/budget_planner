@@ -1,8 +1,8 @@
-console.log("fddfvds");
+// console.log("fddfvds");
 
 self.addEventListener("push", (event) => {
   let title = (event.data && event.data.text()) || "Yay a message";
-  let body = "We have received a push message";
+  let body = "You've reached the limit of your #{current_user.wallet.name} wallet.";
   let tag = "push-simple-demo-notification-tag";
   let icon = '/assets/apple-touch-icon.png';
 
