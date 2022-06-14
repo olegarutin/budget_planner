@@ -6,9 +6,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :transactions
   resources :wallets
-  # resources :dashboards
   resources :reports
   resources :webpush_subscriptions
   get 'dashboard', to: 'dashboards#index'
-
 end
