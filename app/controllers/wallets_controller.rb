@@ -13,10 +13,6 @@ class WalletsController < ApplicationController
     end
   end
 
-  def update
-    @wallet.update(wallet_params)
-  end
-
   def destroy
     @wallet.destroy
   end

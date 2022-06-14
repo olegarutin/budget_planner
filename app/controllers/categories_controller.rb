@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[show edit update destroy]
   before_action :set_categories, only: :create
 
   def new
@@ -21,23 +20,7 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def update
-    if @category.update(category_params)
-      redirect_to new_transaction_path
-    else
-      redirect_to edit_category_path(@category)
-    end
-  end
-
-  def destroy
-    @category.destroy
-  end
-
   private
-
-  def set_category
-    @category = Category.find(params[:id])
-  end
 
   def category_params
     params.permit(:title, :image, :transaction_type).merge(user: current_user)
