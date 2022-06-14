@@ -9,10 +9,9 @@
         My wallets
       </button>
       <ul class='dropdown-menu py-2 px-4' aria-labelledby='dropdownMenuButton1'>
-        <% current_user.wallets.each do |wallet| %>
-          <%= render 'wallets/wallet', wallet: wallet %>
-        <% end %>
-        <%= link_to 'Create wallet', new_wallet_path, class: 'text-dark' %>
+        <%= render 'wallets/wallets', wallets: @wallets %>
+
+        <%= link_to 'Add Wallet', '', class: 'text-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
       </ul>
     </li>
     <div class='collapse navbar-collapse' id='navbarResponsive'>

@@ -19,7 +19,9 @@
               <span class='border-bottom m-auto d-block'>Wallet</span>
               <div class='d-flex border-bottom'>
                 <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
-                <%= f.select(:wallet_id, options_for_select(current_user.wallets.map { |wallet| [wallet.name, wallet.id] }), {}, { class: 'form-select shadow-none text-center border-0' }) %>
+                <%= turbo_frame_tag 'select_wallet', class: 'w-100' do %>
+                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), class: 'form-select shadow-none text-center border-0 mt-1') %>
+                <% end %>
               </div>
             </div>
 

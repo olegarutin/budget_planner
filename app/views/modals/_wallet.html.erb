@@ -1,0 +1,39 @@
+<%=turbo_frame_tag 'wallet_modal' do %>
+  <div class='modal fade text-center' id='AddWallet' tabindex='-1' aria-labelledby='AddWalletLabel' aria-hidden='true'>
+    <div class='modal-dialog modal-md modal-dialog-centered mx-auto my-4'>
+      <div class='modal-content'>
+        <div class='modal-header'>
+          <h5 class='modal-title' id='AddWalletLabel'>Add wallet</h5>
+          <button type='button' class='btn-close' data-bs-toggle='modal' data-bs-target='#AddWallet' aria-label='Close'></button>
+        </div>
+        <div class='modal-body mx-5'>
+          <%= form_with url: wallets_path, method: :post, data: { controller: 'wallets', action: 'turbo:submit-end->wallets#hideModal' } do |f| %>
+            <%= turbo_frame_tag 'wallet_errors' do %>
+                <% if @wallet %>
+                  <%= render 'shared/error_messages', pattern: @wallet %>
+                <% end %>
+              <% end %>
+
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control mb-4 text-center' %>
+
+            <div class='row border-bottom'>
+              <div class='col-md-6'>
+                <%= f.label :currency %>
+                <%= f.select(:currency, options_for_select([['Spanish dollar'], ['Pound sterling'], ['U.S. dollar'], ['Euro'], ['Ukrainian hryvnia']]), {}, { class: 'form-control text-center mb-4' }) %>
+              </div>
+              <div class='col-md-6'>
+                <%= f.label :quantity %>
+                <%= f.number_field :quantity, id: 'number-input', class: 'form-control text-center', value: 0 %>
+              </div>
+            </div>
+            <div class='my-2'>
+              <%= f.submit 'Create', class: 'btn btn-dark' %>
+              <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#AddWallet'>Close</button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
