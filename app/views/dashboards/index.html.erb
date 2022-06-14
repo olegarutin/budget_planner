@@ -41,6 +41,10 @@
   <%= render 'modals/wallet' %>
 
   <%= turbo_frame_tag 'transaction_modal' do %>
+    <% if current_user.wallets.present? %>
       <%= link_to 'Add transaction', new_transaction_path, data: { turbo_frame: 'categories', controller: 'transactions', action: 'transactions#showModal' }, class: 'btn btn-dark my-4', method: 'get' %>
+    <% else %>
+      <%= link_to 'Add Wallet', '', class: 'btn btn-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+    <% end %>
   <% end %>
 </div>
