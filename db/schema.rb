@@ -10,17 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_04_135010) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_13_163620) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "title"
     t.string "image"
+    t.integer "transaction_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.jsonb "params"
+    t.datetime "read_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -51,15 +64,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_04_135010) do
   create_table "wallets", force: :cascade do |t|
     t.text "name"
     t.text "currency"
-    t.integer "quantity"
+    t.integer "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.index ["user_id"], name: "index_wallets_on_user_id"
   end
 
+  create_table "webpush_subscriptions", force: :cascade do |t|
+    t.string "endpoint"
+    t.string "auth_key"
+    t.string "p256dh_key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_webpush_subscriptions_on_user_id"
+  end
+
   add_foreign_key "categories", "users"
   add_foreign_key "transactions", "categories"
   add_foreign_key "transactions", "wallets"
   add_foreign_key "wallets", "users"
+  add_foreign_key "webpush_subscriptions", "users"
 end
