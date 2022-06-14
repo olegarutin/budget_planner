@@ -1,5 +1,8 @@
 <% if @wallet.save %>
   <%= turbo_stream.replace 'wallet_modal', partial: 'modals/wallet' %>
+  <%= turbo_stream.update 'select_wallet' do %>
+    <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), class: 'form-select shadow-none text-center border-0 mt-1') %>
+  <% end %>
 <% else %>
   <%= turbo_stream.update 'wallet_errors', partial: 'shared/error_messages', locals: { pattern: @wallet } %>
 <% end %>

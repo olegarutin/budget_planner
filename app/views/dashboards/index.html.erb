@@ -2,6 +2,7 @@
   <%= render 'shared/header' %>
 
   <%= turbo_stream_from 'transactions' %>
+  <%= turbo_stream_from 'wallets' %>
   <h1 class='pt-5 mb-4'>All Transactions</h1>
 
   <%= render 'shared/notifications' %>

@@ -1,5 +1,6 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_wallets, only: :create
 
   def create
     @wallet = Wallet.new(wallet_params)
@@ -24,5 +25,9 @@ class WalletsController < ApplicationController
 
   def wallet_params
     params.permit(:name, :currency, :quantity).merge(user: current_user)
+  end
+
+  def set_wallets
+    @wallets = current_user.wallets
   end
 end
