@@ -1,0 +1,2 @@
+  <span>Category</span>
+  <%= select_tag(:category_id, options_for_select(categories.map { |category| [category.title, category.id] }, selected: selected), { class: 'form-control text-center mb-4' }) %>

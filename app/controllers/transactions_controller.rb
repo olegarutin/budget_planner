@@ -1,6 +1,8 @@
 class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transaction, only: :destroy
+  before_action :set_categories, only: %i[new create]
+  before_action :set_category, only: :create
 
   def index
     @transactions = current_user.transactions.includes(:category)
@@ -10,32 +12,17 @@ class TransactionsController < ApplicationController
     @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now) if params[:day].present?
   end
 
+  def new
+    @transaction = Transaction.new
+  end
+
   def create
-    @transaction = Transaction.new(transaction_params.merge(user: current_user))
+    @transaction = Transaction.new(transaction_params)
     respond_to do |format|
       if @transaction.save
-        WalletUpdater.call(
-          amount: params[:amount],
-          transaction: @transaction,
-          transaction_type: params[:transaction_type]
-        )
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.replace(
-              ActionView::RecordIdentifier.dom_id(@transaction.wallet),
-              partial: 'wallets/wallet',
-              locals: { wallet: @transaction.wallet }
-            )
-        end
+        format.turbo_stream { render :create }
       else
-        format.turbo_stream do
-          render turbo_stream:
-            turbo_stream.before(
-              'transactions',
-              partial: 'shared/error_messages',
-              locals: { pattern: @transaction }
-            )
-        end
+        format.turbo_stream { render :create, status: :found }
       end
     end
   end
@@ -51,10 +38,20 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.permit(:amount, :note, :transaction_type, :wallet_id, :category_id)
+    params.permit(:amount, :note, :wallet_id, :category_id).merge(
+      user: current_user, transaction_type: @category.transaction_type
+    )
   end
 
   def set_transaction
     @transaction = Transaction.find(params[:id])
+  end
+
+  def set_category
+    @category = Category.find(params[:category_id])
+  end
+
+  def set_categories
+    @categories = Category.all.where(user: [current_user, nil])
   end
 end

@@ -1,7 +1,6 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-
   search() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
@@ -11,5 +10,19 @@ export default class extends Controller {
 
   reset() {
     $('#search_transactions_form').trigger('reset');
+  }
+
+  hideModal(e) {
+    if (e.detail.success) {
+      $('#AddTransaction').modal('hide');
+      this.search();
+    }
+  }
+
+  showModal(e) {
+    $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
+    $('#AddTransaction').find('form').trigger('reset');
+    $('#AddTransaction').modal('show');
+    $('#transaction_errors').empty();
   }
 }

@@ -1,0 +1,6 @@
+<% if @category.save %>
+  <%= turbo_stream.update 'categories', partial: 'transactions/category_select', locals: { categories: @categories, selected: @category.id } %>
+  <%= turbo_stream.replace 'category_modal', partial: 'modals/category' %>
+<% else %>
+  <%= turbo_stream.update 'category_errors', partial: 'shared/error_messages', locals: { pattern: @category } %>
+<% end %>
