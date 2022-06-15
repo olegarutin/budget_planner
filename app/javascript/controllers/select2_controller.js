@@ -1,13 +1,32 @@
-// import { Controller } from '@hotwired/stimulus';
-// import $ from 'jquery';
+import { Controller } from '@hotwired/stimulus';
+import Select2 from 'select2';
 
-// require("select2/dist/css/select2")
-// require("select2-bootstrap-theme/dist/select2-bootstrap")
+export default class extends Controller {
+  connect() {
+    Select2();
+    $('#select_menu').select2({
+      dropdownParent: $('#AddTransaction'),
 
-// import Select2 from "select2"
+      templateResult: formatState,
+      templateSelection: formatState
+    });
 
-// export default class extends Controller {
-//   connect() {
-//     $('#select_menu').select2();
-//   }
-// }
+    function formatState (opt) {
+      if (!opt.id) {
+        return opt.text.toUpperCase();
+      }
+
+      var optimage = $(opt.element).attr('data-image');
+
+      if (!optimage){
+        return opt.text.toUpperCase();
+      } else {
+
+        var $opt = $(
+          '<span><img src="' + optimage + '" width="48px"/> ' + opt.text + '</span>'
+        );
+        return $opt;
+      }
+    }
+  }
+}
