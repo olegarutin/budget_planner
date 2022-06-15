@@ -8,8 +8,8 @@ class WebpushSubscription < ApplicationRecord
         auth: auth_key,
         p256dh: p256dh_key,
         vapid: {
-          private_key: ENV['WEBPUSH_PRIVATE_KEY'],
-          public_key: ENV['WEBPUSH_PUBLIC_KEY']
+          public_key: ENV['WEBPUSH_PUBLIC_KEY'],
+          private_key: ENV['WEBPUSH_PRIVATE_KEY']
         }
       )
   end

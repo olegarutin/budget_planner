@@ -19,6 +19,7 @@
 	  		const data = await fetch('/webpush_subscriptions', {
 	  			method: 'POST',
 	  			headers: {
+	  				'Authorization': 'ENV['WEBPUSH_PUBLIC_KEY']',
 	  				'Content-Type': 'application/json',
 	  			},
 	  			body: JSON.stringify(PushSubscription),
