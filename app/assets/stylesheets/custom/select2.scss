@@ -1,0 +1,26 @@
+.select2:focus,
+.select2-search__field:focus {
+  outline: none;
+}
+
+.container__dropdown, .container__select {
+  text-align: left;
+}
+
+.container__select {
+  border-radius: 0px;
+  border: none;
+  border-top: 1px solid #ced4da;
+  border-bottom: 1px solid #ced4da;
+  height: 50px;
+}
+
+.container__select {
+  .select2-selection__arrow {
+    top: 25%;
+  }
+}
+
+.amount_field:focus::placeholder {
+  display: none;
+}

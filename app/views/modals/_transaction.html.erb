@@ -20,7 +20,7 @@
               <div class='d-flex border-bottom'>
                 <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
                 <%= turbo_frame_tag 'select_wallet', class: 'w-100' do %>
-                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), class: 'form-select shadow-none text-center border-0 mt-1') %>
+                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }))%>
                 <% end %>
               </div>
             </div>
@@ -29,7 +29,7 @@
               <span class='border-bottom m-auto d-block'>Amount</span>
               <div class='d-flex border-bottom'>
                 <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
-                <%= f.number_field :amount, min: 0, placeHolder: 0, class: 'form-control text-cetner border-0 text-center', required: true %>
+                <%= f.number_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true %>
               </div>
             </div>
           </div>
@@ -46,12 +46,10 @@
 
             <div class='col-5'>
               <%= f.label :note, class: 'd-block' %>
-              <%= f.text_area :note, class: 'form-control text-center col-5', autocomplete: 'off' %>
+              <%= f.text_field :note, class: 'form-control text-center col-5', autocomplete: 'off' %>
             </div>
 
-            <a class='btn btn-dark mb-3 mt-4 col-5' data-bs-toggle='modal' href='#AddCategory' data-controller='categories'data-action='click->categories#resetModal'>
-              Add Category
-            </a>
+            <%= link_to 'Add Category', '', class: 'btn btn-dark mb-2 mt-4 col-5', data: { 'bs-toggle': 'modal', 'bs-target': '#AddCategory', controller: 'categories', action: 'click->categories#resetModal' } %>
           </div>
 
           <div class='modal-footer justify-content-center'>

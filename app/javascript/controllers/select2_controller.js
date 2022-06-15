@@ -4,8 +4,14 @@ import Select2 from 'select2';
 export default class extends Controller {
   connect() {
     Select2();
+    $('#wallet_id').select2({
+      dropdownParent: $('#AddTransaction'),
+    });
+
     $('#select_menu').select2({
       dropdownParent: $('#AddTransaction'),
+      dropdownCssClass: 'container__dropdown',
+      selectionCssClass: 'container__select',
 
       templateResult: formatState,
       templateSelection: formatState
