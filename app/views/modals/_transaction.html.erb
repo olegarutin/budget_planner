@@ -39,17 +39,20 @@
             <%= link_to 'Income', categories_path('transaction_type': 'income'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
           </div>
 
-          <%= turbo_frame_tag 'categories' do %>
-            <%= render 'transactions/category_select', categories: @categories, selected: nil %>
-          <% end %>
+          <div class='row justify-content-center my-4'>
+            <%= turbo_frame_tag 'categories', class: 'col-5' do %>
+              <%= render 'transactions/category_select', categories: @categories, selected: nil %>
+            <% end %>
 
-          
-            <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory' data-controller='categories' data-action='click->categories#resetModal'>
+            <div class='col-5'>
+              <%= f.label :note, class: 'd-block' %>
+              <%= f.text_area :note, class: 'form-control text-center col-5', autocomplete: 'off' %>
+            </div>
+
+            <a class='btn btn-dark mb-3 mt-4 col-5' data-bs-toggle='modal' href='#AddCategory' data-controller='categories'data-action='click->categories#resetModal'>
               Add Category
             </a>
-        
-          <%= f.label :note, class: 'd-block' %>
-          <%= f.text_area :note, class: 'form-control mb-4 text-center', autocomplete: 'off' %>
+          </div>
 
           <div class='modal-footer justify-content-center'>
             <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transaction_modal', action: 'transactions#hideModal' } %>
