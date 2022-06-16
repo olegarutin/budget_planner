@@ -11,7 +11,7 @@
       <ul class='dropdown-menu py-2 px-4' aria-labelledby='dropdownMenuButton1'>
         <%= render 'wallets/wallets', wallets: @wallets %>
 
-        <%= link_to 'Add Wallet', '', class: 'text-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+        <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
       </ul>
     </li>
     <div class='collapse navbar-collapse' id='navbarResponsive'>

@@ -16,7 +16,7 @@
       <%= form.label :category, 'Search by category:', class: 'd-block' %>
       <%= form.select :category,
         options_for_select(@categories.pluck(:title, :id)),
-        { include_blank: 'All Teams' },
+        { include_blank: 'All Categories' },
         class: 'form-select',
         data: { action: 'input->transactions#search' }
       %>
