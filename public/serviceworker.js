@@ -1,5 +1,3 @@
-console.log("fddfvds");
-
 self.addEventListener("push", (event) => {
   let title = (event.data && event.data.text()) || "Yay a message";
   let body = "Please, STOP =)";

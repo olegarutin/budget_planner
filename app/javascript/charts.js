@@ -8,7 +8,7 @@ var Bar = function() {
     data: {
       labels: $('#chart-bar').data("labels"),
       datasets: [{
-        label: 'Amount for categories',
+        label: 'Show/Hide Charts',
         data: $('#chart-bar').data("data"),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -54,7 +54,10 @@ var Pie = function() {
         backgroundColor: [
           'rgb(255, 99, 132)',
           'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)'
+          'rgb(255, 205, 86)',
+          'rgb(248, 18, 22)',
+          'rgb(45, 156, 20)',
+          'rgb(120, 30, 48)'
         ],
         hoverOffset: 4
       }]
