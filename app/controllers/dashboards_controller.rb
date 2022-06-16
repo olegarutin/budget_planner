@@ -9,7 +9,8 @@ class DashboardsController < ApplicationController
 
     @wallets.each do |wallet|
       if wallet.quantity.negative?
-        PlannerNotification.with(planner: "You've already reached the limit of #{wallet.name} wallet.").deliver(current_user)
+        PlannerNotification.with(planner: "You've already reached the limit of #{wallet.name} wallet.")
+                           .deliver(current_user)
       end
     end
   end
