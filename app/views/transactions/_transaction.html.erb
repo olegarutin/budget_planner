@@ -1,7 +1,7 @@
 <div class='col-3 position-relative' id='<%= dom_id(transaction) %>'>
   <p>Category: <%= transaction.category.title %></p>
   <p>Type: <%= transaction.transaction_type %></p>
-  <p>Amount: <%= transaction.amount %></p>
+  <p>Amount: <%= transaction.convert_to_currency_format %></p>
   <p>Note: <%= transaction.note %></p>
   <p>Date: <%= (transaction.created_at).to_date %></p>
   <hr>
