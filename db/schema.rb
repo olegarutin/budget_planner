@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_13_163620) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_17_143441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_13_163620) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "amount"
+    t.bigint "amount"
     t.string "note"
     t.integer "transaction_type"
     t.bigint "wallet_id", null: false
