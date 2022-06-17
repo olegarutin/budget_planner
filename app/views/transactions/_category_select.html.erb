@@ -1,2 +1,2 @@
-  <span>Category</span>
-  <%= select_tag(:category_id, options_for_select(categories.map { |category| [category.title, category.id] }, selected: selected), { class: 'form-control text-center mb-4' }) %>
+<span class='d-block'>Category</span>
+<%= select_tag(:category_id, options_for_select(categories.map { |category| [category.title.capitalize, category.id, 'data-image': category.image ] }, selected: selected), id: 'select_menu', style: 'width: 100%;', data: { controller: 'select2' }) %>

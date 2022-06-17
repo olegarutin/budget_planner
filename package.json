@@ -10,8 +10,10 @@
     "chart.js": "^3.7.1",
     "esbuild": "^0.14.36",
     "esbuild-rails": "^1.0.3",
+    "inputmask": "^5.0.7",
     "jquery": "^3.6.0",
     "sass": "^1.50.0",
+    "select2": "^4.1.0-rc.0",
     "stimulus-password-visibility": "^2.0.0"
   },
   "scripts": {

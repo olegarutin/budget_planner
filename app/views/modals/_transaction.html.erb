@@ -1,4 +1,4 @@
-<div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true'>
+<div class='modal fade text-center' id='AddTransaction' tabindex='-1' aria-labelledby='AddTransactionLabel' aria-hidden='true' data-bs-backdrop='static' data-bs-keyboard='false'>
   <div class='modal-dialog modal-lg mx-auto my-4'>
     <div class='modal-content'>
       <div class='modal-header'>
@@ -14,46 +14,47 @@
             <% end %>
           <% end %>
 
-          <div class='row justify-content-center mb-4'>
-            <div class='col-5'>
-              <span class='border-bottom m-auto d-block'>Wallet</span>
-              <div class='d-flex border-bottom'>
-                <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png'/>
+          <div class='row justify-content-center'>
+            <div class='col-lg-5'>
+              <span class='d-block'>Wallet</span>
+              <div class='d-flex mb-4'>
+                <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png' class='border-bottom border-top ps-2'/>
                 <%= turbo_frame_tag 'select_wallet', class: 'w-100' do %>
-                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), class: 'form-select shadow-none text-center border-0 mt-1') %>
+                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%')%>
                 <% end %>
               </div>
             </div>
 
-            <div class='col-5'>
-              <span class='border-bottom m-auto d-block'>Amount</span>
-              <div class='d-flex border-bottom'>
-                <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
-                <%= f.number_field :amount, min: 0, placeHolder: 0, class: 'form-control text-cetner border-0 text-center', required: true %>
+            <div class='col-lg-5'>
+              <span class='border-bottom d-block'>Amount</span>
+              <div class='d-flex border-bottom mb-4'>
+                <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png' class='ps-2'/>
+                <%= f.text_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true, data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
               </div>
             </div>
           </div>
 
-          <div data-controller='categories'>
+          <div data-controller='categories' class='mb-4'>
             <%= link_to 'Expense', categories_path('transaction_type': 'expense'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
             <%= link_to 'Income', categories_path('transaction_type': 'income'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto border' %>
           </div>
 
-          <%= turbo_frame_tag 'categories' do %>
-            <%= render 'transactions/category_select', categories: @categories, selected: nil %>
-          <% end %>
+          <div class='row justify-content-center'>
+            <%= turbo_frame_tag 'categories', class: 'col-lg-5 mb-4' do %>
+              <%= render 'transactions/category_select', categories: @categories, selected: nil %>
+            <% end %>
 
-          
-            <a class='btn btn-dark mb-3' data-bs-toggle='modal' href='#AddCategory' data-controller='categories' data-action='click->categories#resetModal'>
-              Add Category
-            </a>
-        
-          <%= f.label :note, class: 'd-block' %>
-          <%= f.text_area :note, class: 'form-control mb-4 text-center', autocomplete: 'off' %>
+            <div class='col-lg-5 mb-4'>
+              <%= f.label :note, class: 'd-block' %>
+              <%= f.text_field :note, class: 'form-control text-center', autocomplete: 'off' %>
+            </div>
+
+            <%= link_to 'Add Category', '', class: 'btn btn-dark mb-4 col-8 col-sm-5', data: { 'bs-toggle': 'modal', 'bs-target': '#AddCategory', controller: 'categories', action: 'click->categories#resetModal' } %>
+          </div>
 
           <div class='modal-footer justify-content-center'>
-            <%= f.submit 'Create', class: 'btn btn-secondary', data: { turbo_frame: 'transaction_modal', action: 'transactions#hideModal' } %>
-            <button type='button' class='btn btn-secondary' data-bs-dismiss='modal' turbo-frame='transactions'>Close</button>
+            <%= f.submit 'Create', class: 'btn btn-dark', data: { turbo_frame: 'transaction_modal', action: 'transactions#hideModal' } %>
+            <button type='button' class='btn btn-dark' data-bs-dismiss='modal' turbo-frame='transactions'>Close</button>
           </div>
         <% end %>
       </div>

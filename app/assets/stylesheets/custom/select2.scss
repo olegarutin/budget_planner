@@ -1,0 +1,30 @@
+.select2:focus,
+.select2-search__field:focus {
+  outline: none;
+}
+
+.select2-selection.select2-selection--single,
+.select2-dropdown.select2-dropdown--below {
+  text-align: left;
+}
+
+.select2-selection.select2-selection--single, #note {
+  border-radius: 0px;
+  border: none;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  height: 50px;
+}
+
+.select2.select2-container.select2-container--default > span.selection > span > span {
+  top: 25%;
+}
+
+#select2-wallet_id-container {
+  margin-top: 8px;
+}
+
+.select2.select2-container.select2-container--default {
+  height: 50px;
+}
+
