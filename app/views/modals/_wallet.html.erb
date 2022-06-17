@@ -21,6 +21,7 @@
               <div class='col-md-6'>
                 <%= f.label :currency %>
                 <%= f.select(:currency, options_for_select([['Spanish dollar'], ['Pound sterling'], ['U.S. dollar'], ['Euro'], ['Ukrainian hryvnia']]), {}, { class: 'modal__input form-control text-center mb-4' }) %>
+                <%# f.select(:currency, Wallet::CURRENCIES, {}, { class: 'form-control text-center mb-4' }) %>
               </div>
               <div class='col-md-6'>
                 <%= f.label :quantity %>

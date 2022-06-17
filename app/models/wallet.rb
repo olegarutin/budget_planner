@@ -1,4 +1,15 @@
 class Wallet < ApplicationRecord
+  USD = { shortname: 'usd', name: 'United States Dollar', symbol: '$' }.freeze
+  UAH = { shortname: 'uah', name: 'Ukrainian Hryvnia', symbol: '₴' }.freeze
+  PLN = { shortname: 'pln', name: 'Polish Złoty', symbol: 'zł' }.freeze
+  EUR = { shortname: 'eur', name: 'Euro', symbol: '€' }.freeze
+  TRY = { shortname: 'try', name: 'Turkish Lira', symbol: '₺' }.freeze
+  CNY = { shortname: 'cny', name: 'Chinese Renminbi Yuan', symbol: '元' }.freeze
+  JPY = { shortname: 'jpy', name: 'Japanese Yen', symbol: '¥' }.freeze
+  GBP = { shortname: 'gbp', name: 'British Pound', symbol: '£' }.freeze
+
+  CURRENCIES = [USD, UAH, PLN, EUR, TRY, CNY, JPY, GBP].freeze
+
   belongs_to :user
   has_many :transactions, dependent: :destroy
 
