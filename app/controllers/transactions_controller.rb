@@ -33,9 +33,15 @@ class TransactionsController < ApplicationController
 
   private
 
+  def amount_to_number_format
+    (params[:amount].gsub(',', '.').to_f * 100).to_i
+  end
+
   def transaction_params
-    params.permit(:amount, :note, :wallet_id, :category_id).merge(
-      user: current_user, transaction_type: @category.transaction_type
+    params.permit(:note, :wallet_id, :category_id).merge(
+      user: current_user,
+      transaction_type: @category.transaction_type,
+      amount: amount_to_number_format
     )
   end
 
