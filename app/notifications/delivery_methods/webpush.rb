@@ -1,8 +1,13 @@
+require 'rufus-scheduler'
+
 class DeliveryMethods::Webpush < Noticed::DeliveryMethods::Base
   def deliver
     message = params[:planner]
     recipient.webpush_subscriptions.each do |sub|
-      sub.send_to_user(message)
+      scheduler_webpush = Rufus::Scheduler.new
+      scheduler_webpush.every '10s' do
+        sub.send_to_user(message)
+      end
     end
   end
 

@@ -2,8 +2,8 @@ require 'rufus-scheduler'
 
 s = Rufus::Scheduler.singleton
 
-s.every '1m' do
+# s.every '1m' do
 
-  Rails.logger.info "hello, it's #{Time.now}"
-  Rails.logger.flush
-end
+#   Rails.logger.info "hello, it's #{Time.now}"
+#   Rails.logger.flush
+# end

@@ -9,6 +9,8 @@
 
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+    <%= wicked_pdf_stylesheet_link_tag "pdf", media: "all" -%>
+    <%#= wicked_pdf_javascript_include_tag, media: "all" %>
   </head>
 
   <body class='text-center mt-5'>
