@@ -11,7 +11,7 @@ module Transactionable
     for_date_range(start_date, end_date)
       .public_send(transaction_type)
       .includes(:category).group(:category_id)
-      .sum(:amount).values
+      .sum(:amount).values.map { |value| value / 100.to_f }
   end
 
   def category_title(transaction_type, start_date, end_date)
