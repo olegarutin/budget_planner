@@ -5,13 +5,11 @@ export default class extends Controller {
   connect() {
     Select2();
     $('#wallet_id').select2({
-      dropdownParent: $('#AddTransaction'),
+      dropdownParent: $('#AddTransaction')
     });
 
     $('#select_menu').select2({
       dropdownParent: $('#AddTransaction'),
-      dropdownCssClass: 'container__dropdown',
-      selectionCssClass: 'container__select',
 
       templateResult: formatState,
       templateSelection: formatState
@@ -19,20 +17,19 @@ export default class extends Controller {
 
     function formatState (opt) {
       if (!opt.id) {
-        return opt.text.toUpperCase();
+        return opt.text;
       }
 
       var optimage = $(opt.element).attr('data-image');
 
       if (!optimage){
-        return opt.text.toUpperCase();
-      } else {
-
-        var $opt = $(
-          '<span><img src="' + optimage + '" width="48px"/> ' + opt.text + '</span>'
-        );
-        return $opt;
+         optimage = 'https://img.icons8.com/external-filled-outline-perfect-kalash/48/undefined/external-not-found-web-development-and-programming-filled-outline-perfect-kalash.png';
       }
+
+      var $opt = $(
+        '<span><img src="' + optimage + '" width="48px"/> ' + opt.text + '</span>'
+      );
+      return $opt;
     }
   }
 }
