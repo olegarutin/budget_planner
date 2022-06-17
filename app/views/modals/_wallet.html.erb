@@ -24,7 +24,7 @@
               </div>
               <div class='col-md-6'>
                 <%= f.label :quantity %>
-                <%= f.number_field :quantity, id: 'number-input', class: 'form-control text-center', value: 0 %>
+                <%= f.text_field :quantity, id: 'number-input', class: 'form-control text-center', data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
               </div>
             </div>
             <div class='my-2'>

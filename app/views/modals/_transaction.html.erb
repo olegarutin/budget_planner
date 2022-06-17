@@ -29,7 +29,7 @@
               <span class='border-bottom m-auto d-block'>Amount</span>
               <div class='d-flex border-bottom'>
                 <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png'/>
-                <%= f.number_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true %>
+                <%= f.text_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true, data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
               </div>
             </div>
           </div>
