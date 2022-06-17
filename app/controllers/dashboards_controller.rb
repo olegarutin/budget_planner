@@ -1,3 +1,5 @@
+require 'rufus-scheduler'
+
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
 
@@ -7,10 +9,18 @@ class DashboardsController < ApplicationController
     @wallets = current_user.wallets
     return unless @wallets.present?
 
-    @wallets.each do |wallet|
-      if wallet.quantity.negative?
-        PlannerNotification.with(planner: "You've already reached the limit of #{wallet.name} wallet.").deliver(current_user)
+    scheduler = Rufus::Scheduler.new
+    scheduler.every '12h' do
+      @wallets.each do |wallet|
+        if wallet.quantity.negative?
+          PlannerNotification.with(planner: "You've already reached the limit of #{wallet.name} wallet.")
+                             .deliver(current_user)
+        end
       end
     end
   end
+
+
+
+
 end

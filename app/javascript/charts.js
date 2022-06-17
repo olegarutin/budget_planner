@@ -8,7 +8,7 @@ var Bar = function() {
     data: {
       labels: $('#chart-bar').data("labels"),
       datasets: [{
-        label: 'Show/Hide Charts',,
+        label: 'Show/Hide Charts',
         data: $('#chart-bar').data("data"),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',

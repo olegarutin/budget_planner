@@ -8,7 +8,7 @@ class PlannerNotification < Noticed::Base
   #
   deliver_by :database
   deliver_by :webpush, class: "DeliveryMethods::Webpush"
-  deliver_by :email, mailer: "PlannerMailer", delay: 10.minutes, if: :unread?
+  deliver_by :email, mailer: "PlannerMailer"
 
   param :planner
 

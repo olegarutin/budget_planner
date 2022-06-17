@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
     request.variant = :turbo_frame if turbo_frame_request?
   end
 
-  def after_sign_in_path_for(resource)
-    dashboard_path
-  end
-
   def set_cache_buster
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+  end
+
+
+  def after_sign_in_path_for(resource)
+    dashboard_path
   end
 end
