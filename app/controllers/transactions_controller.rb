@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   before_action :set_category, only: %i[create]
 
   def index
-    @transactions = current_user.transactions.includes(:category).sort_by(&:created_at)
+    @transactions = current_user.transactions.includes(:category).order(created_at: :asc)
 
     @transactions.where!('note ILIKE ?', "%#{params[:query]}%").load_async if params[:query].present?
     @transactions.where!(category_id: params[:category]).load_async if params[:category].present?
