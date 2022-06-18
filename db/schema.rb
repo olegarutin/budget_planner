@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_143441) do
   create_table "wallets", force: :cascade do |t|
     t.text "name"
     t.text "currency"
-    t.integer "quantity", default: 0
+    t.bigint "quantity", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
