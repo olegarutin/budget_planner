@@ -23,4 +23,8 @@ class Transaction < ApplicationRecord
   def convert_to_currency_format
     amount / 100.to_f
   end
+
+  def reverse_type
+    (TYPES - [transaction_type.to_sym]).last
+  end
 end
