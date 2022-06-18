@@ -12,15 +12,19 @@
       <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
       <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'form-control' %>
     </div>
+
     <div class='mx-2 col-2'>
       <%= form.label :category, 'Search by category:', class: 'd-block' %>
-      <%= form.select :category,
-        options_for_select(@categories.pluck(:title, :id)),
-        { include_blank: 'All Categories' },
-        class: 'form-select',
-        data: { action: 'input->transactions#search' }
-      %>
+      <%= turbo_frame_tag 'search_by_category' do %>
+        <%= select_tag :category,
+          options_for_select(@categories.pluck(:title, :id)),
+          include_blank: 'All Categories',
+          class: 'form-select',
+          data: { action: 'input->transactions#search' }
+        %>
+      <% end %>
     </div>
+
     <div class='mx-2 col-2'>
       <%= form.label :day, 'Search by time:', class: 'd-block' %>
       <%= form.select :day,
@@ -30,6 +34,7 @@
         data: { action: 'input->transactions#search' }
       %>
     </div>
+
     <div class='col-1'>
       <%= link_to 'Reset', transactions_path, data: { action: 'click->transactions#reset', turbo_frame: 'transactions' }, class:'btn bg-danger' %>
     </div>
