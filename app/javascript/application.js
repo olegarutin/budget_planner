@@ -1,6 +1,6 @@
-import "@hotwired/turbo-rails"
-import "./controllers"
-import "./jquery.js"
-import * as bootstrap from "bootstrap"
-import "./charts.js"
-import "select2"
+import '@hotwired/turbo-rails';
+import './controllers';
+import './jquery.js';
+import * as bootstrap from 'bootstrap';
+import './charts.js';
+import 'select2';

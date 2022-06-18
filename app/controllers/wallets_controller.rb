@@ -19,8 +19,12 @@ class WalletsController < ApplicationController
 
   private
 
+  def quantity_to_number_format
+    (params[:quantity].gsub(',', '.').to_f * 100).to_i
+  end
+
   def wallet_params
-    params.permit(:name, :currency, :quantity).merge(user: current_user)
+    params.permit(:name, :currency).merge(user: current_user, quantity: quantity_to_number_format)
   end
 
   def set_wallets

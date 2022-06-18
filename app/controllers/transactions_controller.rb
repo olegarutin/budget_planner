@@ -2,10 +2,10 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transaction, only: :destroy
   before_action :set_categories, only: %i[new create]
-  before_action :set_category, only: :create
+  before_action :set_category, only: %i[create]
 
   def index
-    @transactions = current_user.transactions.includes(:category).sort_by(&:created_at)
+    @transactions = current_user.transactions.includes(:category).order(created_at: :asc)
 
     @transactions.where!('note ILIKE ?', "%#{params[:query]}%").load_async if params[:query].present?
     @transactions.where!(category_id: params[:category]).load_async if params[:category].present?
@@ -18,17 +18,25 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
-    respond_to do |format|
-      if @transaction.save
-        format.turbo_stream { render :create }
-      else
-        format.turbo_stream { render :create, status: :found }
-      end
+
+    if @transaction.save
+      WalletUpdater.call(
+        amount: @transaction.amount,
+        transaction: @transaction,
+        transaction_type: @category.transaction_type
+      )
+    else
+      render :create, status: :found
     end
   end
 
   def destroy
     @transaction.destroy
+    WalletUpdater.call(
+      amount: @transaction.amount,
+      transaction: @transaction,
+      transaction_type: @transaction.reverse_type
+    )
   end
 
   private

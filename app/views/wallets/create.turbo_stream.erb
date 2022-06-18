@@ -1,7 +1,7 @@
 <% if @wallet.save %>
   <%= turbo_stream.replace 'wallet_modal', partial: 'modals/wallet' %>
   <%= turbo_stream.update 'select_wallet' do %>
-    <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), class: 'form-select shadow-none text-center border-0 mt-1') %>
+    <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%') %>
   <% end %>
   <%= turbo_stream.update 'transaction_modal' do %>
     <%= link_to 'Add transaction', new_transaction_path, data: { turbo_frame: 'categories', controller: 'transactions', action: 'transactions#showModal' }, class: 'btn btn-dark my-4', method: 'get' %>
