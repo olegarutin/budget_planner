@@ -5,7 +5,12 @@ class TransactionsController < ApplicationController
   before_action :set_category, only: %i[create]
 
   def index
-    @transactions = current_user.transactions.includes(:category).order(created_at: :asc)
+    if params[:wallet_id].present?
+      @wallet = Wallet.find(params[:wallet_id])
+      @transactions = @wallet.transactions.includes(:category).order(created_at: :asc)
+    else
+      @transactions = current_user.transactions.includes(:category).order(created_at: :asc)
+    end
 
     @transactions.where!('note ILIKE ?', "%#{params[:query]}%").load_async if params[:query].present?
     @transactions.where!(category_id: params[:category]).load_async if params[:category].present?
@@ -17,6 +22,7 @@ class TransactionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @transaction = Transaction.new(transaction_params)
 
     if @transaction.save

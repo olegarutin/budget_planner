@@ -1,6 +1,11 @@
-<div class='border-bottom mb-2' id="<%= dom_id(wallet) %>">
-  <%= wallet.name %>
-  <span>Currency:</span>
-  <%= wallet.currency %>
-  Quantity: <%= wallet.convert_to_currency_format %>
+<div class='position-relative' id="<%= dom_id(wallet) %>">
+  <%= form_with(url: transactions_path, method: 'get', data: { controller: 'wallets', 'wallets-target': 'wallet', turbo_frame: 'transactions' }, class: 'text-center border-bottom mb-2 position-relative p-4 border rounded') do |f| %>
+      <span class='d-block'><%= wallet.name %></span>
+      <%= wallet.currency %>
+      <span class='d-block'><%= wallet.convert_to_currency_format %></span>
+
+      <%= f.hidden_field :wallet_id, value: wallet.id %>
+      <%= f.submit class:'position-absolute w-100 h-100 start-0 top-0 opacity-0' %>
+  <% end %>
+<%= button_to '', wallet_path(wallet), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_confirm: 'Are you sure?' } }, method: :delete, style: 'z-index: 1000;' %>
 </div>
