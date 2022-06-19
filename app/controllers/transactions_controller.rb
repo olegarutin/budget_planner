@@ -22,7 +22,6 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @transaction = Transaction.new(transaction_params)
 
     if @transaction.save

@@ -10,6 +10,7 @@ class Wallet < ApplicationRecord
 
   after_create_commit { broadcast_append_to 'wallets' }
   after_update_commit { broadcast_replace_to 'wallets' }
+  after_destroy_commit { broadcast_remove_to 'wallets' }
 
   def convert_to_currency_format
     quantity / 100.to_f
