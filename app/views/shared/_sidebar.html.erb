@@ -1,0 +1,20 @@
+<div class='d-flex flex-column flex-shrink-0 p-3 text-white bg-dark text-start px-5 h-100'>
+  <div class='dropdown border-top border-bottom mt-4 py-2 border-secondary mb-4'>
+    <a href='#' class='d-flex align-items-center text-white text-decoration-none dropdown-toggle' id='dropdownUser1' data-bs-toggle='dropdown' aria-expanded='false'>
+      <img src='https://img.icons8.com/office/40/undefined/user.png' class='rounded-circle me-2 bg-white'>
+      <strong><%= current_user.email %></strong>
+    </a>
+    <ul class='dropdown-menu dropdown-menu-dark text-small shadow w-100' aria-labelledby='dropdownUser1'>
+      <li>
+        <%= button_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'dropdown-item text-center' %>
+      </li>
+    </ul>
+  </div>
+
+  <%= render 'wallets/wallets', wallets: @wallets %>
+
+  <%= link_to 'Add Wallet', '', class: 'btn btn-outline-light', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+</div>
+
+
+
