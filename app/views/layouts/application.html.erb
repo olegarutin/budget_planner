@@ -9,8 +9,12 @@
 
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
-    <%= wicked_pdf_stylesheet_link_tag "pdf", media: "all" -%>
-    <%#= wicked_pdf_javascript_include_tag, media: "all" %>
+
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' -%>
+    <%= wicked_pdf_javascript_include_tag 'charts', 'data-turbo-track': true %>
+    <%= wicked_pdf_javascript_include_tag "http://code.jquery.com/jquery-3.6.0.min.js" %>
+    <%#= javascript_include_tag "http://code.jquery.com/ui/3.6.0/jquery-ui.min.js" %>
+    <%#= javascript_include_tag "http://code.jquery.com/jquery-3.6.0.min.js" %>
   </head>
 
   <body class='text-center mt-5'>
