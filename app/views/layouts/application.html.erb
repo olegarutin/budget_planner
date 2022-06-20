@@ -17,7 +17,7 @@
     <%#= javascript_include_tag "http://code.jquery.com/jquery-3.6.0.min.js" %>
   </head>
 
-  <body class='text-center mt-5'>
+  <body class='text-center mt-5' data-webpush="<%= Base64.urlsafe_decode64(ENV['WEBPUSH_PUBLIC_KEY']).bytes %>">
     <%= yield %>
   </body>
 </html>
