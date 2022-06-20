@@ -46,7 +46,7 @@
 
             <div class='col-lg-5 mb-4'>
               <%= f.label :note, class: 'd-block' %>
-              <%= f.text_field :note, class: 'form-control text-center', autocomplete: 'off' %>
+              <%= f.text_field :note, class: 'modal__input form-control text-center', autocomplete: 'off' %>
             </div>
 
             <%= link_to 'Add Category', '', class: 'btn btn-dark mb-4 col-8 col-sm-5', data: { 'bs-toggle': 'modal', 'bs-target': '#AddCategory', controller: 'categories', action: 'click->categories#resetModal' } %>

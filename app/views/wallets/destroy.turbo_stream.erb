@@ -1,0 +1,5 @@
+<%= turbo_stream.update 'wallet_create_button' do %>
+  <% if current_user.user_limit_wallets? %>
+    <%= link_to 'Add Wallet', '', class: 'btn btn-outline-light', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+  <% end %>
+<% end %>

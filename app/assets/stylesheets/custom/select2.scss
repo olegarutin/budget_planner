@@ -8,7 +8,7 @@
   text-align: left;
 }
 
-.select2-selection.select2-selection--single, #note {
+.select2-selection.select2-selection--single, .modal__input {
   border-radius: 0px;
   border: none;
   border-top: 1px solid #dee2e6;
@@ -27,4 +27,3 @@
 .select2.select2-container.select2-container--default {
   height: 50px;
 }
-

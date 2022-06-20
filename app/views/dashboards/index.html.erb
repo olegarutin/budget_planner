@@ -12,6 +12,8 @@
     <%= render 'shared/notifications' %>
 
     <%= form_with(url: transactions_path, method: 'get', id: 'search_transactions_form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
+      <%= form.select(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), {}, class: 'd-none' ) %>
+
       <div class='mx-2 col-2'>
         <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
         <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'form-control' %>
