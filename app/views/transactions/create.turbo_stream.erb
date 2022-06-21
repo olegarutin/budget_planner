@@ -1,8 +1,1 @@
-<% if @transaction.save %>
-  <% WalletUpdater.call(amount: params[:amount], transaction: @transaction, transaction_type: @category.transaction_type) %>
-  <%= turbo_stream.replace ActionView::RecordIdentifier.dom_id(@transaction.wallet),
-    partial: 'wallets/wallet',
-    locals: { wallet: @transaction.wallet } %>
-<% else %>
-  <%= turbo_stream.update 'transaction_errors', partial: 'shared/error_messages', locals: { pattern: @transaction } %>
-<% end %>
+<%= turbo_stream.update 'transaction_errors', partial: 'shared/error_messages', locals: { pattern: @transaction } %>

@@ -1,6 +1,7 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_wallets, only: :create
+  before_action :set_wallet, only: :destroy
 
   def create
     @wallet = Wallet.new(wallet_params)
@@ -19,11 +20,19 @@ class WalletsController < ApplicationController
 
   private
 
+  def quantity_to_number_format
+    (params[:quantity].gsub(',', '.').to_f * 100).to_i
+  end
+
   def wallet_params
-    params.permit(:name, :currency, :quantity).merge(user: current_user)
+    params.permit(:name, :currency).merge(user: current_user, quantity: quantity_to_number_format)
   end
 
   def set_wallets
     @wallets = current_user.wallets
+  end
+
+  def set_wallet
+    @wallet = Wallet.find(params[:id])
   end
 end

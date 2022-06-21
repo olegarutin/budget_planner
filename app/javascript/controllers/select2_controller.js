@@ -4,7 +4,7 @@ import Select2 from 'select2';
 export default class extends Controller {
   connect() {
     Select2();
-    $('#wallet_id').select2({
+    $('#wallet_select_field').select2({
       dropdownParent: $('#AddTransaction')
     });
 

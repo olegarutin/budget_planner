@@ -19,8 +19,8 @@
               <span class='d-block'>Wallet</span>
               <div class='d-flex mb-4'>
                 <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png' class='border-bottom border-top ps-2'/>
-                <%= turbo_frame_tag 'select_wallet', class: 'w-100' do %>
-                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%')%>
+                <%= turbo_frame_tag 'wallet_select', class: 'w-100' do %>
+                  <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%', id: 'wallet_select_field') %>
                 <% end %>
               </div>
             </div>
@@ -46,7 +46,7 @@
 
             <div class='col-lg-5 mb-4'>
               <%= f.label :note, class: 'd-block' %>
-              <%= f.text_field :note, class: 'form-control text-center', autocomplete: 'off' %>
+              <%= f.text_field :note, class: 'modal__input form-control text-center', autocomplete: 'off' %>
             </div>
 
             <%= link_to 'Add Category', '', class: 'btn btn-dark mb-4 col-8 col-sm-5', data: { 'bs-toggle': 'modal', 'bs-target': '#AddCategory', controller: 'categories', action: 'click->categories#resetModal' } %>

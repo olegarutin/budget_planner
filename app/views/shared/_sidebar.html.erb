@@ -1,0 +1,24 @@
+<div class='d-flex flex-column flex-shrink-0 ps-2 pe-3 text-dark text-start h-100' data-controller='wallets'>
+  <div class='dropdown border-top border-bottom py-2 border-secondary my-4 mx-2'>
+    <a href='#' class='d-flex justify-content-center align-items-center text-dark text-decoration-none dropdown-toggle' id='dropdownUser1' data-bs-toggle='dropdown' aria-expanded='false'>
+      <img src='https://img.icons8.com/office/40/undefined/user.png' class='rounded-circle me-2 bg-secondary'>
+      <strong><%= current_user.email %></strong>
+    </a>
+    <ul class='dropdown-menu dropdown-menu-dark text-small shadow w-100' aria-labelledby='dropdownUser1'>
+      <li>
+        <%= button_to 'Sign out', destroy_user_session_path, method: :delete, data: { turbo: false }, class: 'dropdown-item text-center' %>
+      </li>
+    </ul>
+  </div>
+
+  <%= render 'wallets/wallets', wallets: @wallets %>
+
+  <%= turbo_frame_tag 'wallet_create_button', class: 'text-center' do %>
+    <% if current_user.user_limit_wallets? %>
+      <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+    <% end %>
+  <% end %>
+</div>
+
+
+
