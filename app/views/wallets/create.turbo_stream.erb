@@ -13,6 +13,10 @@
       <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
     <% end %>
   <% end %>
+
+  <%= turbo_stream.update 'wallets' do %>
+    <%= render 'wallets/wallets', wallets: @wallets %>
+  <% end %>
 <% else %>
   <%= turbo_stream.update 'wallet_errors', partial: 'shared/error_messages', locals: { pattern: @wallet } %>
 <% end %>
