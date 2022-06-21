@@ -1,3 +1,5 @@
+require 'pdfcrowd'
+
 class ReportsController < ApplicationController
   def index
     @transaction_type = params[:transaction_type] || 'expense'
@@ -6,9 +8,27 @@ class ReportsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "Report from #{Date.current}", template: "reports/index", formats: [:html],
-        orientation: "landscape", page_size: "A4", javascript_delay: 10000, view_as_html: false
+        begin
+        client = Pdfcrowd::HtmlToPdfClient.new(ENV['PDFCROWD_USERNAME'], ENV['PDFCROWD_API_KEY'])
+
+        pdf = client.convertUrl("https://budget--planner.herokuapp.com/reports")
+
+        send_data pdf,
+                  :type => "application/pdf",
+                  :disposition => "attachment; filename*=UTF-8''#{ERB::Util.url_encode('result.pdf')}"
+        rescue Pdfcrowd::Error => why
+          render plain: why.getMessage(), status: why.getCode()
+        end
       end
+    end
+
+
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     render pdf: "Report from #{Date.current}", template: "reports/index", formats: [:html],
+    #     orientation: "landscape", page_size: "A4", javascript_delay: 1000, view_as_html: false
+    #   end
 
     # respond_to do |format|
     #   format.html
@@ -18,7 +38,6 @@ class ReportsController < ApplicationController
     #                           type: "application/pdf",
     #                           disposition: "inline"
     #   end
-    end
   end
 
   # def pdf
