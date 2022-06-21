@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   get 'webpush_subscriptions', to: 'webpush_subscriptions#index'
-  post 'download_pdf', to: 'reports#index'
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   resources :users
 
