@@ -70,3 +70,14 @@ document.addEventListener("turbo:load", () => {
   Bar();
   Pie();
 });
+
+$("#download-pdf").on("click", function() {
+    var charts_pdf = document.getElementById('create-charts-pdf');
+    var opt = {
+      margin:       1,
+      filename:     'html2pdf_example.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2 },
+      jsPDF:        { unit: 'in', format: 'tabloid', orientation: 'landscape' }};
+    html2pdf().set(opt).from(charts_pdf).save();       
+});

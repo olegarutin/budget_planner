@@ -55,7 +55,7 @@
     </div>
   <% end %>
 </div>
-<p><%= link_to 'Download PDF', reports_path(format: :pdf), class: 'btn btn-light mx-2'%></p>
+<p><%= link_to 'Download PDF', class: 'btn btn-light mx-2', id: 'download-pdf' %></p>
 <script>
   setTimeout(function (){
     var charts_pdf = document.getElementById('create-charts-pdf');
