@@ -1,10 +1,10 @@
 <%= render 'shared/header' %>
-<div class='row me-2'>
-  <div class='col-3'>
+<div class='row mx-2'>
+  <div class='col-lg-3 col-12 border-end'>
     <%= render 'shared/sidebar' %>
   </div>
 
-  <div class='col-9'>
+  <div class='col-lg-9 col-12'>
     <%= turbo_stream_from 'transactions' %>
     <%= turbo_stream_from 'wallets' %>
     <h1 class='pt-5 mb-4'>All Transactions</h1>
@@ -12,7 +12,7 @@
     <%= render 'shared/notifications' %>
 
     <%= form_with(url: transactions_path, method: 'get', id: 'search_transactions_form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
-      <%= form.select(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), {}, class: 'd-none' ) %>
+      <%= form.hidden_field :wallet_id, value: '', id: 'wallet_list' %>
 
       <div class='mx-2 col-2'>
         <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
