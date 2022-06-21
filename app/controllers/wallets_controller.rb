@@ -1,6 +1,7 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_wallets, only: :create
+  before_action :set_wallet, only: :destroy
 
   def create
     @wallet = Wallet.new(wallet_params)
@@ -29,5 +30,9 @@ class WalletsController < ApplicationController
 
   def set_wallets
     @wallets = current_user.wallets
+  end
+
+  def set_wallet
+    @wallet = Wallet.find(params[:id])
   end
 end

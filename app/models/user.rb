@@ -28,4 +28,8 @@ class User < ApplicationRecord
     end
     user
   end
+
+  def user_limit_wallets?
+    wallets.count <= 3
+  end
 end

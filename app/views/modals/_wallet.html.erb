@@ -15,21 +15,21 @@
               <% end %>
 
             <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control mb-4 text-center' %>
+            <%= f.text_field :name, class: 'form-control mb-4 text-center modal__input' %>
 
             <div class='row border-bottom'>
               <div class='col-md-6'>
                 <%= f.label :currency %>
-                <%= f.select(:currency, options_for_select([['Spanish dollar'], ['Pound sterling'], ['U.S. dollar'], ['Euro'], ['Ukrainian hryvnia']]), {}, { class: 'form-control text-center mb-4' }) %>
+                <%= f.select(:currency, options_for_select([['Spanish dollar'], ['Pound sterling'], ['U.S. dollar'], ['Euro'], ['Ukrainian hryvnia']]), {}, { class: 'modal__input form-control text-center mb-4' }) %>
               </div>
               <div class='col-md-6'>
                 <%= f.label :quantity %>
-                <%= f.text_field :quantity, id: 'number-input', class: 'form-control text-center mb-4', data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
+                <%= f.text_field :quantity, id: 'number-input', class: 'form-control text-center mb-4 modal__input', data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
               </div>
             </div>
             <div class='my-2'>
-              <%= f.submit 'Create', class: 'btn btn-dark' %>
-              <button type='button' class='btn btn-dark' data-bs-toggle='modal' data-bs-target='#AddWallet'>Close</button>
+              <%= f.submit 'Create', class: 'btn btn-dark mx-2' %>
+              <button type='button' class='btn btn-dark mx-2' data-bs-toggle='modal' data-bs-target='#AddWallet'>Close</button>
             </div>
           <% end %>
         </div>
