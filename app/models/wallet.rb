@@ -24,4 +24,7 @@ class Wallet < ApplicationRecord
   def convert_to_currency_format
     quantity / 100.to_f
   end
+
+  def self.currencies_select_oblect
+  end
 end
