@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   before_action :turbo_frame_request_variant
   before_action :set_cache_buster
 
@@ -8,7 +9,7 @@ class ApplicationController < ActionController::Base
     request.variant = :turbo_frame if turbo_frame_request?
   end
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     dashboard_path
   end
 
