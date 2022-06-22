@@ -7,14 +7,16 @@ class TransactionsController < ApplicationController
   def index
     if params[:wallet_id].present?
       @wallet = Wallet.find(params[:wallet_id])
-      @transactions = @wallet.transactions.includes(:category).order(created_at: :asc)
+      @transactions = @wallet.transactions.includes(:category).order(created_at: :desc)
     else
-      @transactions = current_user.transactions.includes(:category).order(created_at: :asc)
+      @transactions = current_user.transactions.includes(:category).order(created_at: :desc)
     end
 
-    @transactions.where!('note ILIKE ?', "%#{params[:query]}%").load_async if params[:query].present?
-    @transactions.where!(category_id: params[:category]).load_async if params[:category].present?
-    @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now).load_async if params[:day].present?
+    @transactions.where!('note ILIKE ?', "%#{params[:query]}%") if params[:query].present?
+    @transactions.where!(category_id: params[:category]) if params[:category].present?
+    @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now) if params[:day].present?
+
+    @pagy, @transactions = pagy(@transactions)
   end
 
   def new
@@ -36,6 +38,7 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
+    # binding.pry
     @transaction.destroy
     WalletUpdater.call(
       amount: @transaction.amount,

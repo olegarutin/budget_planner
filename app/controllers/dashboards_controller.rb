@@ -3,8 +3,8 @@ class DashboardsController < ApplicationController
 
   def index
     @categories = Category.all.where(user: [current_user, nil])
-    @transactions = current_user.transactions
-    @wallets = current_user.wallets
+    @pagy, @transactions = pagy(current_user.transactions.order(created_at: :desc))
+    @wallets = current_user.wallets.order(created_at: :desc)
     return unless @wallets.present?
 
     @wallets.each do |wallet|

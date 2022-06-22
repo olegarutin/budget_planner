@@ -29,7 +29,7 @@ class WalletsController < ApplicationController
   end
 
   def set_wallets
-    @wallets = current_user.wallets
+    @wallets = current_user.wallets.order(created_at: :desc)
   end
 
   def set_wallet
