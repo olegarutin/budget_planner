@@ -1,12 +1,4 @@
-<div class='position-relative my-4 mx-auto px-0' style='max-width: 250px;' id="<%= dom_id(wallet) %>">
-  <%= form_with(url: transactions_path, method: 'get', data: { 'wallets-target': 'wallet', turbo_frame: 'transactions' }, class: 'text-dark position-relative p-3 border rounded border shadow', id: wallet.id) do |f| %>
-    <span class='d-block border-bottom'>Wallet: <%= wallet.name.capitalize %></span>
-    <span class='d-block my-3 border-bottom text-truncate'>Currency: <%= wallet.currency %></span>
-
-    <span class='d-block border-bottom'>Balance: <%= wallet.convert_to_currency_format %></span>
-
-    <%= f.hidden_field :wallet_id, value: wallet.id %>
-    <%= f.submit class:'position-absolute w-100 h-100 start-0 top-0 opacity-0', data: { action: 'wallets#selectWallet' } %>
-  <% end %>
+<div class='position-relative mx-auto px-0 border rounded' data-wallets-target='wallet' style='max-width: 250px;' id="<%= dom_id(wallet) %>">
+  <%= render 'wallets/form', wallet: wallet %>
   <%= button_to '', wallet_path(wallet), class: 'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_confirm: ' Are you sure you want to delete the wallet?' } }, method: :delete %>
 </div>

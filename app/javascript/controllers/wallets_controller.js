@@ -12,7 +12,7 @@ export default class extends Controller {
     document.getElementById('search_transactions_form').reset();
     document.getElementById('wallet_list').value = e.target.form.id;
     this.walletTargets.forEach(wallet => wallet.classList.remove('border-success'));
-    e.target.form.classList.add('border-success');
+    e.target.form.offsetParent.classList.add('border-success');
   }
 
   hideModal(e) {
