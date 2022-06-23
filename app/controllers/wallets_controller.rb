@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_wallets, only: :create
+  before_action :set_wallets, only: %i[create destroy]
   before_action :set_wallet, only: :destroy
 
   def create
