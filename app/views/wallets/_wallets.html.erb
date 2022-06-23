@@ -1,5 +1,5 @@
 <%= turbo_frame_tag 'wallets', class: 'text-center' do %>
-  <h3 class='text-center'>My Wallets</h3>
+  <h3 class='text-center mb-4'>My Wallets</h3>
   <%= button_to 'All Wallets', transactions_path, class: 'btn shadow mb-4', method: 'get', data: { turbo_frame: 'transactions', controller: 'wallets', action: 'wallets#selectAll' } %>
   <div class='row d-lg-block justify-content-center mx-auto g-4 mb-4' id='wallets_list'>
     <%= render @wallets %>
