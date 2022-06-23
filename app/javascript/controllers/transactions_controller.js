@@ -3,6 +3,12 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
   static values = { page: Number }
 
+  connect() {
+    $('.page-link').click(function() {
+      document.getElementById('search_transactions_form').scrollIntoView();
+    });
+  }
+
   search() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
@@ -23,7 +29,8 @@ export default class extends Controller {
   }
 
   test() {
-    console.log(this.pageValue)
+    document.getElementById('page_count').value = this.pageValue;
+    // this.search(); # remove transaction not change wallet balance
   }
 
   showModal(e) {
