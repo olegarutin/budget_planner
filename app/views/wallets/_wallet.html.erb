@@ -1,4 +1,3 @@
-<div class='position-relative mx-auto px-0 border rounded' data-wallets-target='wallet' style='max-width: 250px;' id="<%= dom_id(wallet) %>">
+<div class='position-relative mx-auto p-0 text-start btn rounded' data-wallets-target='wallet' style='max-width: 250px;' id="<%= dom_id(wallet) %>" data-wallets-target='wallet'>
   <%= render 'wallets/form', wallet: wallet %>
-  <%= button_to '', wallet_path(wallet), class: 'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_confirm: ' Are you sure you want to delete the wallet?' } }, method: :delete %>
 </div>

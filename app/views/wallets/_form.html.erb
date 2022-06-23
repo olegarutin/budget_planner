@@ -6,3 +6,4 @@
   <%= f.hidden_field :wallet_id, value: wallet.id %>
   <%= f.submit class:'position-absolute w-100 h-100 start-0 top-0 opacity-0', data: { action: 'wallets#selectWallet' } %>
 <% end %>
+<%= button_to '', wallet_path(wallet), class: 'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_confirm: ' Are you sure you want to delete the wallet?' } }, method: :delete %>

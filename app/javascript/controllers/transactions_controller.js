@@ -1,6 +1,8 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+  static values = { page: Number }
+
   search() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
@@ -10,6 +12,7 @@ export default class extends Controller {
 
   reset() {
     $('#search_transactions_form').trigger('reset');
+    this.search();
   }
 
   hideModal(e) {
@@ -19,8 +22,12 @@ export default class extends Controller {
     }
   }
 
+  test() {
+    console.log(this.pageValue)
+  }
+
   showModal(e) {
-    $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
+    $('.button--green-border').removeClass('button--green-border');
     $('#AddTransaction').find('form').trigger('reset');
     $('#AddTransaction').modal('show');
     $('#transaction_errors').empty();
