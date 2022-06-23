@@ -38,7 +38,6 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
-    # binding.pry
     @transaction.destroy
     WalletUpdater.call(
       amount: @transaction.amount,
