@@ -1,6 +1,6 @@
 class WalletsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_wallets, only: :create
+  before_action :set_wallets, only: %i[create destroy]
   before_action :set_wallet, only: :destroy
 
   def create
@@ -29,7 +29,7 @@ class WalletsController < ApplicationController
   end
 
   def set_wallets
-    @wallets = current_user.wallets
+    @wallets = current_user.wallets.order(created_at: :desc)
   end
 
   def set_wallet

@@ -2,8 +2,9 @@
   <p>Category: <%= transaction.category.title %></p>
   <p>Type: <%= transaction.transaction_type %></p>
   <p>Amount: <%= transaction.convert_to_currency_format %></p>
-  <p>Note: <%= transaction.note %></p>
+  <p class='text-break'>Note: <%= transaction.note %></p>
   <p>Date: <%= (transaction.created_at).to_date %></p>
+  <p>Wallet: <%= transaction.wallet.name %></p>
   <hr>
-  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
+  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_frame: 'transactions', controller: 'transactions', action: 'turbo:submit-end->transactions#test', turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
 </div>

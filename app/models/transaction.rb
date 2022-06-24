@@ -15,10 +15,9 @@ class Transaction < ApplicationRecord
   enum transaction_type: TYPES
 
   validates :amount, numericality: { greater_than: 0, less_than: 1_000_000_00 }
-  validates :note, length: { maximum: 140 }
+  validates :note, length: { maximum: 40 }
 
   after_update_commit { broadcast_replace_to 'transactions' }
-  after_destroy_commit { broadcast_remove_to 'transactions' }
 
   def convert_to_currency_format
     amount / 100.to_f

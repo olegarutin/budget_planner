@@ -1,3 +1,10 @@
 <%= turbo_frame_tag 'transactions' do %>
   <%= render @transactions %>
+
+  <% if @pagy.count > 12 %>
+    <div class='d-flex justify-content-center' data-controller='transactions'>
+      <%= hidden_field_tag :page, @pagy.in, id: 'texting' %>
+      <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+  <% end %>
 <% end %>

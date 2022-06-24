@@ -3,3 +3,7 @@
     <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.update 'wallet_select' do %>
+    <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%', id: 'wallet_select_field') %>
+<% end %>

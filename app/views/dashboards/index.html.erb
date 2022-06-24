@@ -1,5 +1,5 @@
 <%= render 'shared/header' %>
-<div class='row mx-2'>
+<div class='row mx-2 mb-5 border-bottom'>
   <div class='col-lg-3 col-12 mt-4'>
     <%= render 'shared/sidebar' %>
   </div>
@@ -8,43 +8,9 @@
     <%= turbo_stream_from 'transactions' %>
     <%= turbo_stream_from 'wallets' %>
     <h1 class='pt-5 mb-4'>All Transactions</h1>
-
     <%= render 'shared/notifications' %>
 
-    <%= form_with(url: transactions_path, method: 'get', id: 'search_transactions_form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
-      <%= form.hidden_field :wallet_id, value: '', id: 'wallet_list' %>
-
-      <div class='mx-2 col-3'>
-        <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
-        <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'text-center modal__input form-control' %>
-      </div>
-
-      <div class='mx-2 col-3'>
-        <%= form.label :category, 'Search by category:', class: 'd-block' %>
-        <%= turbo_frame_tag 'search_by_category' do %>
-          <%= select_tag :category,
-            options_for_select(@categories.pluck(:title, :id)),
-            include_blank: 'All Categories',
-            class: 'text-center modal__input form-select',
-            data: { action: 'input->transactions#search' }
-          %>
-        <% end %>
-      </div>
-
-      <div class='mx-2 col-3'>
-        <%= form.label :day, 'Search by time:', class: 'd-block' %>
-        <%= form.select :day,
-          options_for_select([['Day', 1], ['Week', 7], ['Two weeks', 14], ['Month', 30], ['Two months', 60], ['Half-year', 182], ['Year', 365]]),
-          { include_blank: 'All Time' },
-          class: 'text-center modal__input form-select',
-          data: { action: 'input->transactions#search' }
-        %>
-      </div>
-
-      <div class='col-1'>
-        <%= link_to 'Reset', transactions_path, data: { action: 'click->transactions#reset', turbo_frame: 'transactions' }, class:'btn bg-danger mb-2' %>
-      </div>
-    <% end %>
+    <%= render 'transactions/transaction_filters' %>
     <%= render 'transactions/transactions', transactions: @transactions %>
 
     <%= turbo_frame_tag 'transaction_modal' do %>
