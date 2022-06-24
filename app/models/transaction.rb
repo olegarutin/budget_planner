@@ -18,7 +18,6 @@ class Transaction < ApplicationRecord
   validates :note, length: { maximum: 40 }
 
   after_update_commit { broadcast_replace_to 'transactions' }
-  after_destroy_commit { broadcast_remove_to 'transactions' }
 
   def convert_to_currency_format
     amount / 100.to_f

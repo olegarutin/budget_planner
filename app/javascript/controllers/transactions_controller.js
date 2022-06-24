@@ -1,11 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-  static values = { page: Number }
-
   connect() {
     $('.page-link').click(function() {
-      document.getElementById('search_transactions_form').scrollIntoView();
+      document.getElementById('search_transactions_form').scrollIntoView(0);
     });
   }
 
@@ -25,12 +23,17 @@ export default class extends Controller {
     if (e.detail.success) {
       $('#AddTransaction').modal('hide');
       this.search();
+      document.getElementById('search_transactions_form').scrollIntoView(0);
     }
   }
 
   test() {
-    document.getElementById('page_count').value = this.pageValue;
-    // this.search(); # remove transaction not change wallet balance
+    let count = document.getElementById('texting').value;
+    if (count == 1) {
+      $(".prev .page-link")[0].click();
+    } else {
+      $(".active .page-link")[0].click();
+    }
   }
 
   showModal(e) {
