@@ -9,3 +9,13 @@
 .button--green-border {
   color: green;
 }
+
+.transactions--border {
+  border-left: 1px solid #dee2e6;
+}
+
+@media only screen and (max-width: 991px) {
+  .transactions--border {
+    border: none;
+  }
+}
