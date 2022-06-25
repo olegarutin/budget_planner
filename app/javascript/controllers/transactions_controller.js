@@ -27,12 +27,12 @@ export default class extends Controller {
     }
   }
 
-  test() {
-    let count = document.getElementById('texting').value;
+  setPage() {
+    let count = document.getElementById('transactions_count').value;
     if (count == 1) {
-      $(".prev .page-link")[0].click();
+      $('.prev .page-link')[0].click();
     } else {
-      $(".active .page-link")[0].click();
+      $('.active .page-link')[0].click();
     }
   }
 
