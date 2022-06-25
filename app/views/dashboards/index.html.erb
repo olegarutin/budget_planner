@@ -4,7 +4,7 @@
     <%= render 'shared/sidebar' %>
   </div>
 
-  <div class='col-lg-9 col-12 border-start px-5'>
+  <div class='col-lg-9 col-12 transactions--border'>
     <%= turbo_stream_from 'transactions' %>
     <%= turbo_stream_from 'wallets' %>
     <h1 class='pt-5 mb-4'>All Transactions</h1>
