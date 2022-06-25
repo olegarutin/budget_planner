@@ -1,34 +1,47 @@
-<%= form_with(url: transactions_path, method: 'get', id: 'search_transactions_form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'mb-4 row justify-content-center align-items-end') do |form| %>
+<%= form_with(url: transactions_path, method: 'get', id: 'search_transactions_form', data: { controller: 'transactions', turbo_frame: 'transactions' }, class: 'row justify-content-center align-items-end') do |form| %>
   <%= form.hidden_field :wallet_id, value: '', id: 'wallet_list' %>
 
-  <div class='transaction__block--medium'>
+  <div class='transaction__block--medium mb-4'>
     <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
     <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'text-center modal__input form-control' %>
   </div>
 
-  <div class='transaction__block--medium'>
+  <div class='transaction__block--medium mb-4'>
+    <%= form.label :type, 'Search by type:', class: 'd-block' %>
+    <%= form.select :type,
+      [['Income', 'income'], ['Expense', 'expense']],
+      { include_blank: 'All Types' },
+      id: 'type__filter',
+      class: 'text-center modal__input form-select transactions__filters',
+      style: 'width: 100%'
+    %>
+  </div>
+
+  <div class='transaction__block--medium mb-4'>
     <%= form.label :category, 'Search by category:', class: 'd-block' %>
     <%= turbo_frame_tag 'search_by_category' do %>
       <%= select_tag :category,
         options_for_select(@categories.pluck(:title, :id)),
         include_blank: 'All Categories',
-        class: 'text-center modal__input form-select',
-        data: { action: 'input->transactions#search' }
+        id: 'category__filter',
+        class: 'text-center modal__input form-select transactions__filters',
+        style: 'width: 100%'
       %>
     <% end %>
   </div>
 
-  <div class='transaction__block--medium'>
-    <%= form.label :day, 'Search by time:', class: 'd-block' %>
-    <%= form.select :day,
-      options_for_select([['Day', 1], ['Week', 7], ['Two weeks', 14], ['Month', 30], ['Two months', 60], ['Half-year', 182], ['Year', 365]]),
-      { include_blank: 'All Time' },
-      class: 'text-center modal__input form-select',
-      data: { action: 'input->transactions#search' }
-    %>
+  <div class='transaction__block--medium mb-4'>
+    <%= form.label :date, 'From:', class: 'd-block' %>
+    <%= form.date_field :start_date, value: current_user.transactions.first&.created_at.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
+  </div>
+
+  <div class='transaction__block--medium mb-4'>
+    <%= form.label :date, 'To:', class: 'd-block' %>
+    <%= form.date_field :end_date, value: current_user.transactions.last&.created_at.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
   </div>
 
   <div>
-    <%= button_to 'Reset', '', data: { action: 'click->transactions#reset', turbo_frame: 'transactions' }, class:'btn bg-danger my-2', style: 'max-width: 80px;' %>
+    <%= button_to 'Reset', '', data: { action: 'click->transactions#reset', turbo_frame: 'transactions' }, class:'btn bg-danger', style: 'max-width: 80px;' %>
   </div>
+
 <% end %>
