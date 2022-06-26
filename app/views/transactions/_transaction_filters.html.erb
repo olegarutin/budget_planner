@@ -32,12 +32,12 @@
 
   <div class='transaction__block--medium mb-4'>
     <%= form.label :date, 'From:', class: 'd-block' %>
-    <%= form.date_field :start_date, value: current_user.transactions.first&.created_at.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
+    <%= form.date_field :start_date, value: current_user.transactions.first&.created_at&.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
   </div>
 
   <div class='transaction__block--medium mb-4'>
     <%= form.label :date, 'To:', class: 'd-block' %>
-    <%= form.date_field :end_date, value: current_user.transactions.last&.created_at.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
+    <%= form.date_field :end_date, value: current_user.transactions.last&.created_at&.to_date || Time.now.to_date, class: 'modal__input text-center form-control', data: { action: 'transactions#search' } %>
   </div>
 
   <div>

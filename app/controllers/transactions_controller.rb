@@ -7,14 +7,25 @@ class TransactionsController < ApplicationController
   def index
     if params[:wallet_id].present?
       @wallet = Wallet.find(params[:wallet_id])
-      @transactions = @wallet.transactions.includes(:category).order(created_at: :desc)
+      @transactions = @wallet.transactions.includes(:category).order(created_at: :desc).load_async
     else
-      @transactions = current_user.transactions.includes(:category).order(created_at: :desc)
+      @transactions = current_user.transactions.includes(:category).order(created_at: :desc).load_async
     end
 
-    @transactions.where!('note ILIKE ?', "%#{params[:query]}%") if params[:query].present?
-    @transactions.where!(category_id: params[:category]) if params[:category].present?
-    @transactions.where!(created_at: params[:day].to_i.day.ago..Time.now) if params[:day].present?
+    if params[:start_date].present?
+      @transactions = @transactions.where(
+        created_at: params[:start_date].to_date.beginning_of_day..params[:end_date].to_date.end_of_day
+      )
+    end
+    if params[:type].present?
+      @transactions = @transactions.send(params[:type])
+    end
+    if params[:query].present?
+      @transactions = @transactions.where('note ILIKE ?', "%#{params[:query]}%")
+    end
+    if params[:category].present?
+      @transactions = @transactions.where(category_id: params[:category])
+    end
 
     @pagy, @transactions = pagy(@transactions)
   end
