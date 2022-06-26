@@ -1,14 +1,10 @@
 class Wallet < ApplicationRecord
-  USD = { shortname: 'usd', name: 'United States Dollar', symbol: '$' }.freeze
   UAH = { shortname: 'uah', name: 'Ukrainian Hryvnia', symbol: '₴' }.freeze
+  USD = { shortname: 'usd', name: 'United States Dollar', symbol: '$' }.freeze
   PLN = { shortname: 'pln', name: 'Polish Złoty', symbol: 'zł' }.freeze
   EUR = { shortname: 'eur', name: 'Euro', symbol: '€' }.freeze
-  TRY = { shortname: 'try', name: 'Turkish Lira', symbol: '₺' }.freeze
-  CNY = { shortname: 'cny', name: 'Chinese Renminbi Yuan', symbol: '元' }.freeze
-  JPY = { shortname: 'jpy', name: 'Japanese Yen', symbol: '¥' }.freeze
-  GBP = { shortname: 'gbp', name: 'British Pound', symbol: '£' }.freeze
 
-  CURRENCIES = [USD, UAH, PLN, EUR, TRY, CNY, JPY, GBP].freeze
+  CURRENCIES = [UAH, USD, PLN, EUR].freeze
 
   belongs_to :user
   has_many :transactions, dependent: :destroy
@@ -25,6 +21,11 @@ class Wallet < ApplicationRecord
     quantity / 100.to_f
   end
 
-  def self.currencies_select_oblect
+  def self.currencies_select_object
+    CURRENCIES.map { |currency| ["#{currency[:symbol]} #{currency[:name]}", currency[:shortname]] }
+  end
+
+  def currency_symbol
+    CURRENCIES.detect { |currency| currency[:shortname] == self.currency }[:symbol]
   end
 end
