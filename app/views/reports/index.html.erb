@@ -35,7 +35,7 @@
         <div class='col'>
           <div class='card'>
             <div class='card-header'>
-              Bar Chart for Expenses by Categories
+              Bar Chart by Categories
             </div>
               <div class='card-body'>
                 <canvas id='chart-bar' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@user_wallet, @transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@user_wallet, @transaction_type, @start_date, @end_date) %>'></canvas>
@@ -46,15 +46,16 @@
         <div class='col'>
           <div class='card'>
             <div class='card-header'>
-              Pie Chart for Expenses by Categories
+              Pie Chart by Categories
             </div>
               <div class='card-body'>
                 <canvas id='chart-pie' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@user_wallet, @transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@user_wallet, @transaction_type, @start_date, @end_date) %>'></canvas>
               </div>
           </div>
         </div>
-    </div>
+      </div>
   <% end %>
 </div>
 <br>
 <button id='download-pdf' class='btn btn-light mx-2'>Download PDF</button>
+<button id='download-pdf-mobile' class='btn btn-light mx-2'>Download PDF</button>
