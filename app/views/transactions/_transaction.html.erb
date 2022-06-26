@@ -17,9 +17,9 @@
   <div class='d-flex justify-content-start align-items-center modal__input'>
     <%= image_tag('https://img.icons8.com/doodle/48/000000/coins--v1.png') %>
     <% if transaction.income? %>
-      <p class='text-break my-0 mx-2 text-success'>$ <%= transaction.convert_to_currency_format %></p>
+      <p class='text-break my-0 mx-2 text-success'><%= transaction.convert_to_currency_format.to_s + transaction.wallet.currency_symbol %></p>
     <% else %>
-      <p class='text-break my-0 mx-2 text-danger'>$ <%= transaction.convert_to_currency_format %></p>
+      <p class='text-break my-0 mx-2 text-danger'><%= transaction.convert_to_currency_format.to_s + transaction.wallet.currency_symbol %></p>
     <% end %>
   </div>
 
