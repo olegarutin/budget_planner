@@ -1,10 +1,37 @@
-<div class='col-3 position-relative' id='<%= dom_id(transaction) %>'>
-  <p>Category: <%= transaction.category.title %></p>
-  <p>Type: <%= transaction.transaction_type %></p>
-  <p>Amount: <%= transaction.convert_to_currency_format %></p>
-  <p class='text-break'>Note: <%= transaction.note %></p>
-  <p>Date: <%= (transaction.created_at).to_date %></p>
-  <p>Wallet: <%= transaction.wallet.name %></p>
-  <hr>
-  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_frame: 'transactions', controller: 'transactions', action: 'turbo:submit-end->transactions#test', turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
+<div class='position-relative border p-4 shadow rounded transaction__block--medium' id='<%= dom_id(transaction) %>'>
+
+  <div class='d-flex align-items-center border-bottom'>
+    <% if transaction.category.image.present? %>
+      <%= image_tag(transaction.category.image) %>
+    <% else %>
+      <%= image_tag('https://img.icons8.com/external-filled-outline-perfect-kalash/48/undefined/external-not-found-web-development-and-programming-filled-outline-perfect-kalash.png') %>
+    <% end %>
+    <p class='text-break my-0 mx-2'><%= transaction.category.title.capitalize %></p>
+  </div>
+
+  <div class='d-flex justify-content-start align-items-center'>
+    <%= image_tag('https://img.icons8.com/doodle/48/000000/wallet--v1.png') %>
+    <p class='text-break my-0 mx-2'><%= transaction.wallet.name.capitalize %> </p>
+  </div>
+
+  <div class='d-flex justify-content-start align-items-center modal__input'>
+    <%= image_tag('https://img.icons8.com/doodle/48/000000/coins--v1.png') %>
+    <% if transaction.income? %>
+      <p class='text-break my-0 mx-2 text-success'>$ <%= transaction.convert_to_currency_format %></p>
+    <% else %>
+      <p class='text-break my-0 mx-2 text-danger'>$ <%= transaction.convert_to_currency_format %></p>
+    <% end %>
+  </div>
+
+  <div class='d-flex justify-content-start align-items-center'>
+    <%= image_tag('https://img.icons8.com/doodle/48/000000/calendar--v2.png') %>
+    <p class='my-0 mx-2'><%=(transaction.created_at).to_date %></p>
+  </div>
+
+  <div class='d-flex justify-content-start align-items-center border-bottom border-top'>
+    <%= image_tag('https://img.icons8.com/external-icongeek26-flat-icongeek26/48/000000/external-Note-education-icongeek26-flat-icongeek26.png') %>
+    <p class='my-0 mx-2 text-break'><%= transaction.note.presence || '-' %></p>
+  </div>
+
+  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_frame: 'transactions', controller: 'transactions', action: 'turbo:submit-end->transactions#setPage', turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
 </div>

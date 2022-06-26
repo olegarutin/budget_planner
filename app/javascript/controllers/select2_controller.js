@@ -8,6 +8,13 @@ export default class extends Controller {
       dropdownParent: $('#AddTransaction')
     });
 
+    $('#category__filter').select2();
+    $('#type__filter').select2();
+
+    $('.transactions__filters').change(function(){
+      document.getElementById('search_transactions_form').requestSubmit();
+    });
+
     $('#select_menu').select2({
       dropdownParent: $('#AddTransaction'),
 

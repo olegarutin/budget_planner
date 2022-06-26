@@ -20,7 +20,7 @@ end
 # Instance variables
 # See https://ddnexus.github.io/pagy/api/pagy#instance-variables
 Pagy::DEFAULT[:page]   = 1
-Pagy::DEFAULT[:items]  = 12
+Pagy::DEFAULT[:items]  = 9
 # Pagy::DEFAULT[:cycle]  = true
 
 require 'pagy/extras/bootstrap'

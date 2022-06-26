@@ -15,7 +15,8 @@ export default class extends Controller {
   }
 
   reset() {
-    $('#search_transactions_form').trigger('reset');
+    document.getElementById('search_transactions_form').reset();
+    $('.transactions__filters').val(null).trigger("change");
     this.search();
   }
 
@@ -27,12 +28,12 @@ export default class extends Controller {
     }
   }
 
-  test() {
-    let count = document.getElementById('texting').value;
+  setPage() {
+    let count = document.getElementById('transactions_count').value;
     if (count == 1) {
-      $(".prev .page-link")[0].click();
+      $('.prev .page-link')[0].click();
     } else {
-      $(".active .page-link")[0].click();
+      $('.active .page-link')[0].click();
     }
   }
 
