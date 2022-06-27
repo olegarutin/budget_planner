@@ -1,12 +1,14 @@
 class CategoriesController < ApplicationController
-  before_action :set_categories, only: :create
+  before_action :set_categories, only: %i[create index]
 
   def new
     @category = Category.new
   end
 
   def index
-    @categories = Category.all.where(user: [current_user, nil]).send(params[:transaction_type])
+    return unless Transaction::TYPES.include?(params[:transaction_type].to_sym)
+
+    @categories = @categories.send(params[:transaction_type])
   end
 
   def create

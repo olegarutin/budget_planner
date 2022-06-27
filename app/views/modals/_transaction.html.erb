@@ -35,8 +35,8 @@
           </div>
 
           <div data-controller='categories' class='mb-4'>
-            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
-            <%= link_to 'Income', categories_path('transaction_type': 'income'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
+            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
+            <%= link_to 'Income', categories_path('transaction_type': 'income'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
           </div>
 
           <div class='row justify-content-center'>

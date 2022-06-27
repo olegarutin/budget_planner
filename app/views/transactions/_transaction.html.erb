@@ -33,7 +33,7 @@
     <p class='my-0 mx-2 text-break'><%= transaction.note.presence || '-' %></p>
   </div>
 
-  <% action = if @pagy.page == 1
+  <% action = if @pagy&.page == 1
                 'turbo:submit-start->transactions#search'
               else
                'turbo:submit-end->transactions#setPage'
