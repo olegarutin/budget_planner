@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_transaction, only: :destroy
   before_action :set_categories, only: %i[new create]
-  before_action :set_category, only: %i[create]
+  before_action :set_category, only: :create
 
   def index
     if params[:wallet_id].present?
@@ -59,15 +59,11 @@ class TransactionsController < ApplicationController
 
   private
 
-  def amount_to_number_format
-    (params[:amount].gsub(',', '.').to_f * 100).to_i
-  end
-
   def transaction_params
     params.permit(:note, :wallet_id, :category_id).merge(
       user: current_user,
       transaction_type: @category.transaction_type,
-      amount: amount_to_number_format
+      amount: amount_to_number_format(params[:amount])
     )
   end
 
