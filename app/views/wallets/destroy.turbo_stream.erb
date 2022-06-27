@@ -13,3 +13,7 @@
     <%= link_to 'Add Transaction', new_transaction_path, data: { turbo_frame: 'categories', controller: 'transactions', action: 'transactions#showModal' }, class: 'btn btn-dark my-4', method: 'get' %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.update 'transactions' do %>
+  <%= render current_user.transactions %>
+<% end %>
