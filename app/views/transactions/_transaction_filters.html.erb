@@ -3,7 +3,7 @@
 
   <div class='transaction__block--medium mb-4'>
     <%= form.label :query, 'Search by keyword:', class: 'd-block' %>
-    <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'text-center modal__input form-control' %>
+    <%= form.text_field :query, data: { action: 'transactions#search' }, class: 'text-center modal__input form-control', autocomplete: 'off' %>
   </div>
 
   <div class='transaction__block--medium mb-4'>
