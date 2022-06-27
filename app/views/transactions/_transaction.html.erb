@@ -34,7 +34,7 @@
   </div>
 
   <% action = if @pagy.page == 1
-                'click->transactions#search'
+                'turbo:submit-start->transactions#search'
               else
                'turbo:submit-end->transactions#setPage'
               end
