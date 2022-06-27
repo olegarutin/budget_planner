@@ -15,8 +15,6 @@ class Wallet < ApplicationRecord
 
   scope :date_range, ->(start_date, end_date) { where(created_at: start_date.beginning_of_day..end_date.end_of_day) }
 
-  after_destroy_commit { broadcast_remove_to 'wallets' }
-
   def convert_to_currency_format
     quantity / 100.to_f
   end
