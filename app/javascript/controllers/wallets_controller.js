@@ -19,6 +19,10 @@ export default class extends Controller {
     document.getElementById('wallet_list').value = '';
   }
 
+  destroy() {
+    document.getElementById('wallet_list').value = '';
+  }
+
   moveClass(target) {
     $('.wallet--green-border').removeClass('wallet--green-border');
     target.classList.add('wallet--green-border');
