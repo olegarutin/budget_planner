@@ -17,6 +17,7 @@ class WalletsController < ApplicationController
 
   def destroy
     @wallet.destroy
+    @pagy, @transactions = pagy(current_user.transactions)
   end
 
   private
