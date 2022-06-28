@@ -4,8 +4,7 @@
   <%= button_to 'All Wallets', transactions_path,
     class: 'btn shadow mb-4',
     method: 'get',
-    data: { turbo_frame: 'transactions', controller: 'wallets', action: 'wallets#selectAll' }
-  %>
+    data: { turbo_frame: 'transactions', controller: 'wallets', action: 'wallets#selectAll' } %>
 
   <div class='row justify-content-center mx-auto gap-4 mb-4' id='wallets_list'>
     <%= render @wallets %>
