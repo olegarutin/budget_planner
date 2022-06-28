@@ -1,23 +1,58 @@
-<h3><%= link_to 'Dashboard', dashboard_path %></h3>
-<hr>
-<div class='container'>
+<nav class='navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3'>
+  <div class='container'>
+    <a class='navbar-brand border-bottom' href='#'>Budget planner</a>
+    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+      <span class='navbar-toggler-icon'></span>
+    </button>
+    <div class='collapse navbar-collapse' id='navbarResponsive'>
+      <ul class='navbar-nav ms-auto'>
+        <% if current_user %>
+          <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-light mx-2' %>
+          <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-light mx-2 w-100', data: { turbo: false } %>
+        <% else %>
+          <%= link_to 'Log in', new_user_session_path, class: 'btn btn-light mx-2' %>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<br><br>
+
+<div class='container' id="create-charts-pdf">
 
   <%= form_with model: @transaction, method: :get do |form| %>
-    <div class='form-group'>
-      <%= form.select :transaction_type, current_user.transactions.transaction_types.keys, { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();' } %>
-      <%= form.date_field :start_date, value: @start_date %>
-      <%= form.date_field :end_date, value: @end_date %>
-      <%= form.submit %>
+    <div class='form-group' id='report-from', data-date='Report from <%= Date.current %>'>
+      <div class='row row-cols-4 justify-content-center'>
+        <div class='mx-2 col-2'>
+          <%= form.label :user_wallet, 'Select wallet:', class: 'd-block' %>
+          <%= form.select :user_wallet, options_for_select(current_user.wallets.pluck(:name, :id)), { onchange: 'this.form.submit();' }, class: 'text-center modal__input form-select', id: 'report-wallet' %>
+        </div>
+        <div class='mx-2 col-2'>
+          <%= form.label :transaction_type, 'Select expense/income:', class: 'd-block' %>
+          <%= form.select :transaction_type, current_user.transactions.transaction_types.keys, { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();', class: 'text-center modal__input form-select' } %>
+        </div>
+        <div class='mx-2 col-2'>
+          <%= form.label :start_date, 'Starts from:', class: 'd-block' %>
+          <%= form.date_field :start_date, value: @start_date, class: 'text-center modal__input form-select' %>
+        </div>
+        <div class='mx-2 col-2'>
+          <%= form.label :end_date, 'Ends at:', class: 'd-block' %>
+          <%= form.date_field :end_date, value: @end_date, class: 'text-center modal__input form-select' %>
+        </div>
+      </div>
+          <%= form.submit 'Show', class: 'btn btn-dark mx-2 justify-content-center', id: 'remove-params' %>
     </div>
 
       <div class='row row-cols-2'>
         <div class='col'>
           <div class='card'>
             <div class='card-header'>
-              Bar Chart for Expenses by Categories
+              Bar Chart by Categories
             </div>
               <div class='card-body'>
-                <canvas id='chart-bar' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>'></canvas>
+                <canvas id='chart-bar' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@user_wallet, @transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@user_wallet, @transaction_type, @start_date, @end_date) %>'></canvas>
               </div>
           </div>
         </div>
@@ -25,13 +60,16 @@
         <div class='col'>
           <div class='card'>
             <div class='card-header'>
-              Pie Chart for Expenses by Categories
+              Pie Chart by Categories
             </div>
               <div class='card-body'>
-                <canvas id='chart-pie' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@transaction_type, @start_date, @end_date) %>'></canvas>
+                <canvas id='chart-pie' width='200' height='200' data-data='<%= current_user.transactions.amount_for_categories(@user_wallet, @transaction_type, @start_date, @end_date) %>' data-labels='<%= current_user.transactions.category_title(@user_wallet, @transaction_type, @start_date, @end_date) %>'></canvas>
               </div>
           </div>
         </div>
-    </div>
+      </div>
   <% end %>
 </div>
+<br>
+<button id='download-pdf' class='btn btn-light mx-2'>Download PDF</button>
+<button id='download-pdf-mobile' class='btn btn-light mx-2'>Download PDF</button>

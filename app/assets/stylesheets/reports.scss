@@ -1,0 +1,15 @@
+@media only screen and (max-width: 765px) {
+	.col {width: 100%;}
+
+	.btn {font-size: 12px;}
+	#download-pdf {
+		display: none;
+	}
+}
+
+@media only screen and (min-width: 766px) {
+	#download-pdf-mobile {
+		display: none;
+	}
+}
+ 
