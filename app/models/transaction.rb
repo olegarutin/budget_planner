@@ -14,8 +14,12 @@ class Transaction < ApplicationRecord
 
   enum transaction_type: TYPES
 
-  validates :amount, numericality: { greater_than: 0, less_than: 10_000_000_000 }
   validates :note, length: { maximum: 40 }
+  validates :amount, numericality: {
+    greater_than: 0,
+    less_than_or_equal_to: 1_000_000_000_00,
+    message: QUANTITY_VALIDATION_ERROR
+  }
 
   after_update_commit { broadcast_replace_to 'transactions' }
 
