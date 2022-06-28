@@ -1,23 +1,15 @@
 <div class='col-lg-6 offset-lg-3 border p-5'>
   <div class='form-centered w-75 mx-auto'>
-    <h2 class='mb-4'>Log in</h2>
+    <h2 class='mb-4'>Sign in</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { 'data-turbo': false }) do |f| %>
       <%= render 'shared/error_messages', pattern: resource %>
 
-      <div class='field mb-2'>
-        <%= f.label :email %>
-        <%= f.email_field :email, class: 'form-control form-control-sm', autofocus: true, autocomplete: 'email' %>
-      </div>
+      <%= render 'devise/shared/email_field', f: f %>
 
       <%= render 'devise/shared/password_field', f: f, field: :password %>
 
-      <div class='mb-2'>
-        <%= f.label :remember_me %>
-        <%= f.check_box :remember_me, class: 'form-check-input' %>
-      </div>
-
-      <div class='actions'>
+      <div class='actions mt-4'>
         <%= f.submit 'Sign in', class: ' mx-1 btn btn-dark' %>
         <%= render 'devise/shared/links' %>
       </div>

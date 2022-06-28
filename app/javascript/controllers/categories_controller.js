@@ -4,8 +4,8 @@ export default class extends Controller {
   static targets = ['button']
 
   change(e) {
-    this.buttonTargets.forEach(button => button.classList.remove('btn-outline-success', 'border-success'));
-    e.target.classList.add('btn-outline-success', 'border-success', 'select_button');
+    this.buttonTargets.forEach(button => button.classList.remove('button--green-border'));
+    e.target.classList.add('button--green-border');
   }
 
   resetModal() {
@@ -16,7 +16,7 @@ export default class extends Controller {
 
   hideModal(e) {
     if (e.detail.success) {
-      $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
+      $('.button--green-border').removeClass('button--green-border');
       $('#AddTransaction').modal('show');
       $('#AddCategory').modal('hide');
     }

@@ -21,9 +21,15 @@
 }
 
 #select2-wallet_select_field-container {
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .select2.select2-container.select2-container--default {
   height: 50px;
+}
+
+#select2-category__filter-container,
+#select2-type__filter-container {
+  margin-top: 10px;
+  text-align: center;
 }

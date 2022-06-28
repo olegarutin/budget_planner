@@ -1,6 +1,12 @@
 import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
+  connect() {
+    $('.page-link').click(function() {
+      document.getElementById('search_transactions_form').scrollIntoView(0);
+    });
+  }
+
   search() {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
@@ -9,18 +15,30 @@ export default class extends Controller {
   }
 
   reset() {
-    $('#search_transactions_form').trigger('reset');
+    document.getElementById('search_transactions_form').reset();
+    $('.transactions__filters').val(null).trigger("change");
+    this.search();
   }
 
   hideModal(e) {
     if (e.detail.success) {
       $('#AddTransaction').modal('hide');
       this.search();
+      document.getElementById('search_transactions_form').scrollIntoView(0);
+    }
+  }
+
+  setPage() {
+    let count = document.getElementById('transactions_count').value;
+    if (count == 1) {
+      $('.prev .page-link')[0].click();
+    } else {
+      $('.active .page-link')[0].click();
     }
   }
 
   showModal(e) {
-    $('.select_button').removeClass(['btn-outline-success', 'border-success', 'select_button']);
+    $('.button--green-border').removeClass('button--green-border');
     $('#AddTransaction').find('form').trigger('reset');
     $('#AddTransaction').modal('show');
     $('#transaction_errors').empty();

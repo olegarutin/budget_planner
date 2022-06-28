@@ -3,7 +3,7 @@
     <div class='modal-dialog modal-md modal-dialog-centered mx-auto my-4'>
       <div class='modal-content'>
         <div class='modal-header'>
-          <h5 class='modal-title' id='AddCategoryLabel'>Add category</h5>
+          <h5 class='modal-title' id='AddCategoryLabel'>Add Category</h5>
           <button type='button' class='btn-close' data-bs-target='#AddTransaction' data-bs-toggle='modal' aria-label='Close'></button>
         </div>
         <div class='modal-body mx-5'>
@@ -17,12 +17,12 @@
 
             <div>
               <%= f.label :title, class: 'd-block' %>
-              <%= f.text_field :title, class: 'form-control modal__input mb-4 text-center' %>
+              <%= f.text_field :title, class: 'form-control modal__input mb-4 text-center', autocomplete: 'off' %>
             </div>
 
             <div>
               <%= f.label :image, class: 'd-block' %>
-              <%= f.text_field :image, class: 'form-control modal__input text-center' %>
+              <%= f.text_field :image, class: 'form-control modal__input text-center', autocomplete: 'off' %>
             </div>
 
             <div class='my-2'>

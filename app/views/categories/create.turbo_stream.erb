@@ -4,8 +4,10 @@
   <%= turbo_stream.update 'search_by_category' do %>
     <%= select_tag :category,
       options_for_select(@categories.pluck(:title, :id)),
-      include_blank: 'All Categories', class: 'form-select',
-      data: { action: 'input->transactions#search' }
+      include_blank: 'All Categories',
+      id: 'category__filter',
+      class: 'text-center modal__input form-select transactions__filters',
+      style: 'width: 100%'
     %>
   <% end %>
 <% else %>

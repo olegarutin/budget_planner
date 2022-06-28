@@ -24,6 +24,9 @@ gem 'figaro'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
+# Clean, powerful, customizable and sophisticated paginator for modern web app frameworks and ORMs
+gem 'pagy', '~> 5.10'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 

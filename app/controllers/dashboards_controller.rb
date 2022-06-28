@@ -2,11 +2,10 @@ require 'rufus-scheduler'
 
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_resources, only: :index
 
   def index
-    @categories = Category.all.where(user: [current_user, nil])
-    @transactions = current_user.transactions
-    @wallets = current_user.wallets
+    @pagy, @transactions = pagy(@transactions)
     return unless @wallets.present?
 
     scheduler_mail = Rufus::Scheduler.new
@@ -28,5 +27,13 @@ class DashboardsController < ApplicationController
         end
       end
     end
+  end
+
+  private
+
+  def load_resources
+    @categories = Category.all.where(user: [current_user, nil])
+    @transactions = current_user.transactions.order(created_at: :desc)
+    @wallets = current_user.wallets.order(created_at: :desc)
   end
 end

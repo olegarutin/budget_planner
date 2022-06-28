@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :turbo_frame_request_variant
-  before_action :set_cache_buster
+  include Pagy::Backend
+
+  before_action :turbo_frame_request_variant, :set_cache_buster
 
   private
 
@@ -8,12 +9,15 @@ class ApplicationController < ActionController::Base
     request.variant = :turbo_frame if turbo_frame_request?
   end
 
+  def after_sign_in_path_for(_resource)
+    dashboard_path
+  end
+
   def set_cache_buster
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
   end
 
-
-  def after_sign_in_path_for(resource)
-    dashboard_path
+  def amount_to_number_format(amount)
+    (amount.gsub(',', '.').to_f * 100).to_i
   end
 end
