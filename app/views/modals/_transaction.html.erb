@@ -2,7 +2,7 @@
   <div class='modal-dialog modal-lg mx-auto my-4'>
     <div class='modal-content'>
       <div class='modal-header'>
-        <h5 class='modal-title' id='AddTransactionLabel'>Add transaction</h5>
+        <h5 class='modal-title' id='AddTransactionLabel'>Add Transaction</h5>
         <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
       </div>
 
@@ -29,14 +29,14 @@
               <span class='border-bottom d-block'>Amount</span>
               <div class='d-flex border-bottom mb-4'>
                 <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png' class='ps-2'/>
-                <%= f.text_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true, data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
+                <%= f.text_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true, data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' }, autocomplete: 'off' %>
               </div>
             </div>
           </div>
 
           <div data-controller='categories' class='mb-4'>
-            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
-            <%= link_to 'Income', categories_path('transaction_type': 'income'), id: 'button', data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
+            <%= link_to 'Expense', categories_path('transaction_type': 'expense'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
+            <%= link_to 'Income', categories_path('transaction_type': 'income'), data: { turbo_frame: 'categories', action: 'categories#change', 'categories-target': 'button' }, class: 'btn mx-auto button--white-border' %>
           </div>
 
           <div class='row justify-content-center'>

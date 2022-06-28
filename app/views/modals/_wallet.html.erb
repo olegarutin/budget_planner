@@ -3,7 +3,7 @@
     <div class='modal-dialog modal-md modal-dialog-centered mx-auto my-4'>
       <div class='modal-content'>
         <div class='modal-header'>
-          <h5 class='modal-title' id='AddWalletLabel'>Add wallet</h5>
+          <h5 class='modal-title' id='AddWalletLabel'>Add Wallet</h5>
           <button type='button' class='btn-close' data-bs-toggle='modal' data-bs-target='#AddWallet' aria-label='Close'></button>
         </div>
         <div class='modal-body mx-5'>
@@ -15,7 +15,7 @@
               <% end %>
 
             <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control mb-4 text-center modal__input' %>
+            <%= f.text_field :name, class: 'form-control mb-4 text-center modal__input', autocomplete: 'off' %>
 
             <div class='row border-bottom'>
               <div class='col-md-6'>
@@ -24,7 +24,7 @@
               </div>
               <div class='col-md-6'>
                 <%= f.label :quantity %>
-                <%= f.text_field :quantity, id: 'number-input', class: 'form-control text-center mb-4 modal__input', data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' } %>
+                <%= f.text_field :quantity, id: 'number-input', class: 'form-control text-center mb-4 modal__input', data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' }, autocomplete: 'off' %>
               </div>
             </div>
             <div class='my-2'>

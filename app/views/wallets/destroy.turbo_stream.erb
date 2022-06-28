@@ -1,9 +1,24 @@
 <%= turbo_stream.update 'wallet_create_button' do %>
   <% if current_user.user_limit_wallets? %>
-    <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark', data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
+    <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark',
+      data: { 'bs-target': '#AddWallet', 'bs-toggle': 'modal', controller: 'wallets', action: 'wallets#resetModal' } %>
   <% end %>
 <% end %>
 
 <%= turbo_stream.update 'wallet_select' do %>
-    <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%', id: 'wallet_select_field') %>
+    <%= select_tag(:wallet_id,
+      options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }),
+      style: 'width: 100%', id: 'wallet_select_field') %>
+<% end %>
+
+<%= turbo_stream.update 'transaction_modal' do %>
+  <% if current_user.wallets.present? %>
+    <%= link_to 'Add Transaction', new_transaction_path,
+      data: { turbo_frame: 'categories', controller: 'transactions', action: 'transactions#showModal' },
+      class: 'btn btn-dark my-4', method: 'get' %>
+  <% end %>
+<% end %>
+
+<%= turbo_stream.update 'transactions' do %>
+  <%= render 'transactions/transactions' %>
 <% end %>

@@ -33,5 +33,12 @@
     <p class='my-0 mx-2 text-break'><%= transaction.note.presence || '-' %></p>
   </div>
 
-  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_frame: 'transactions', controller: 'transactions', action: 'turbo:submit-end->transactions#setPage', turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
+  <% action = if @pagy&.page == 1
+                'turbo:submit-start->transactions#search'
+              else
+               'turbo:submit-end->transactions#setPage'
+              end
+  %>
+
+  <%= button_to '', transaction_path(transaction), class:'btn-close bg-danger position-absolute top-0 end-0', form: { data: { turbo_frame: 'transactions', controller: 'transactions', action: action, turbo_confirm: 'Are you sure you want to delete the transaction?' } }, method: :delete %>
 </div>

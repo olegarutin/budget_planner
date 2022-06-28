@@ -5,6 +5,7 @@ class WalletsController < ApplicationController
 
   def create
     @wallet = Wallet.new(wallet_params)
+
     respond_to do |format|
       if @wallet.save
         format.turbo_stream { render :create }
@@ -16,16 +17,16 @@ class WalletsController < ApplicationController
 
   def destroy
     @wallet.destroy
+    @pagy, @transactions = pagy(current_user.transactions)
   end
 
   private
 
-  def quantity_to_number_format
-    (params[:quantity].gsub(',', '.').to_f * 100).to_i
-  end
-
   def wallet_params
-    params.permit(:name, :currency).merge(user: current_user, quantity: quantity_to_number_format)
+    params.permit(:name, :currency).merge(
+      user: current_user,
+      quantity: amount_to_number_format(params[:quantity])
+    )
   end
 
   def set_wallets
