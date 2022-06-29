@@ -22,6 +22,7 @@ export default class extends Controller {
   destroy() {
     document.getElementById('wallet_list').value = '';
     $('.wallet--green-border').removeClass('wallet--green-border');
+    document.getElementById('search_transactions_form').requestSubmit();
   }
 
   moveClass(target) {
