@@ -1,30 +1,20 @@
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3 px-5 justify-content-between mb-5'>
-    <a class='navbar-brand border-bottom' href='#'>Budget planner</a>
+  <a class='navbar-brand border-bottom' href='#'>Budget planner</a>
 
-    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
-    <span class='navbar-toggler-icon'></span>
-    </button>
+  <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+  <span class='navbar-toggler-icon'></span>
+  </button>
 
-  <ul class='collapse navbar-collapse justify-content-end mb-0 navbar-nav' id='navbarResponsive'>
+  <div class='collapse navbar-collapse justify-content-end mb-0 navbar-nav' id='navbarResponsive'>
     <% if current_user %>
-      <li class='nav-item'>
-        <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-dark mx-2' %>
-      </li>
-      <li class='nav-item'>
-        <%= link_to 'Home', root_path, class: 'nav-link' %>
-      </li>
-      <li class='nav-item'>
-        <%= link_to 'Reports', reports_path, class: 'nav-link' %>
-      </li>
+      <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-dark mx-2' %>
+      <%= link_to 'Home', root_path, class: 'nav-link' %>
+      <%= link_to 'Reports', reports_path, class: 'nav-link' %>
     <% else %>
-      <div class="d-flex justify-content-center">
-        <li>
-          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-light mx-2' %>
-        </li>
-        <li>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
-        </li>
+      <div class='d-flex justify-content-center'>
+        <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-light mx-2' %>
+        <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
       </div>
     <% end %>
-  </ul>
+  </div>
 </nav>
