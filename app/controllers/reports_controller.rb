@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
     @transaction_type = params[:transaction_type] || 'expense'
     @start_date = params[:start_date] || (Time.now.to_date - 7.days)
     @end_date = params[:end_date] || Time.now.to_date
-    @previous_choice = params[:user_wallet]
+    @previous_wallet = params[:user_wallet]
+    @previous_type = params[:transaction_type]
   end
 end
