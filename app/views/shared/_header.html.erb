@@ -5,28 +5,26 @@
     <span class='navbar-toggler-icon'></span>
     </button>
 
-  <div class='collapse navbar-collapse justify-content-end' id='navbarResponsive'>
-    <ul class='navbar-nav '>
-      <% if current_user %>
-        <li class='nav-item'>
-          <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-dark mx-2' %>
+  <ul class='collapse navbar-collapse justify-content-end mb-0 navbar-nav' id='navbarResponsive'>
+    <% if current_user %>
+      <li class='nav-item'>
+        <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-dark mx-2' %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class='nav-item'>
+        <%= link_to 'Reports', reports_path, class: 'nav-link' %>
+      </li>
+    <% else %>
+      <div class="d-flex justify-content-center">
+        <li>
+          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-light mx-2' %>
         </li>
-        <li class='nav-item'>
-          <%= link_to 'Home', root_path, class: 'nav-link' %>
+        <li>
+          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
         </li>
-        <li class='nav-item'>
-          <%= link_to 'Reports', reports_path, class: 'nav-link' %>
-        </li>
-      <% else %>
-        <div class="d-flex justify-content-center">
-          <li>
-            <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-light mx-2' %>
-          </li>
-          <li>
-            <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
-          </li>
-        </div>
-      <% end %>
-    </ul>
-  </div>
+      </div>
+    <% end %>
+  </ul>
 </nav>

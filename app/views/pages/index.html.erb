@@ -1,19 +1,17 @@
-<nav class='navbar navbar-expand-lg navbar-dark bg-dark fixed-top py-3'>
-  <div class='container'>
-    <a class='navbar-brand border-bottom' href='#'>Budget planner</a>
-    <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
-      <span class='navbar-toggler-icon'></span>
-    </button>
-    <div class='collapse navbar-collapse' id='navbarResponsive'>
-      <ul class='navbar-nav ms-auto'>
-        <% if current_user %>
-          <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-light mx-2' %>
-          <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-light mx-2 w-100', data: { turbo: false } %>
-        <% else %>
-          <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-light mx-2' %>
-          <%= link_to 'Sign up', new_user_registration_path, class: 'btn btn-light mx-2' %>
-        <% end %>
-      </ul>
+<%= render 'shared/header' %>
+<div class='mx-2 row'>
+  <div class='text-dark col-11 col-lg-8 mx-auto my-5 border-bottom border-top py-2'>
+    <h1>Welcome To Our Website!</h1>
+    <h3>Ever feel like  you're throwing money away? Take control of your cashflow by logging what you're spend with simple form.</h3>
+  </div>
+
+  <div class='row mx-auto justify-content-center'>
+    <div class='col-11 col-lg-6'>
+      <img class='col-12' src='https://guardianwealth.app/wp-content/uploads/2021/02/iStock-1211384881.jpg'>
+    </div>
+    <div class='col-11 col-sm-7 col-lg-4 my-auto p-5 border rounded-circle'>
+      <h2>Start tracking your expenses and income</h2>
+      <%= link_to "Let's Get Started", new_user_registration_path, class: 'btn btn-dark mt-2 w-50 rounded-pill' %>
     </div>
   </div>
-</nav>
+</div>
