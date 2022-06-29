@@ -4,19 +4,19 @@
       <div class='row row-cols-4 justify-content-center'>
         <div class='mx-2 col-2'>
           <%= form.label :user_wallet, 'Select wallet:', class: 'd-block' %>
-          <%= form.select :user_wallet, options_for_select(current_user.wallets.pluck(:name, :id)), { onchange: 'this.form.submit();' }, class: 'text-center modal__input form-select', id: 'report-wallet' %>
+          <%= form.select :user_wallet, options_for_select(current_user.wallets.pluck(:name, :id), @previous_wallet), { selected: params[:user_wallet] || current_user.wallets.last, onchange: 'this.form.submit();' }, class: 'text-center modal__input form-select' %>
         </div>
         <div class='mx-2 col-2'>
           <%= form.label :transaction_type, 'Select expense/income:', class: 'd-block' %>
-          <%= form.select :transaction_type, current_user.transactions.transaction_types.keys, { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();', class: 'text-center modal__input form-select' } %>
+          <%= form.select :transaction_type, options_for_select([['Expense', 'expense'], ['Income', 'income']], @previous_type), { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();', class: 'text-center modal__input form-select' } %>
         </div>
         <div class='mx-2 col-2'>
           <%= form.label :start_date, 'Starts from:', class: 'd-block' %>
-          <%= form.date_field :start_date, value: @start_date, class: 'text-center modal__input form-select' %>
+          <%= form.date_field :start_date, value: @start_date, class: 'text-center modal__input form-control' %>
         </div>
         <div class='mx-2 col-2'>
           <%= form.label :end_date, 'Ends at:', class: 'd-block' %>
-          <%= form.date_field :end_date, value: @end_date, class: 'text-center modal__input form-select' %>
+          <%= form.date_field :end_date, value: @end_date, class: 'text-center modal__input form-control' %>
         </div>
       </div>
         <%= form.submit 'Show', class: 'btn btn-dark mx-2 justify-content-center', id: 'remove-params' %>
