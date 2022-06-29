@@ -9,13 +9,13 @@
       data: { action: 'transactions#search' } %>
   </div>
 
-  <div class='transaction__block--medium mb-4'>
-    <%= form.label :date, 'To:', class: 'd-block' %>
-    <%= form.date_field :end_date,
-      value: current_user.transactions.last&.created_at&.to_date || Time.now.to_date,
+  <%= turbo_frame_tag 'data_picker', class: 'transaction__block--medium mb-4' do %>
+    <%= label_tag :date, 'To:', class: 'd-block' %>
+    <%= date_field_tag :end_date,
+      current_user.transactions.last&.created_at&.to_date || Time.now.to_date,
       class: 'modal__input text-center form-control',
       data: { action: 'transactions#search' } %>
-  </div>
+  <% end %>
 
   <div class='transaction__block--medium mb-4'>
     <%= form.label :type, 'Search by type:', class: 'd-block' %>

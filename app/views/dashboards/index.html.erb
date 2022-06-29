@@ -1,10 +1,9 @@
-<%= render 'shared/header' %>
-<div class='row mx-2 mb-5 border-bottom'>
+<div class='row mx-2'>
   <div class='col-lg-3 col-12 mt-4'>
     <%= render 'shared/sidebar' %>
   </div>
 
-  <div class='col-lg-9 col-12 transactions--border'>
+  <div class='col-lg-9 col-12 transactions--border pb-4'>
     <%= turbo_stream_from 'transactions' %>
     <%= turbo_stream_from 'wallets' %>
     <h1 class='pt-5 mb-4'>All Transactions</h1>

@@ -1,3 +1,5 @@
+<%= turbo_stream.remove(@wallet) %>
+
 <%= turbo_stream.update 'wallet_create_button' do %>
   <% if current_user.user_limit_wallets? %>
     <%= link_to 'Add Wallet', '', class: 'btn btn-outline-dark',
@@ -17,8 +19,4 @@
       data: { turbo_frame: 'categories', controller: 'transactions', action: 'transactions#showModal' },
       class: 'btn btn-dark my-4', method: 'get' %>
   <% end %>
-<% end %>
-
-<%= turbo_stream.update 'transactions' do %>
-  <%= render 'transactions/transactions' %>
 <% end %>

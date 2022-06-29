@@ -42,9 +42,6 @@ gem 'bootsnap', require: false
 # Use Sass to process CSS
 # gem 'sassc-rails'
 
-# For static pages
-gem 'high_voltage', '~> 3.1'
-
 # For push notifications
 gem 'webpush'
 gem 'noticed'
