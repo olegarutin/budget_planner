@@ -1,7 +1,6 @@
 require 'rufus-scheduler'
 
 class DashboardsController < ApplicationController
-  before_action :authenticate_user!
   before_action :load_resources, only: :index
 
   def index
