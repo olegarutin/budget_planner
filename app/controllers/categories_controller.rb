@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :set_categories, only: %i[create index]
+  before_action :set_images, :set_categories, only: %i[create index]
 
   def new
     @category = Category.new
@@ -13,6 +13,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+
     respond_to do |format|
       if @category.save
         format.turbo_stream { render :create }
