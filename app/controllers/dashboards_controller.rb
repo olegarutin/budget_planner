@@ -1,5 +1,3 @@
-require 'rufus-scheduler'
-
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
   before_action :load_resources, only: :index
@@ -9,7 +7,7 @@ class DashboardsController < ApplicationController
     return unless @wallets.present?
 
     scheduler_mail = Rufus::Scheduler.new
-    scheduler_mail.every '12h' do
+    scheduler_mail.every '1h' do
       @wallets.each do |wallet|
         if wallet.quantity.negative?
           PlannerNotification.with(planner: "You've already reached the limit of #{wallet.name} wallet.")
@@ -19,7 +17,7 @@ class DashboardsController < ApplicationController
     end
 
     scheduler_push = Rufus::Scheduler.new
-    scheduler_push.every '1h' do
+    scheduler_push.every '10s' do
       @wallets.each do |wallet|
         if wallet.quantity.negative?
           WebpushNotification.with(planner_push: "You've already reached the limit of #{wallet.name} wallet.")
