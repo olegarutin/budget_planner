@@ -1,11 +1,21 @@
-document.addEventListener("turbo:load", () => {
+$(document).ready(() => {
 
   const vapidPublicKey = new Uint8Array($('.body').data("webpush"));
-
+  console.log('1dfdsfcsfadxas')
   if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('/service_worker.js', { scope: './' })
+    console.log('2dfdsfcsfadxas')
+
+
+  navigator.serviceWorker.register('/webpush.js')
   .then(function(reg) {
+     console.log('Service worker change, registered the service worker');
+  });
+
+
+  navigator.serviceWorker.register('/webpush.js').then((reg) => {
+    console.log('4dfdsfcsfadxas')
     navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+      console.log('3dfdsfcsfadxas')
       serviceWorkerRegistration.pushManager
       .subscribe({
         userVisibleOnly: true,
@@ -21,7 +31,7 @@ document.addEventListener("turbo:load", () => {
         console.log(data);
       });
     });
-     // console.log('Service worker change, registered the service worker');
+     console.log('Service worker change, registered the service worker');
   });
   }
   else {
@@ -30,12 +40,12 @@ document.addEventListener("turbo:load", () => {
 
 });
 
-document.addEventListener("push", (event) => {
+self.addEventListener("push", (event) => {
+  console.log(event, 'ffsddfdfsd');
   let title = (event.data && event.data.text()) || "Yay a message";
   let body = "You've reached the limit of your wallet.";
   let tag = "push-simple-demo-notification-tag";
   let icon = '/assets/apple-touch-icon.png';
-
   event.waitUntil(
     self.registration.showNotification(title, { body, icon, tag })
   )

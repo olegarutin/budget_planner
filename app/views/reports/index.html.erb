@@ -1,14 +1,14 @@
 <div class='container pt-4' id='create-charts-pdf'>
-  <%= form_with model: @transaction, method: :get do |form| %>
+  <%= form_with model: @transaction, method: :get, id: 'transaction' do |form| %>
     <div class='form-group' id='report-from' data-date='Report from <%= Date.current %>'>
       <div class='row row-cols-4 justify-content-center'>
         <div class='mx-2 col-2'>
           <%= form.label :user_wallet, 'Select wallet:', class: 'd-block' %>
-          <%= form.select :user_wallet, options_for_select(current_user.wallets.pluck(:name, :id), @previous_wallet), { selected: params[:user_wallet] || current_user.wallets.last, onchange: 'this.form.submit();' }, class: 'text-center modal__input form-select' %>
+          <%= form.select :user_wallet, options_for_select(current_user.wallets.pluck(:name, :id), @previous_wallet), { selected: @user_wallet }, onchange: 'this.form.submit();', class: 'text-center modal__input form-select' %>
         </div>
         <div class='mx-2 col-2'>
           <%= form.label :transaction_type, 'Select expense/income:', class: 'd-block' %>
-          <%= form.select :transaction_type, options_for_select([['Expense', 'expense'], ['Income', 'income']], @previous_type), { selected: params[:transaction_type] || 'expense' }, { onchange: 'this.form.submit();', class: 'text-center modal__input form-select' } %>
+          <%= form.select :transaction_type, options_for_select([['Expense', 'expense'], ['Income', 'income']], selected: @transaction_type), {}, onchange: 'this.form.submit();', class: 'text-center modal__input form-select' %>
         </div>
         <div class='mx-2 col-2'>
           <%= form.label :start_date, 'Starts from:', class: 'd-block' %>

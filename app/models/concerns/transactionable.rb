@@ -9,7 +9,6 @@ module Transactionable
   end
 
   def amount_for_categories(user_wallet, transaction_type, start_date, end_date)
-    # debugger
     where(wallet_id: user_wallet)
       .for_date_range(start_date, end_date)
       .public_send(transaction_type)

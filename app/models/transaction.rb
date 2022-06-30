@@ -10,7 +10,9 @@ class Transaction < ApplicationRecord
   belongs_to :category
   belongs_to :user
 
-  scope :for_date_range, ->(start_date, end_date) { where(created_at: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day) }
+  scope :for_date_range, ->(start_date, end_date) { 
+    where(created_at: start_date.to_date.beginning_of_day..end_date.to_date.end_of_day)
+  }
 
   enum transaction_type: TYPES
 
