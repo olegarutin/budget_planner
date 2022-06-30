@@ -17,19 +17,30 @@
 
             <div>
               <%= f.label :title, class: 'd-block' %>
-              <%= f.text_field :title, class: 'form-control modal__input mb-4 text-center', autocomplete: 'off' %>
+              <%= f.text_field :title, class: 'form-control modal__input text-center', autocomplete: 'off' %>
             </div>
 
-            <div>
-              <%= f.label :image, class: 'd-block' %>
-              <%= f.text_field :image, class: 'form-control modal__input text-center', autocomplete: 'off' %>
-            </div>
+            <div class='row w-100 justify-content-between mx-0 mb-4'>
+              <div class='col-lg-5 px-0 mt-4'>
+                <span class='d-block'>Image:</span>
+                <%= select_tag(:image,
+                  options_for_select(@images.map do |img|
+                    [img, 'data-image': asset_path(img)]
+                  end,
+                  ), id: 'category_select_field',
+                  style: 'width: 100%;',
+                  data: { controller: 'select2' }) %>
+              </div>
 
-            <div class='my-2'>
-              <%= f.radio_button :transaction_type, 'expense', checked: true %> 
-              <%= f.label :transaction_type, 'Expense', value: 'expense' %>
-              <%= f.radio_button :transaction_type, 'income' %> 
-              <%= f.label :transaction_type, 'Income', value: 'income' %>
+              <div class='col-lg-5 px-0 mt-4'>
+                <span class='d-block'>Type:</span>
+                <div class='modal__input modal__input--with-top-padding'>
+                  <%= f.radio_button :transaction_type, 'expense', checked: true %>
+                  <%= f.label :transaction_type, 'Expense', value: 'expense' %>
+                  <%= f.radio_button :transaction_type, 'income' %> 
+                  <%= f.label :transaction_type, 'Income', value: 'income' %>
+                </div>
+              </div>
             </div>
 
             <div class='modal-footer justify-content-center'>

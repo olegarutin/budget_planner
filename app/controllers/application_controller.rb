@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
-  before_action :authenticate_user!
 
-  before_action :turbo_frame_request_variant, :set_cache_buster
+  before_action :authenticate_user!, :turbo_frame_request_variant, :set_cache_buster, :set_images
 
   private
 
@@ -20,5 +19,11 @@ class ApplicationController < ActionController::Base
 
   def amount_to_number_format(amount)
     (amount.gsub(',', '.').to_f * 100).to_i
+  end
+
+  def set_images
+    @images = Dir.chdir(Rails.root.join('app/assets/images')) do
+      Dir.glob('category/*.png')
+    end
   end
 end

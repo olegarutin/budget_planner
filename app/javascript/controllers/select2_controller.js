@@ -8,6 +8,18 @@ export default class extends Controller {
       dropdownParent: $('#AddTransaction')
     });
 
+    $('#category_select_field').select2({
+      dropdownParent: $('#AddCategory'),
+      minimumResultsForSearch: -1,
+
+      templateResult: createOption,
+      templateSelection: createOption
+    });
+
+    function createOption(opt) {
+      return  $('<span><img src="' + $(opt.element).attr('data-image') + '" width="48px"/></span>');
+    }
+
     $('#category__filter').select2();
     $('#type__filter').select2();
 
@@ -22,21 +34,18 @@ export default class extends Controller {
       templateSelection: formatState
     });
 
-    function formatState (opt) {
+    function formatState(opt) {
       if (!opt.id) {
         return opt.text;
       }
 
-      var optimage = $(opt.element).attr('data-image');
+      let optimage = $(opt.element).attr('data-image');
 
-      if (!optimage){
-         optimage = 'https://img.icons8.com/external-filled-outline-perfect-kalash/48/undefined/external-not-found-web-development-and-programming-filled-outline-perfect-kalash.png';
+      if (!optimage) {
+        optimage = 'https://img.icons8.com/external-filled-outline-perfect-kalash/48/undefined/external-not-found-web-development-and-programming-filled-outline-perfect-kalash.png';
       }
 
-      var $opt = $(
-        '<span><img src="' + optimage + '" width="48px"/> ' + opt.text + '</span>'
-      );
-      return $opt;
+      return $('<span><img src="' + optimage + '" width="48px"/> ' + opt.text + '</span>');
     }
   }
 }
