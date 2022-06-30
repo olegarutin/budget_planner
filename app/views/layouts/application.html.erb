@@ -15,8 +15,12 @@
 
   <body class='text-center mt-5 pt-4' data-webpush="<%= Base64.urlsafe_decode64(ENV['WEBPUSH_PUBLIC_KEY']).bytes %>">
     <%= render 'shared/header' %>
-    <%= yield %>
-    <div class='bg-dark text-white'>
+
+    <div class='min-vh-100'>
+      <%= yield %>
+    </div>
+
+    <div class='bg-dark text-white mt-5'>
       <p class='py-4 mb-0'>Copyright © Budget Planner 2022</p>
     </div>
   </body>
