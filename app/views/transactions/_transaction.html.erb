@@ -10,12 +10,12 @@
   </div>
 
   <div class='d-flex justify-content-start align-items-center'>
-    <%= image_tag('https://img.icons8.com/doodle/48/000000/wallet--v1.png') %>
+    <%= image_tag('dashboard/wallet.png', alt: 'Wallet-icon') %>
     <p class='text-break my-0 mx-2'><%= transaction.wallet.name.capitalize %> </p>
   </div>
 
   <div class='d-flex justify-content-start align-items-center modal__input'>
-    <%= image_tag('https://img.icons8.com/doodle/48/000000/coins--v1.png') %>
+    <%= image_tag('dashboard/coins.png', alt: 'Coins-icon') %>
     <% if transaction.income? %>
       <p class='text-break my-0 mx-2 text-success'><%= transaction.convert_to_currency_format.to_s + transaction.wallet.currency_symbol %></p>
     <% else %>
@@ -24,12 +24,12 @@
   </div>
 
   <div class='d-flex justify-content-start align-items-center'>
-    <%= image_tag('https://img.icons8.com/doodle/48/000000/calendar--v2.png') %>
+    <%= image_tag('dashboard/calendar.png', alt: 'lol') %>
     <p class='my-0 mx-2'><%=(transaction.created_at).to_date %></p>
   </div>
 
   <div class='d-flex justify-content-start align-items-center border-bottom border-top'>
-    <%= image_tag('https://img.icons8.com/external-icongeek26-flat-icongeek26/48/000000/external-Note-education-icongeek26-flat-icongeek26.png') %>
+    <%= image_tag('dashboard/note.png', alt: 'Note-icon') %>
     <p class='my-0 mx-2 text-break'><%= transaction.note.presence || '-' %></p>
   </div>
 

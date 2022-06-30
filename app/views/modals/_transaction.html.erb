@@ -18,7 +18,7 @@
             <div class='col-lg-5'>
               <span class='d-block'>Wallet</span>
               <div class='d-flex mb-4'>
-                <img src='https://img.icons8.com/doodle/48/000000/wallet--v1.png' class='border-bottom border-top ps-2'/>
+                <%= image_tag('dashboard/wallet.png', alt: 'Wallet-icon', class: 'border-bottom border-top ps-2') %>
                 <%= turbo_frame_tag 'wallet_select', class: 'w-100' do %>
                   <%= select_tag(:wallet_id, options_for_select(@wallets.map { |wallet| [wallet.name, wallet.id] }), style: 'width: 100%', id: 'wallet_select_field') %>
                 <% end %>
@@ -28,7 +28,7 @@
             <div class='col-lg-5'>
               <span class='border-bottom d-block'>Amount</span>
               <div class='d-flex border-bottom mb-4'>
-                <img src='https://img.icons8.com/doodle/48/000000/coins--v1.png' class='ps-2'/>
+                <%= image_tag('dashboard/coins.png', alt: 'Coins-icon', class: 'ps-2') %>
                 <%= f.text_field :amount, min: 0, placeHolder: 0, class: 'amount_field form-control text-cetner border-0 text-center', required: true, data: { controller: 'inputmask', 'inputmask-target': 'field', 'inputmask-type-value': 'number' }, autocomplete: 'off' %>
               </div>
             </div>
