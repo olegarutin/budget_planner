@@ -42,6 +42,8 @@ class TransactionsController < ApplicationController
         transaction: @transaction,
         transaction_type: @category.transaction_type
       )
+
+      flash.notice = 'Transaction successfully created'
     else
       render :create, status: :found
     end
@@ -54,6 +56,8 @@ class TransactionsController < ApplicationController
       transaction: @transaction,
       transaction_type: @transaction.reverse_type
     )
+
+    flash.notice = 'Transaction successfully destroyed'
   end
 
   private

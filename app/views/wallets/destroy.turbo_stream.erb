@@ -20,3 +20,7 @@
       class: 'btn btn-dark my-4', method: 'get' %>
   <% end %>
 <% end %>
+
+<%= turbo_stream.update 'turbo_errors' do %>
+  <%= render 'shared/notifications' %>
+<% end %>

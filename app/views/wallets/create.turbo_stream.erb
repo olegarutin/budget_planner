@@ -22,6 +22,11 @@
   <%= turbo_stream.prepend 'wallets_list' do %>
     <%= render 'wallets/wallet', wallet: @wallet %>
   <% end %>
+
+  <%= turbo_stream.update 'turbo_errors' do %>
+    <%= render 'shared/notifications' %>
+  <% end %>
+
 <% else %>
   <%= turbo_stream.update 'wallet_errors', partial: 'shared/error_messages', locals: { pattern: @wallet } %>
 <% end %>

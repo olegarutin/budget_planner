@@ -11,3 +11,7 @@
     class: 'modal__input text-center form-control',
     data: { action: 'transactions#search' } %>
 <% end %>
+
+<%= turbo_stream.update 'turbo_errors' do %>
+  <%= render 'shared/notifications' %>
+<% end %>

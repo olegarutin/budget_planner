@@ -1,3 +1,7 @@
 <%= turbo_stream.update(ActionView::RecordIdentifier.dom_id(@transaction.wallet)) do %>
   <%= render 'wallets/form', wallet: @transaction.wallet %>
 <% end %>
+
+<%= turbo_stream.update 'turbo_errors' do %>
+  <%= render 'shared/notifications' %>
+<% end %>
