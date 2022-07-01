@@ -1,17 +1,13 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  before_action :authenticate_user!, :turbo_frame_request_variant, :set_cache_buster, :set_images
-  after_action -> { flash.clear }
+  before_action :authenticate_user!, :turbo_frame_request_variant, :set_images
+  after_action -> { flash.clear }, unless: -> { devise_controller? }
 
   private
 
   def turbo_frame_request_variant
     request.variant = :turbo_frame if turbo_frame_request?
-  end
-
-  def set_cache_buster
-    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
   end
 
   def after_sign_in_path_for(_resource)

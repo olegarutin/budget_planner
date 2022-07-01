@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  before_action :load_resources, only: :index
+  before_action :load_resources, :clear_cache, only: :index
 
   def index
     @pagy, @transactions = pagy(@transactions)
@@ -32,5 +32,9 @@ class DashboardsController < ApplicationController
     @categories = Category.all.where(user: [current_user, nil])
     @transactions = current_user.transactions.order(created_at: :desc)
     @wallets = current_user.wallets.order(created_at: :desc)
+  end
+
+  def clear_cache
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
   end
 end

@@ -39,7 +39,7 @@
   <div class='transaction__block--medium mb-4'>
     <%= form.label :category, 'Search by category:', class: 'd-block' %>
     <%= turbo_frame_tag 'search_by_category' do %>
-      <%= select_tag :category,
+      <%= select_tag :category_id,
         options_for_select(@categories.pluck(:title, :id)),
         include_blank: 'All Categories',
         id: 'category__filter',
