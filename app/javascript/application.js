@@ -6,4 +6,3 @@ import "./charts.js"
 import "select2"
 import "./webpush.js"
 import "./download_pdf.js"
-// import "./remove_params.js
