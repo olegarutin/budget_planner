@@ -7,10 +7,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= render 'layouts/favicons' %>
+
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'></script>
   </head>
 
   <body class='text-center mt-5 pt-4' data-webpush="<%= Base64.urlsafe_decode64(ENV.fetch('WEBPUSH_PUBLIC_KEY', '')).bytes %>">
