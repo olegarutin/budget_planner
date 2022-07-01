@@ -9,6 +9,10 @@
     <h1 class='pt-5 mb-4'>All Transactions</h1>
     <%= render 'shared/notifications' %>
 
+    <%= turbo_frame_tag 'turbo_errors' do %>
+      <%= render 'shared/error_messages' %>
+    <% end %>
+
     <%= render 'transactions/transaction_filters' %>
 
     <%= turbo_frame_tag 'transaction_modal' do %>
