@@ -7,6 +7,8 @@ class WalletsController < ApplicationController
 
     respond_to do |format|
       if @wallet.save
+        flash.notice = 'Wallet successfully created'
+
         format.turbo_stream { render :create }
       else
         format.turbo_stream { render :create, status: :found }
@@ -16,6 +18,8 @@ class WalletsController < ApplicationController
 
   def destroy
     @wallet.destroy
+
+    flash.notice = 'Wallet successfully destroyed'
   end
 
   private
