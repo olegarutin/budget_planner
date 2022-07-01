@@ -2,7 +2,6 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: :destroy
   before_action :set_categories, only: %i[new create]
   before_action :set_category, only: :create
-  after_action -> { flash.clear }
 
   def index
     @transactions = TransactionsSorter.call(transactions: current_user.transactions, params: params)

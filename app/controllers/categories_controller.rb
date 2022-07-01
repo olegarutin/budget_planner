@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
   before_action :set_images, :set_categories, only: %i[create index]
-  after_action -> { flash.clear }
 
   def new
     @category = Category.new

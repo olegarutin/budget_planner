@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
 
   before_action :authenticate_user!, :turbo_frame_request_variant, :set_images
+  after_action -> { flash.clear }, unless: -> { devise_controller? }
 
   private
 
