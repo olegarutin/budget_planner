@@ -7,11 +7,11 @@ class WebpushSubscriptionsController < ApplicationController
     @webpush_subscription = WebpushSubscription.find_by(auth_key: params[:keys][:auth])
     if !@webpush_subscription
       @webpush_subscription = WebpushSubscription.new(
-          user: current_user,
-          endpoint: params[:endpoint],
-          auth_key: params[:keys][:auth],
-          p256dh_key: params[:keys][:p256dh]
-        )
+        user: current_user,
+        endpoint: params[:endpoint],
+        auth_key: params[:keys][:auth],
+        p256dh_key: params[:keys][:p256dh]
+      )
     end
     if @webpush_subscription.save
       render json: @webpush_subscription
