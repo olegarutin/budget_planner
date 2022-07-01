@@ -3,7 +3,7 @@
     <h2 class='mb-4'>Sign in</h2>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { 'data-turbo': false }) do |f| %>
-      <%= render 'shared/error_messages', pattern: resource %>
+      <%= render 'shared/notifications' %>
 
       <%= render 'devise/shared/email_field', f: f %>
 

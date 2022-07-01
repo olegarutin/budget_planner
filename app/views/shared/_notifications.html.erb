@@ -1,5 +1,11 @@
 <% if notice.present? %>
-  <div class='alert alert-success mx-auto mb-4 mt-3 w-75'>
+  <div class='alert alert-success mx-auto mb-4 mt-3 w-75' data-controller='notices'>
     <%= notice %>
+  </div>
+<% end %>
+
+<% if flash.alert.present? %>
+  <div class='alert alert-danger mx-auto mb-4 mt-3 w-75'>
+    <%= flash.alert %>
   </div>
 <% end %>

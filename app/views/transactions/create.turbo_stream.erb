@@ -12,6 +12,6 @@
     data: { action: 'transactions#search' } %>
 <% end %>
 
-<%= turbo_stream.update 'turbo_errors' do %>
+<%= turbo_stream.update 'flash_messages' do %>
   <%= render 'shared/notifications' %>
 <% end %>
