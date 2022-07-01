@@ -1,4 +1,4 @@
-<div class='row mx-2'>
+<div class='row mx-2 min-vh-100'>
   <div class='col-lg-3 col-12 mt-4'>
     <%= render 'shared/sidebar' %>
   </div>
@@ -7,10 +7,9 @@
     <%= turbo_stream_from 'transactions' %>
     <%= turbo_stream_from 'wallets' %>
     <h1 class='pt-5 mb-4'>All Transactions</h1>
-    <%= render 'shared/notifications' %>
 
-    <%= turbo_frame_tag 'turbo_errors' do %>
-      <%= render 'shared/error_messages' %>
+    <%= turbo_frame_tag 'flash_messages' do %>
+      <%= render 'shared/notifications' %>
     <% end %>
 
     <%= render 'transactions/transaction_filters' %>
