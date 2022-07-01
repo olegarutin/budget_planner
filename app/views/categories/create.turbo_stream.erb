@@ -2,7 +2,7 @@
   <%= turbo_stream.update 'categories', partial: 'transactions/category_select', locals: { categories: @categories, selected: @category.id } %>
   <%= turbo_stream.replace 'category_modal', partial: 'modals/category' %>
   <%= turbo_stream.update 'search_by_category' do %>
-    <%= select_tag :category,
+    <%= select_tag :category_id,
       options_for_select(@categories.pluck(:title, :id)),
       include_blank: 'All Categories',
       id: 'category__filter',
