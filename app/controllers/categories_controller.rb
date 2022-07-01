@@ -16,6 +16,8 @@ class CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
+        flash.notice = 'Category successfully created'
+
         format.turbo_stream { render :create }
       else
         format.turbo_stream { render :create, status: :found }

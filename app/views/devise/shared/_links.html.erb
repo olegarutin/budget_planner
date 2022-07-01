@@ -19,5 +19,5 @@
 <% end %>
 
 <% if devise_mapping.omniauthable? %>
-  <%= link_to image_tag('devise/google.png', alt: 'google-sign-in', class: 'google__link'), omniauth_authorize_path(resource_name, :google_oauth2) %>
+  <%= link_to image_tag('devise/google.png', alt: 'google-sign-in', class: 'google__link mb-4'), omniauth_authorize_path(resource_name, :google_oauth2) %>
 <% end %>

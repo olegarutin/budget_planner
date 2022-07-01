@@ -2,13 +2,16 @@
   <%= turbo_stream.update 'categories', partial: 'transactions/category_select', locals: { categories: @categories, selected: @category.id } %>
   <%= turbo_stream.replace 'category_modal', partial: 'modals/category' %>
   <%= turbo_stream.update 'search_by_category' do %>
-    <%= select_tag :category,
+    <%= select_tag :category_id,
       options_for_select(@categories.pluck(:title, :id)),
       include_blank: 'All Categories',
       id: 'category__filter',
       class: 'text-center modal__input form-select transactions__filters',
-      style: 'width: 100%'
-    %>
+      style: 'width: 100%' %>
+  <% end %>
+
+  <%= turbo_stream.update 'transaction_errors' do %>
+    <%= render 'shared/notifications' %>
   <% end %>
 <% else %>
   <%= turbo_stream.update 'category_errors', partial: 'shared/error_messages', locals: { pattern: @category } %>

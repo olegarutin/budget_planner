@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
 
-  before_action :authenticate_user!, :turbo_frame_request_variant, :set_cache_buster, :set_images
+  before_action :authenticate_user!, :turbo_frame_request_variant, :set_images
+  after_action -> { flash.clear }, unless: -> { devise_controller? }
 
   private
 
@@ -11,10 +12,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(_resource)
     dashboard_path
-  end
-
-  def set_cache_buster
-    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
   end
 
   def amount_to_number_format(amount)
