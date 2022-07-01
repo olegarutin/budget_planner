@@ -1,6 +1,7 @@
 class WalletsController < ApplicationController
   before_action :set_wallets, only: %i[create destroy]
   before_action :set_wallet, only: :destroy
+  after_action -> { flash.clear }
 
   def create
     @wallet = Wallet.new(wallet_params)
