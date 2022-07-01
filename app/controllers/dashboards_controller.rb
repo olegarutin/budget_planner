@@ -16,7 +16,7 @@ class DashboardsController < ApplicationController
     end
 
     scheduler_push = Rufus::Scheduler.new
-    scheduler_push.every '10s' do
+    scheduler_push.every '30s' do
       @wallets.each do |wallet|
         if wallet.quantity.negative?
           WebpushNotification.with(planner_push: "You've already reached the limit of #{wallet.name} wallet.")
